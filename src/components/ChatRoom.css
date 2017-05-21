@@ -1,3 +1,48 @@
+.scroll {
+  margin: 85px 0 60px;
+}
+
+li {
+  list-style: none;
+}
+
+li .text-bubble {
+  position: relative;
+  float: right;
+  clear: both;
+  max-width: 240px;
+  margin: 15px 30px;
+  padding: 10px;
+  border-radius: 20px;
+  background: #1e3f80;
+  list-style: none;
+  color: white;
+  font-weight: 100;
+}
+
+li.agent .text-bubble {
+  float: left;
+  margin-left: 10px;
+  background: lightgrey;
+  color: #1e3f80;
+  font-weight: 400;
+}
+
+li.agent img {
+  position: absolute;
+  left: -35px;
+  bottom: 0;
+  width: 30px;
+  border-radius: 50%;
+}
+
 input {
-  display: block;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: calc(100% - 60px);
+  padding: 6px 9px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  font-size: 16px;
 }

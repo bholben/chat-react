@@ -1,14 +1,23 @@
-.App-header {
-  height: 80px;
-  padding: 20px;
-  text-align: center;
-  background-color: #222;
-  color: white;
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 20px 5px;
+  background-color: rgba(230, 230, 230, .95);
+  color: #1e3f80;
 }
 
-.App-logo {
+.header-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.header-text {
+  text-transform: uppercase;
 }
 
 @keyframes App-logo-spin {
