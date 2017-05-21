@@ -2,7 +2,7 @@ import React from 'react';
 import Meta from './Meta';
 import Avatar from './Avatar';
 
-export default function (props) {
+function Messages(props) {
   const ulStyle = {
     margin: '90px 0 60px',
     padding: 0,
@@ -43,3 +43,5 @@ export default function (props) {
     </ul>
   );
 }
+
+export default Messages;

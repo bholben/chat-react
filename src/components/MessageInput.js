@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function (props) {
+function MessageInput(props) {
   const backgroundStyle = {
     position: 'fixed',
     bottom: 0,
@@ -34,3 +34,5 @@ export default function (props) {
     </form>
   );
 }
+
+export default MessageInput;

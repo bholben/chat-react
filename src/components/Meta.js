@@ -1,7 +1,7 @@
 import React from 'react';
 import * as moment from 'moment';
 
-export default function (props) {
+function Meta(props) {
   const metaStyle = {
     position: 'absolute',
     top: -20,
@@ -23,8 +23,8 @@ export default function (props) {
 
   const agentMeta = (
     <div style={agentMetaStyle}>
-      <span style={nameStyle}>{`${props.message.name} - `}</span>
-      {moment(props.message.dateTime).fromNow()}
+      <span style={nameStyle}>{props.message.name}</span>
+      <span> - {moment(props.message.dateTime).fromNow()}</span>
     </div>
   );
 
@@ -36,3 +36,5 @@ export default function (props) {
 
   return props.message.isAgent ? agentMeta : customerMeta;
 }
+
+export default Meta;
