@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
 import Meta from './Meta';
-import AgentAvatar from './AgentAvatar';
+import Avatar from './Avatar';
 import './ChatRoom.css';
 
 class ChatRoom extends Component {
@@ -47,11 +47,9 @@ class ChatRoom extends Component {
   render() {
     const messages = this.state.messages.map(message =>
       <li key={message.id} className={message.isAgent ? 'agent' : ''}>
-        <div className="text-bubble">
-          <Meta message={message}/>
-          <AgentAvatar isAgent={message.isAgent} />
-          {message.text}
-        </div>
+        <Meta message={message}/>
+        <Avatar message={message} />
+        {message.text}
       </li>
     );
 

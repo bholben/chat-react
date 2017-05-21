@@ -1,6 +1,5 @@
 import React from 'react';
 import * as moment from 'moment';
-import './ChatRoom.css';
 
 export default function (props) {
   const metaStyle = {
