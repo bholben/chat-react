@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
-import Meta from './Meta';
-import Avatar from './Avatar';
-import './ChatRoom.css';
+import Messages from './Messages';
+import MessageInput from './MessageInput';
 
 class ChatRoom extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class ChatRoom extends Component {
     firebase.database()
       .ref('messages/')
       .orderByKey()
-      .limitToLast(10)
+      // .limitToLast(20)
       .on('value', snap => {
         this.setState({ messages : snap.val() || [] });
       });
@@ -33,7 +32,7 @@ class ChatRoom extends Component {
   sendMessage(e) {
     const message = {
       id: this.state.messages.length,
-      name: this.props.user.firstName,
+      name: this.props.user.name,
       dateTime: moment().format(),
       text: this.state.message
     };
@@ -45,26 +44,13 @@ class ChatRoom extends Component {
   }
 
   render() {
-    const messages = this.state.messages.map(message =>
-      <li key={message.id} className={message.isAgent ? 'agent' : ''}>
-        <Meta message={message}/>
-        <Avatar message={message} />
-        {message.text}
-      </li>
-    );
-
     return (
       <div>
-        <div className="scroll">
-          <ul>{messages}</ul>
-        </div>
-        <form onSubmit={e => this.sendMessage(e)}>
-          <input
-            type="text"
-            placeholder="Message"
-            value={this.state.message}
-            onChange={this.changeMessageState} />
-        </form>
+        <Messages messages={this.state.messages} />
+        <MessageInput
+          sendMessage={this.sendMessage}
+          changeMessageState={this.changeMessageState}
+          message={this.state.message} />
       </div>
     );
   }

@@ -8,6 +8,7 @@
   padding: 20px 5px;
   background-color: rgba(230, 230, 230, .95);
   color: #1e3f80;
+  box-shadow: 0 1px 5px #bbb;
 }
 
 .header-logo {

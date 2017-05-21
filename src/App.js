@@ -6,7 +6,7 @@ import ChatRoom from './components/ChatRoom';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.user = { firstName: 'Anonymous' };
+    this.user = { name: 'Anonymous' };
   }
   render() {
     return (
