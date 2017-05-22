@@ -11,20 +11,21 @@ const backgroundStyle = {
   backgroundColor: 'white',
 };
 
-const inputStyle = {
+const textAreaStyle = {
   width: 'calc(100% - 60px)',
-  height: 20,
+  minHeight: 20,
   marginTop: 3,
-  padding: '6px 9px',
+  padding: '6px 35px 6px 9px',
   border: '1px solid gray',
   borderRadius: 20,
   fontSize: 16,
+  resize: 'none',
 };
 
 const inactiveButtonStyle = {
   position: 'absolute',
   top: 6,
-  right: 24,
+  right: 11,
   width: 29,
   border: 'none',
   borderRadius: '50%',
@@ -43,15 +44,15 @@ function MessageInput(props) {
   return (
     <form onSubmit={props.sendMessage}>
       <div style={backgroundStyle}>
-        <input
-          type='text'
+        <textarea
+          rows="1"
           placeholder='Message'
-          style={inputStyle}
+          style={textAreaStyle}
           value={props.messageText}
-          onChange={props.changeMessageState} />
+          onChange={props.changeMessageState}>
+        </textarea>
         <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
-          <i
-            className="fa fa-arrow-up"
+          <i className="fa fa-arrow-up"
             style={{color: 'white'}}
             aria-hidden="true">
           </i>
