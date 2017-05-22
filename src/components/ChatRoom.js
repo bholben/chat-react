@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
+import { sortBy } from 'lodash';
 import * as moment from 'moment';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
@@ -18,10 +19,9 @@ class ChatRoom extends Component {
   componentDidMount() {
     firebase.database()
       .ref('messages/')
-      .orderByKey()
-      // .limitToLast(20)
       .on('value', snap => {
-        this.setState({ messages : snap.val() || [] });
+        const messages = sortBy(snap.val(), 'dateTime');
+        this.setState({ messages });
       });
   }
 
@@ -31,7 +31,7 @@ class ChatRoom extends Component {
 
   sendMessage(e) {
     const message = {
-      id: this.state.messages.length,
+      id: Object.keys(this.state.messages).length,
       name: this.props.user.name,
       dateTime: moment().format(),
       text: this.state.message

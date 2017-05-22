@@ -17,20 +17,24 @@ const agentMetaStyle = Object.assign({}, metaStyle, {
 });
 
 function Meta(props) {
-  const agentMeta = (
+  return props.message.isAgent ? getAgentMeta(props) : getCustomerMeta(props);
+}
+
+function getAgentMeta(props) {
+  return (
     <div style={agentMetaStyle}>
       <span style={{fontWeight: 700}}>{props.message.name}</span>
       <span> - {moment(props.message.dateTime).fromNow()}</span>
     </div>
   );
+}
 
-  const customerMeta = (
+function getCustomerMeta(props) {
+  return (
     <div style={metaStyle}>
       {moment(props.message.dateTime).fromNow()}
     </div>
   );
-
-  return props.message.isAgent ? agentMeta : customerMeta;
 }
 
 export default Meta;
