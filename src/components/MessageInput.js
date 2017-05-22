@@ -29,7 +29,8 @@ const inactiveButtonStyle = {
   width: 29,
   border: 'none',
   borderRadius: '50%',
-  backgroundColor: '#aaa',
+  backgroundColor: '#ddd',
+  color: '#1e3f80',
   fontSize: 20,
   cursor: 'pointer',
 };
@@ -37,7 +38,7 @@ const inactiveButtonStyle = {
 const activeButtonStyle = Object.assign(
   {},
   inactiveButtonStyle,
-  { backgroundColor: '#ce1141' }
+  { backgroundColor: '#1e3f80' }
 );
 
 function MessageInput(props) {
@@ -53,7 +54,7 @@ function MessageInput(props) {
         </textarea>
         <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
           <i className="fa fa-arrow-up"
-            style={{color: 'white'}}
+            style={props.messageText ? {color: 'white'} : {color: '#1e3f80'}}
             aria-hidden="true">
           </i>
         </button>
