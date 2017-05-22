@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
-import { sortBy } from 'lodash';
-import * as moment from 'moment';
+import { map } from 'lodash';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
@@ -9,7 +8,7 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
+      messageText: '',
       messages: [],
     };
     this.changeMessageState = this.changeMessageState.bind(this);
@@ -17,30 +16,33 @@ class ChatRoom extends Component {
   }
 
   componentDidMount() {
+    // Read from firebase
     firebase.database()
       .ref('messages/')
       .on('value', snap => {
-        const messages = sortBy(snap.val(), 'dateTime');
+        // Use lodash map to convert messages object into an array
+        const messages = map(snap.val(), x => x);
         this.setState({ messages });
       });
   }
 
   changeMessageState(e) {
-    this.setState({ message: e.target.value });
+    this.setState({ messageText: e.target.value });
   }
 
   sendMessage(e) {
     const message = {
-      id: Object.keys(this.state.messages).length,
       name: this.props.user.name,
-      dateTime: moment().format(),
-      text: this.state.message
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
+      text: this.state.messageText
     };
     e.preventDefault();
+    // Write to firebase
     message.text && firebase.database()
-      .ref(`messages/${message.id}`)
-      .set(message);
-    this.setState({ message: '' });
+      .ref('messages')
+      .push(message);
+    // Clear the input field
+    this.setState({ messageText: '' });
   }
 
   render() {
@@ -50,7 +52,7 @@ class ChatRoom extends Component {
         <MessageInput
           sendMessage={this.sendMessage}
           changeMessageState={this.changeMessageState}
-          message={this.state.message} />
+          messageText={this.state.messageText} />
       </div>
     );
   }

@@ -47,9 +47,9 @@ function MessageInput(props) {
           type='text'
           placeholder='Message'
           style={inputStyle}
-          value={props.message}
+          value={props.messageText}
           onChange={props.changeMessageState} />
-        <button style={props.message ? activeButtonStyle : inactiveButtonStyle}>
+        <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
           <i
             className="fa fa-arrow-up"
             style={{color: 'white'}}

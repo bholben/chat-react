@@ -24,7 +24,7 @@ function getAgentMeta(props) {
   return (
     <div style={agentMetaStyle}>
       <span style={{fontWeight: 700}}>{props.message.name}</span>
-      <span> - {moment(props.message.dateTime).fromNow()}</span>
+      <span> - {moment(props.message.timeStamp).fromNow()}</span>
     </div>
   );
 }
@@ -32,7 +32,7 @@ function getAgentMeta(props) {
 function getCustomerMeta(props) {
   return (
     <div style={metaStyle}>
-      {moment(props.message.dateTime).fromNow()}
+      {moment(props.message.timestamp).fromNow()}
     </div>
   );
 }

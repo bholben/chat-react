@@ -10,24 +10,27 @@ const ulStyle = {
   overflowY: 'scroll',
 }
 
-const customerStyle = {
+const liCustomerStyle = {
   position: 'relative',
   float: 'right',
   clear: 'both',
   maxWidth: 220,
+  minWidth: 18,
   margin: '20px 15px 10px',
   padding: 10,
   borderRadius: 20,
   backgroundColor: '#1e3f80',
   listStyle: 'none',
+  textAlign: 'right',
   color: 'white',
   fontWeight: 100,
 };
 
-const agentStyle = Object.assign({}, customerStyle, {
+const liAgentStyle = Object.assign({}, liCustomerStyle, {
   float: 'left',
   marginLeft: 45,
   backgroundColor: '#ddd',
+  textAlign: 'left',
   color: '#1e3f80',
   fontWeight: 400,
 });
@@ -46,13 +49,13 @@ class Messages extends Component {
     return (
       <ul style={ulStyle}>
         {this.props.messages.map(message =>
-          <li key={message.id} style={message.isAgent ? agentStyle : customerStyle}>
+          <li key={message.timestamp} style={message.isAgent ? liAgentStyle : liCustomerStyle}>
             <Meta message={message}/>
             <Avatar message={message} />
             <div>{message.text}</div>
           </li>
         )}
-        <li ref={el => { this.scrollBottom = el; }} style={ {float:'left'} }></li>
+        <li ref={el => { this.scrollBottom = el; }} style={ {float:'left', display: 'none'} }></li>
       </ul>
     );
   }
