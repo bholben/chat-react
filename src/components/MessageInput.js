@@ -1,5 +1,4 @@
 import React from 'react';
-import 'font-awesome/css/font-awesome.css'
 
 const backgroundStyle = {
   position: 'fixed',
@@ -22,7 +21,7 @@ const inputStyle = {
   fontSize: 16,
 };
 
-const buttonStyle = {
+const inactiveButtonStyle = {
   position: 'absolute',
   top: 6,
   right: 24,
@@ -34,6 +33,12 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
+const activeButtonStyle = Object.assign(
+  {},
+  inactiveButtonStyle,
+  { backgroundColor: '#ce1141' }
+);
+
 function MessageInput(props) {
   return (
     <form onSubmit={props.sendMessage}>
@@ -44,10 +49,12 @@ function MessageInput(props) {
           style={inputStyle}
           value={props.message}
           onChange={props.changeMessageState} />
-        <button style={buttonStyle}>
-          <i className="fa fa-arrow-up"
+        <button style={props.message ? activeButtonStyle : inactiveButtonStyle}>
+          <i
+            className="fa fa-arrow-up"
             style={{color: 'white'}}
-            aria-hidden="true"></i>
+            aria-hidden="true">
+          </i>
         </button>
       </div>
     </form>

@@ -37,7 +37,7 @@ class ChatRoom extends Component {
       text: this.state.message
     };
     e.preventDefault();
-    firebase.database()
+    message.text && firebase.database()
       .ref(`messages/${message.id}`)
       .set(message);
     this.setState({ message: '' });

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import * as firebase from 'firebase';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import 'font-awesome/css/font-awesome.css'
 import './index.css';
 
 var config = {
