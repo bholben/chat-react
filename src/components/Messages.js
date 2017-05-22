@@ -4,7 +4,8 @@ import Meta from './Meta';
 import Avatar from './Avatar';
 
 const ulStyle = {
-  margin: '90px 0 60px',
+  marginTop: 90,
+  marginBottom: 40,
   padding: 0,
   overflowY: 'scroll',
 }
@@ -32,7 +33,6 @@ const agentStyle = Object.assign({}, customerStyle, {
 });
 
 class Messages extends Component {
-
   componentDidUpdate() {
     this.scrollToBottom();
   }
