@@ -17,13 +17,9 @@ function Meta(props) {
     textAlign: 'left'
   });
 
-  const nameStyle = {
-    fontWeight: 'bold'
-  };
-
   const agentMeta = (
     <div style={agentMetaStyle}>
-      <span style={nameStyle}>{props.message.name}</span>
+      <span style={{fontWeight: 700}}>{props.message.name}</span>
       <span> - {moment(props.message.dateTime).fromNow()}</span>
     </div>
   );
