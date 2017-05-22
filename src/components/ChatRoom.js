@@ -27,7 +27,14 @@ class ChatRoom extends Component {
   }
 
   changeMessageState(e) {
-    this.setState({ messageText: e.target.value });
+    const messageText = e.target.value;
+    const ENTER_CHARCODE = 10;
+    // Don't allow a return inside the textarea
+    if (messageText.charCodeAt(messageText.length - 1) === ENTER_CHARCODE) {
+      this.sendMessage(e)
+    } else {
+      this.setState({ messageText });
+    }
   }
 
   sendMessage(e) {
@@ -36,11 +43,7 @@ class ChatRoom extends Component {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };
-    if (this.state.messageText.startsWith('//')) {
-      message.text = message.text.substring(2).trim();
-      message.name = 'Addison';
-      message.isAgent = true;
-    }
+    this.temporaryAgentHack(message);
     e.preventDefault();
     // Write to firebase
     message.text && firebase.database()
@@ -48,6 +51,14 @@ class ChatRoom extends Component {
       .push(message);
     // Clear the input field
     this.setState({ messageText: '' });
+  }
+
+  temporaryAgentHack(message) {
+    if (this.state.messageText.startsWith('//')) {
+      message.text = message.text.substring(2).trim();
+      message.name = 'Addison';
+      message.isAgent = true;
+    }
   }
 
   render() {
