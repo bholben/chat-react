@@ -47,6 +47,7 @@ function MessageInput(props) {
       <div style={backgroundStyle}>
         <textarea
             rows="1"
+            maxLength="255"
             placeholder='Message'
             style={textAreaStyle}
             value={props.messageText}
