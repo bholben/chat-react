@@ -15,13 +15,11 @@ const liCustomerStyle = {
   float: 'right',
   clear: 'both',
   maxWidth: 220,
-  minWidth: 18,
   margin: '20px 15px 10px',
   padding: 10,
   borderRadius: 20,
   backgroundColor: '#1e3f80',
   listStyle: 'none',
-  textAlign: 'right',
   color: 'white',
   fontWeight: 100,
 };
@@ -30,7 +28,6 @@ const liAgentStyle = Object.assign({}, liCustomerStyle, {
   float: 'left',
   marginLeft: 45,
   backgroundColor: '#ddd',
-  textAlign: 'left',
   color: '#1e3f80',
   fontWeight: 400,
 });
@@ -52,7 +49,7 @@ class Messages extends Component {
           <li key={message.timestamp} style={message.isAgent ? liAgentStyle : liCustomerStyle}>
             <Meta message={message}/>
             <Avatar message={message} />
-            <div>{message.text}</div>
+            <div style={{padding: '0 7px'}}>{message.text}</div>
           </li>
         )}
         <li ref={el => { this.scrollBottom = el; }} style={ {float:'left', display: 'none'} }></li>
