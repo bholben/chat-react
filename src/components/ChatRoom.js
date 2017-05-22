@@ -36,6 +36,11 @@ class ChatRoom extends Component {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };
+    if (this.state.messageText.startsWith('//')) {
+      message.text = message.text.substring(2).trim();
+      message.name = 'Addison';
+      message.isAgent = true;
+    }
     e.preventDefault();
     // Write to firebase
     message.text && firebase.database()
