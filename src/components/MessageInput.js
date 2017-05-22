@@ -6,7 +6,6 @@ const backgroundStyle = {
   left: 0,
   right: 0,
   height: 44,
-  zIndex: 1,
   textAlign: 'center',
   backgroundColor: 'white',
 };
