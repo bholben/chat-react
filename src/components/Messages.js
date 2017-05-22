@@ -46,13 +46,17 @@ class Messages extends Component {
     return (
       <ul style={ulStyle}>
         {this.props.messages.map(message =>
-          <li key={message.timestamp} style={message.isAgent ? liAgentStyle : liCustomerStyle}>
+          <li key={message.timestamp}
+              style={message.isAgent ? liAgentStyle : liCustomerStyle}>
             <Meta message={message}/>
             <Avatar message={message} />
             <div style={{padding: '0 7px'}}>{message.text}</div>
           </li>
         )}
-        <li ref={el => { this.scrollBottom = el; }} style={ {float:'left', clear: 'both'} }></li>
+        {/* This dummy element is used only to facilitate bottom scrolling */}
+        <li ref={el => this.scrollBottom = el}
+            style={{float:'left', clear: 'both'}}>
+        </li>
       </ul>
     );
   }

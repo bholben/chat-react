@@ -46,16 +46,16 @@ function MessageInput(props) {
     <form onSubmit={props.sendMessage}>
       <div style={backgroundStyle}>
         <textarea
-          rows="1"
-          placeholder='Message'
-          style={textAreaStyle}
-          value={props.messageText}
-          onChange={props.changeMessageState}>
+            rows="1"
+            placeholder='Message'
+            style={textAreaStyle}
+            value={props.messageText}
+            onChange={props.changeMessageState}>
         </textarea>
         <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
           <i className="fa fa-arrow-up"
-            style={props.messageText ? {color: 'white'} : {color: '#1e3f80'}}
-            aria-hidden="true">
+              style={props.messageText ? {color: 'white'} : {color: '#1e3f80'}}
+              aria-hidden="true">
           </i>
         </button>
       </div>

@@ -66,9 +66,9 @@ class ChatRoom extends Component {
       <div>
         <Messages messages={this.state.messages} />
         <MessageInput
-          sendMessage={this.sendMessage}
-          changeMessageState={this.changeMessageState}
-          messageText={this.state.messageText} />
+            sendMessage={this.sendMessage}
+            changeMessageState={this.changeMessageState}
+            messageText={this.state.messageText} />
       </div>
     );
   }
