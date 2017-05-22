@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 import { map } from 'lodash';
+import { hasEnter } from '../utils/strings'
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
@@ -28,9 +29,8 @@ class ChatRoom extends Component {
 
   changeMessageState(e) {
     const messageText = e.target.value;
-    const ENTER_CHARCODE = 10;
     // Don't allow a return inside the textarea
-    if (messageText.charCodeAt(messageText.length - 1) === ENTER_CHARCODE) {
+    if (hasEnter(messageText)) {
       this.sendMessage(e)
     } else {
       this.setState({ messageText });

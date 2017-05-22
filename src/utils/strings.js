@@ -1,4 +1,4 @@
-import { every } from 'lodash';
+import { every, some } from 'lodash';
 
 export function isShortEmojiString(str, charLimit) {
   // an emoji typically contains 2 or more code points so
@@ -16,3 +16,6 @@ export function isEmoji(str) {
 
   return !!str.match(ranges.join('|'));
 }
+
+export const isEnter = char => char.charCodeAt(0) === 10;
+export const hasEnter = str => some(str, isEnter);
