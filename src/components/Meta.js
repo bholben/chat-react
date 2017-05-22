@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import * as moment from 'moment';
 
 const metaStyle = {
@@ -16,25 +16,44 @@ const agentMetaStyle = Object.assign({}, metaStyle, {
   textAlign: 'left'
 });
 
-function Meta(props) {
-  return props.message.isAgent ? getAgentMeta(props) : getCustomerMeta(props);
-}
+class Meta extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isRelativeTime: true,
+    }
+    this.clickMeta = this.clickMeta.bind(this);
+  }
 
-function getAgentMeta(props) {
-  return (
-    <div style={agentMetaStyle}>
-      <span style={{fontWeight: 700}}>{props.message.name}</span>
-      <span> - {moment(props.message.timeStamp).fromNow()}</span>
-    </div>
-  );
-}
+  render() {
+    return this.props.message.isAgent ? this.getAgentMeta() : this.getCustomerMeta();
+  }
 
-function getCustomerMeta(props) {
-  return (
-    <div style={metaStyle}>
-      {moment(props.message.timestamp).fromNow()}
-    </div>
-  );
+  getAgentMeta() {
+    return (
+      <div style={agentMetaStyle} onClick={this.clickMeta}>
+        <span style={{fontWeight: 700}}>{this.props.message.name}</span>
+        <span> - {this.getTimeLabel()}</span>
+      </div>
+    );
+  }
+
+  getCustomerMeta() {
+    return (
+      <div style={metaStyle} onClick={this.clickMeta}>
+        {this.getTimeLabel()}
+      </div>
+    );
+  }
+
+  getTimeLabel() {
+    const time = moment(this.props.message.timestamp);
+    return this.state.isRelativeTime ? time.fromNow() : time.format('llll');
+  }
+
+  clickMeta() {
+    this.setState({isRelativeTime: !this.state.isRelativeTime});
+  }
 }
 
 export default Meta;

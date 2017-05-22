@@ -52,7 +52,7 @@ class Messages extends Component {
             <div style={{padding: '0 7px'}}>{message.text}</div>
           </li>
         )}
-        <li ref={el => { this.scrollBottom = el; }} style={ {float:'left', display: 'none'} }></li>
+        <li ref={el => { this.scrollBottom = el; }} style={ {float:'left', clear: 'both'} }></li>
       </ul>
     );
   }
