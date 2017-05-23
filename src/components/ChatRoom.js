@@ -48,13 +48,12 @@ class ChatRoom extends Component {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };
-    this.temporaryAgentHack(message);
+    this.enableAgentEasterEgg(message);
     e.preventDefault();
     // Write to firebase
     message.text && firebase.database()
       .ref('messages')
-      .push(message)
-      .then(res => console.log('DB PUSH completed'));
+      .push(message);
     // Clear the input field
     this.setState({ messageText: '' });
   }
@@ -63,11 +62,10 @@ class ChatRoom extends Component {
     firebase.database()
       .ref('messages')
       .child(message.key)
-      .remove()
-      .then(res => console.log('DB DELETE completed'));
+      .remove();
   }
 
-  temporaryAgentHack(message) {
+  enableAgentEasterEgg(message) {
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
       message.name = 'Addison';

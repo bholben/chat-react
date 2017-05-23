@@ -42,7 +42,7 @@ const bigEmojiStyle = {
 const xStyle = {
   display: 'none',
   position: 'absolute',
-  top: 2,
+  top: -1,
   right: 7,
   color: 'rgba(255, 255, 255, 0.5)',
   fontSize: 24,
@@ -77,10 +77,14 @@ class Messages extends Component {
   }
 
   toggleDelete(e) {
-    const target = e.target.tagName === 'LI' ? e.target : e.target.parentNode;
-    target.style.maxWidth = this.state.isReadOnly ? '245px' : '220px';
-    target.children[1].style.paddingRight = this.state.isReadOnly ? '32px' : '7px';
-    target.children[2].style.display = this.state.isReadOnly ? 'block' : 'none';
+    const li = e.target.tagName === 'LI' ? e.target : e.target.parentNode;
+    const messageDiv = [...li.children].filter(child => child.tagName === 'DIV').reverse()[0];
+    const button = [...li.children].find(child => child.tagName === 'BUTTON');
+
+    li.style.maxWidth = this.state.isReadOnly ? '245px' : '220px';
+    messageDiv.style.paddingRight = this.state.isReadOnly ? '32px' : '7px';
+    button.style.display = this.state.isReadOnly ? 'block' : 'none';
+
     this.setState({isReadOnly: !this.state.isReadOnly});
   }
 
