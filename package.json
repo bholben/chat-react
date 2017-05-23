@@ -4,7 +4,6 @@
   "homepage": "https://bholben.github.io/chat-demo",
   "dependencies": {
     "api": "https://github.com/bholben/api",
-    "firebase": "^4.0.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
