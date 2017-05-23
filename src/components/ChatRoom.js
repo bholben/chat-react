@@ -53,7 +53,8 @@ class ChatRoom extends Component {
     // Write to firebase
     message.text && firebase.database()
       .ref('messages')
-      .push(message);
+      .push(message)
+      .catch(console.error);
     // Clear the input field
     this.setState({ messageText: '' });
   }
@@ -62,7 +63,8 @@ class ChatRoom extends Component {
     firebase.database()
       .ref('messages')
       .child(message.key)
-      .remove();
+      .remove()
+      .catch(console.error);
   }
 
   enableAgentEasterEgg(message) {
