@@ -66,7 +66,7 @@ class ChatRoom extends Component {
 
   sendMessage(e) {
     const message = {
-      name: this.props.user.name,
+      name: this.state.name,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };

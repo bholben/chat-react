@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ChatRoom from './components/ChatRoom';
-// import Auth from './components/Auth';
 
-function CheapRouter(props) {
-  if (props.user) {
-    return <ChatRoom user={props.user}/>;
-  } else {
-    // return <Auth />;
+class CheapRouter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 'CHAT_ROOM',
+    };
+  }
+
+  render(props) {
+    if (this.state.page === 'CHAT_ROOM') {
+      return <ChatRoom />;
+    }
   }
 }
 
