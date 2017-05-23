@@ -20,6 +20,8 @@ class ChatRoom extends Component {
     // Read from firebase
     firebase.database()
       .ref('messages/')
+      .orderByKey()
+      .limitToLast(100)
       .on('value', snap => {
         // Use lodash map to:
         //     (1) convert snap.val() object into a messages array
