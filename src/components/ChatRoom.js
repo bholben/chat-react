@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
-import { map } from 'lodash';
-import { hasEnter } from '../utils/strings'
+import { api, firebase } from 'api';
+import { hasEnter } from '../utils/strings';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
@@ -9,9 +8,8 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAnonymous: true,
-      uid: null,
-      name: 'Anonymous',
+      user: {},
+      displayName: 'Anonymous',
       messageText: '',
       messages: [],
     };
@@ -22,44 +20,23 @@ class ChatRoom extends Component {
 
   componentDidMount() {
     firebase.auth().signInAnonymously()
-      .catch(console.error);
+      .then(user => {
+        // This is where we can spoof to get into another conversation
+        // user = {
+        //   uid: 'jc4JByFVHhhamVCDbQg2hj4mzEz2',
+        //   isAnonymous: true,
+        // }
 
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        const {isAnonymous, uid} = user;
-        const overrideUid = '';
-        this.setState({isAnonymous, uid: overrideUid || uid});
-        this.getMessages();
-      } else {
-        // User is signed out
-      }
-    });
-  }
-
-  getMessages() {
-    firebase.database()
-      .ref('users')
-      .child(this.state.uid)
-      .child('messages')
-      .orderByKey()
-      .limitToLast(100)
-      .on('value', snap => {
-        // Use lodash map to:
-        //     (1) convert snap.val() object into a messages array
-        //     (2) pull the key down into the message object
-        const messages = map(snap.val(), (message, key) => {
-          message.key = key;
-          return message;
+        api.syncMessages(user, messages => {
+          this.setState({ user, messages })
         });
-        this.setState({ messages });
-      }, console.error);
+      });
   }
 
   changeMessageState(e) {
     const messageText = e.target.value;
-    // Don't allow a return inside the textarea
     if (hasEnter(messageText)) {
-      this.sendMessage(e)
+      this.sendMessage(e);
     } else {
       this.setState({ messageText });
     }
@@ -67,36 +44,28 @@ class ChatRoom extends Component {
 
   sendMessage(e) {
     const message = {
-      name: this.state.name,
+      displayName: this.state.displayName,
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };
     this.enableAgentEasterEgg(message);
     e.preventDefault();
-    message.text && firebase.database()
-      .ref('users')
-      .child(this.state.uid)
-      .child('messages')
-      .push(message)
+
+    api.sendMessage(message, this.state.user)
+      .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
-    // Clear the input field
-    this.setState({ messageText: '' });
   }
 
   deleteMessage(message) {
-    firebase.database()
-      .ref('users')
-      .child(this.state.uid)
-      .child('messages')
-      .child(message.key)
-      .remove()
+    api.deleteMessage(message, this.state.user)
       .catch(console.error);
   }
 
   enableAgentEasterEgg(message) {
+    // This is how we create texts as the agent on the left side
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
-      message.name = 'Addison';
+      message.displayName = 'Addison';
       message.isAgent = true;
     }
   }

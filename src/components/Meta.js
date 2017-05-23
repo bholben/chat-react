@@ -32,7 +32,7 @@ class Meta extends Component {
   getAgentMeta() {
     return (
       <div style={agentMetaStyle} onClick={this.clickMeta}>
-        <span style={{fontWeight: 700}}>{this.props.message.name}</span>
+        <span style={{fontWeight: 700}}>{this.props.message.displayName}</span>
         <span> - {this.getTimeLabel()}</span>
       </div>
     );
