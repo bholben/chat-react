@@ -27,7 +27,8 @@ class ChatRoom extends Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const {isAnonymous, uid} = user;
-        this.setState({isAnonymous, uid});
+        const overrideUid = '';
+        this.setState({isAnonymous, uid: overrideUid || uid});
         this.getMessages();
       } else {
         // User is signed out
