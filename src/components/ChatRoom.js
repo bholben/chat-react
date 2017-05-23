@@ -21,10 +21,15 @@ class ChatRoom extends Component {
     firebase.database()
       .ref('messages/')
       .on('value', snap => {
-        // Use lodash map to convert messages object into an array
-        const messages = map(snap.val(), x => x);
+        // Use lodash map to:
+        //     (1) convert snap.val() object into a messages array
+        //     (2) pull the key down into the message object
+        const messages = map(snap.val(), (message, key) => {
+          message.key = key;
+          return message;
+        });
         this.setState({ messages });
-      });
+      }, console.error);
   }
 
   changeMessageState(e) {
@@ -48,9 +53,18 @@ class ChatRoom extends Component {
     // Write to firebase
     message.text && firebase.database()
       .ref('messages')
-      .push(message);
+      .push(message)
+      .then(res => console.log('DB PUSH completed'));
     // Clear the input field
     this.setState({ messageText: '' });
+  }
+
+  deleteMessage(message) {
+    firebase.database()
+      .ref('messages')
+      .child(message.key)
+      .remove()
+      .then(res => console.log('DB DELETE completed'));
   }
 
   temporaryAgentHack(message) {
@@ -64,7 +78,8 @@ class ChatRoom extends Component {
   render() {
     return (
       <div>
-        <Messages messages={this.state.messages} />
+        <Messages messages={this.state.messages}
+            deleteMessage={this.deleteMessage}/>
         <MessageInput
             sendMessage={this.sendMessage}
             changeMessageState={this.changeMessageState}

@@ -55,7 +55,7 @@ function MessageInput(props) {
         </textarea>
         <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
           <i className="fa fa-arrow-up"
-              style={props.messageText ? {color: 'white'} : {color: '#1e3f80'}}
+              style={{color: 'white'}}
               aria-hidden="true">
           </i>
         </button>
