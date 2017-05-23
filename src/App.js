@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ChatRoom from './components/ChatRoom';
+import CheapRouter from './CheapRouter';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
           <img src={logo} className="header-logo" alt="logo" />
           <span className="header-text">React Firebase Chat App</span>
         </div>
-        <ChatRoom user={this.user}/>
+        <CheapRouter user={this.user}></CheapRouter>
       </div>
     );
   }
