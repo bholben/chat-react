@@ -9,17 +9,37 @@ class ChatRoom extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isAnonymous: true,
+      uid: null,
+      name: 'Anonymous',
       messageText: '',
       messages: [],
     };
     this.changeMessageState = this.changeMessageState.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
   }
 
   componentDidMount() {
-    // Read from firebase
+    firebase.auth().signInAnonymously()
+      .catch(console.error);
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const {isAnonymous, uid} = user;
+        this.setState({isAnonymous, uid});
+        this.getMessages();
+      } else {
+        // User is signed out
+      }
+    });
+  }
+
+  getMessages() {
     firebase.database()
-      .ref('messages/')
+      .ref('users')
+      .child(this.state.uid)
+      .child('messages')
       .orderByKey()
       .limitToLast(100)
       .on('value', snap => {
@@ -52,9 +72,10 @@ class ChatRoom extends Component {
     };
     this.enableAgentEasterEgg(message);
     e.preventDefault();
-    // Write to firebase
     message.text && firebase.database()
-      .ref('messages')
+      .ref('users')
+      .child(this.state.uid)
+      .child('messages')
       .push(message)
       .catch(console.error);
     // Clear the input field
@@ -63,7 +84,9 @@ class ChatRoom extends Component {
 
   deleteMessage(message) {
     firebase.database()
-      .ref('messages')
+      .ref('users')
+      .child(this.state.uid)
+      .child('messages')
       .child(message.key)
       .remove()
       .catch(console.error);
