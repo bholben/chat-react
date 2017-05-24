@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
+import Header from '../components/Chat/Header';
 import CheapRouter from './CheapRouter';
 
 class App extends Component {

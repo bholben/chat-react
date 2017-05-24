@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { api, firebase } from 'api';
-import { hasEnter } from '../utils/strings';
+import { hasEnter } from '../../utils/strings';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
-class ChatRoom extends Component {
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,4 +84,4 @@ class ChatRoom extends Component {
   }
 }
 
-export default ChatRoom;
+export default Chat;

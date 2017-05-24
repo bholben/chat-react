@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { isShortEmojiString } from '../utils/strings'
+import { isShortEmojiString } from '../../utils/strings'
 import Meta from './Meta';
 import Avatar from './Avatar';
 
