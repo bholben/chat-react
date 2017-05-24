@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ChatRoom from './components/ChatRoom';
+import ChatRoom from '../components/ChatRoom';
 
 class CheapRouter extends Component {
   constructor(props) {
