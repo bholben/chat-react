@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { api, firebase } from 'api';
 import { hasEnter } from '../../utils/strings';
+import Header from './Header';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
 
@@ -73,8 +74,9 @@ class Chat extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Messages messages={this.state.messages}
-            deleteMessage={this.deleteMessage}/>
+            deleteMessage={this.deleteMessage} />
         <MessageInput
             sendMessage={this.sendMessage}
             changeMessageText={this.changeMessageText}

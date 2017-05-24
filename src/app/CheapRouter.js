@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Chat from '../components/Chat';
+import ChatRoom from '../containers/ChatRoom';
 
 class CheapRouter extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class CheapRouter extends Component {
 
   render(props) {
     if (this.state.page === 'CHAT_ROOM') {
-      return <Chat />;
+      return <ChatRoom />;
     }
   }
 }
