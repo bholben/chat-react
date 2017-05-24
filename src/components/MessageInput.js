@@ -60,7 +60,7 @@ function MessageInput(props) {
             placeholder='Message'
             style={props.messageText ? activeTextAreaStyle : inactiveTextAreaStyle}
             value={props.messageText}
-            onChange={props.changeMessageState}>
+            onChange={props.changeMessageText}>
         </textarea>
         <button style={props.messageText ? activeButtonStyle : inactiveButtonStyle}>
           <i className="fa fa-arrow-up"

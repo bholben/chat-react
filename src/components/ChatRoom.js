@@ -13,7 +13,7 @@ class ChatRoom extends Component {
       messageText: '',
       messages: [],
     };
-    this.changeMessageState = this.changeMessageState.bind(this);
+    this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
   }
@@ -33,7 +33,7 @@ class ChatRoom extends Component {
       });
   }
 
-  changeMessageState(e) {
+  changeMessageText(e) {
     const messageText = e.target.value;
     if (hasEnter(messageText)) {
       this.sendMessage(e);
@@ -77,7 +77,7 @@ class ChatRoom extends Component {
             deleteMessage={this.deleteMessage}/>
         <MessageInput
             sendMessage={this.sendMessage}
-            changeMessageState={this.changeMessageState}
+            changeMessageText={this.changeMessageText}
             messageText={this.state.messageText} />
       </div>
     );
