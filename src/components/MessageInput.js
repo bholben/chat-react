@@ -6,30 +6,39 @@ const backgroundStyle = {
   left: 0,
   right: 0,
   height: 44,
-  textAlign: 'center',
+  textAlign: 'right',
   backgroundColor: 'white',
 };
 
-const textAreaStyle = {
-  width: 'calc(100% - 60px)',
+const inactiveTextAreaStyle = {
+  width: 220,
   minHeight: 28,
   marginTop: 3,
-  padding: '2px 35px 2px 9px',
-  border: '1px solid gray',
-  borderRadius: 20,
+  padding: '2px 65px 2px 15px',
+  border: '1px solid #bbb',
+  borderRight: 'none',
+  borderRadius: 0,
+  borderBottomLeftRadius: 20,
+  borderTopLeftRadius: 20,
   fontSize: 16,
   resize: 'none',
 };
 
+const activeTextAreaStyle = Object.assign(
+  {},
+  inactiveTextAreaStyle,
+  { borderColor: '#1e3f80' }
+);
+
 const inactiveButtonStyle = {
   position: 'absolute',
-  top: 6,
-  right: 11,
-  width: 28,
-  height: 28,
+  top: 4,
+  right: 0,
+  width: 60,
+  height: 32,
   border: 'none',
-  borderRadius: '50%',
-  backgroundColor: '#ddd',
+  textAlign: 'center',
+  backgroundColor: '#bbb',
   color: '#1e3f80',
   fontSize: 20,
   cursor: 'pointer',
@@ -49,7 +58,7 @@ function MessageInput(props) {
             rows="1"
             maxLength="255"
             placeholder='Message'
-            style={textAreaStyle}
+            style={props.messageText ? activeTextAreaStyle : inactiveTextAreaStyle}
             value={props.messageText}
             onChange={props.changeMessageState}>
         </textarea>
