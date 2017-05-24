@@ -62,7 +62,7 @@ class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReadOnly: true,
+      hideX: true,
     };
     this.toggleDelete = this.toggleDelete.bind(this);
   }
@@ -77,15 +77,17 @@ class Messages extends Component {
   }
 
   toggleDelete(e) {
+    if (!this.props.isDeleteEnabled) return;
+
     const li = e.target.tagName === 'LI' ? e.target : e.target.parentNode;
     const messageDiv = [...li.children].filter(child => child.tagName === 'DIV').reverse()[0];
     const button = [...li.children].find(child => child.tagName === 'BUTTON');
 
-    li.style.maxWidth = this.state.isReadOnly ? '245px' : '220px';
-    messageDiv.style.paddingRight = this.state.isReadOnly ? '32px' : '7px';
-    button.style.display = this.state.isReadOnly ? 'block' : 'none';
+    li.style.maxWidth = this.state.hideX ? '245px' : '220px';
+    messageDiv.style.paddingRight = this.state.hideX ? '32px' : '7px';
+    button.style.display = this.state.hideX ? 'block' : 'none';
 
-    this.setState({isReadOnly: !this.state.isReadOnly});
+    this.setState({hideX: !this.state.hideX});
   }
 
   render() {

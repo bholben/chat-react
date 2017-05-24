@@ -11,6 +11,7 @@ class ChatRoom extends Component {
       messages: [],
       displayName: 'Anonymous',
       messageText: '',
+      isDeleteEnabled: true,
     };
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -56,7 +57,7 @@ class ChatRoom extends Component {
   }
 
   deleteMessage(message) {
-    api.deleteMessage(message, this.state.user)
+    this.state.isDeleteEnabled && api.deleteMessage(message, this.state.user)
       .catch(console.error);
   }
 
@@ -77,6 +78,7 @@ class ChatRoom extends Component {
           messages={this.state.messages}
           changeMessageText={this.changeMessageText}
           sendMessage={this.sendMessage}
+          isDeleteEnabled = {this.state.isDeleteEnabled}
           deleteMessage={this.deleteMessage} />
     );
   }

@@ -20,7 +20,7 @@ class Meta extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRelativeTime: true,
+      isTimeFromNow: true,
     }
     this.clickMeta = this.clickMeta.bind(this);
   }
@@ -48,11 +48,11 @@ class Meta extends Component {
 
   getTimeLabel() {
     const time = moment(this.props.message.timestamp);
-    return this.state.isRelativeTime ? time.fromNow() : time.format('llll');
+    return this.state.isTimeFromNow ? time.fromNow() : time.format('llll');
   }
 
   clickMeta() {
-    this.setState({isRelativeTime: !this.state.isRelativeTime});
+    this.setState({isTimeFromNow: !this.state.isTimeFromNow});
   }
 }
 
