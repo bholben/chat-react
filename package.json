@@ -4,6 +4,7 @@
   "description": "Chat application modeled after iMessage",
   "homepage": "https://bholben.github.io/chat-demo",
   "scripts": {
+    "postinstall": "scripts/postinstall.sh",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "api": "https://github.com/bholben/api",
+    "chat-room": "https://github.com/bholben/chat-room",
     "firebase": "^4.0.0",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
