@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { api, firebase } from 'api';
+import { api, firebase } from 'chat-api';
 import { hasEnter } from '../utils/strings';
 import Chat from '../node_modules/chat-room/Chat';
 
