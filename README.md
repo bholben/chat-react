@@ -1,8 +1,8 @@
 To run this project, open a terminal and type the following commands:
 
- 1. `git clone https://github.com/bholben/chat-demo.git`
+ 1. `git clone https://github.com/bholben/chat-user.git`
 
- 2. `cd chat-demo`
+ 2. `cd chat-user`
 
  3. `yarn` OR `npm install`
 

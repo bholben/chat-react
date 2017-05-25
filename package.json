@@ -14,11 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "chat-api": "https://github.com/bholben/chat-api",
-    "chat-room": "https://github.com/bholben/chat-room",
+    "chat-room-component": "https://github.com/bholben/chat-room-component",
     "firebase": "^4.0.0",
-    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
-    "moment": "^2.18.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },

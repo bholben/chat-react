@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { api, firebase } from 'chat-api';
 import { hasEnter } from '../utils/strings';
-import Chat from '../node_modules/chat-room/Chat';
+import Chat from '../node_modules/chat-room-component/Chat';
 
 class ChatRoom extends Component {
   constructor(props) {
