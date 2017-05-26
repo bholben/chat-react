@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { api, firebase } from 'chat-api';
 import { hasEnter } from '../utils/strings';
+import Users from '../components/Users';
 import Chat from '../node_modules/chat-room-component/Chat';
+
+const messengerStyles = {
+  display: 'flex',
+};
 
 class ChatRoom extends Component {
   constructor(props) {
@@ -11,7 +16,6 @@ class ChatRoom extends Component {
       messages: [],
       displayName: 'Anonymous',
       messageText: '',
-      isDeleteEnabled: true,
     };
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -57,7 +61,7 @@ class ChatRoom extends Component {
   }
 
   deleteMessage(message) {
-    this.state.isDeleteEnabled && api.deleteMessage(message, this.state.user)
+    api.deleteMessage(message, this.state.user)
       .catch(console.error);
   }
 
@@ -72,14 +76,18 @@ class ChatRoom extends Component {
 
   render() {
     return (
-      <Chat user={this.state.user}
-          displayName={this.state.displayName}
-          messageText={this.state.messageText}
-          messages={this.state.messages}
-          changeMessageText={this.changeMessageText}
-          sendMessage={this.sendMessage}
-          isDeleteEnabled = {this.state.isDeleteEnabled}
-          deleteMessage={this.deleteMessage} />
+      <div style={messengerStyles}>
+        <Users />
+        <Chat isAgentOnRight={true}
+            user={this.state.user}
+            displayName={this.state.displayName}
+            messageText={this.state.messageText}
+            messages={this.state.messages}
+            changeMessageText={this.changeMessageText}
+            sendMessage={this.sendMessage}
+            isDeleteEnabled = {true}
+            deleteMessage={this.deleteMessage} />
+      </div>
     );
   }
 }
