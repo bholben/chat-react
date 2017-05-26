@@ -1,7 +1,7 @@
 {
-  "name": "chat-user",
+  "name": "chat-agent",
   "version": "0.1.0",
-  "description": "Chat application for user",
+  "description": "Chat application for agent",
   "scripts": {
     "postinstall": "scripts/postinstall.sh",
     "start": "react-scripts start",
