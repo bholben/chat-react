@@ -52,7 +52,7 @@ class ChatRoom extends Component {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       text: this.state.messageText
     };
-    this.enableAgentEasterEgg(message);
+    this.enableOtherUserSpoof(message);
     e.preventDefault();
 
     api.sendMessage(message, this.state.user)
@@ -65,8 +65,7 @@ class ChatRoom extends Component {
       .catch(console.error);
   }
 
-  enableAgentEasterEgg(message) {
-    // This is how we create texts as the agent on the left side
+  enableOtherUserSpoof(message) {
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
       message.displayName = 'Addison';
