@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
-const usersStyle = {
-  width: 300,
-}
-
-class Users extends Component {
+class ChatRooms extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,9 +10,9 @@ class Users extends Component {
 
   render() {
     return (
-      <div style={usersStyle}>Users</div>
+      <div style={{flex: 1, overflowY: 'auto'}}>Users</div>
     );
   }
 }
 
-export default Users;
+export default ChatRooms;

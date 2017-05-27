@@ -6,5 +6,6 @@
 # shared components should never be edited in their destination.  The gitignore
 # file will keep them away from the remote repo.
 
+rm -rf src/node_modules
 mkdir -p src/node_modules/chat-room-component
-cp -R ./node_modules/chat-room-component/Chat "$_"
+cp -R ./node_modules/chat-room-component/ChatRoom "$_"

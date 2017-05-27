@@ -1238,7 +1238,7 @@ chalk@1.1.3, chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
 
 "chat-room-component@https://github.com/bholben/chat-room-component":
   version "0.1.0"
-  resolved "https://github.com/bholben/chat-room-component#59787dcc3bc845229260d23748907105ceb0cb89"
+  resolved "https://github.com/bholben/chat-room-component#cb29fb1d51ff16c7f7e94c487ef699a5baeb8aa5"
   dependencies:
     font-awesome "^4.7.0"
     moment "^2.18.1"

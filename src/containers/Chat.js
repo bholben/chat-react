@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { api, firebase } from 'chat-api';
 import { hasEnter } from '../utils/strings';
-import Users from '../components/Users';
-import Chat from '../node_modules/chat-room-component/Chat';
+import ChatRooms from '../components/ChatRooms';
+import ChatRoom from '../node_modules/chat-room-component/ChatRoom';
 
 const messengerStyles = {
   display: 'flex',
+  height: '100vh',
 };
 
-class ChatRoom extends Component {
+class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,19 +77,21 @@ class ChatRoom extends Component {
   render() {
     return (
       <div style={messengerStyles}>
-        <Users />
-        <Chat isAgentOnRight={true}
-            user={this.state.user}
-            displayName={this.state.displayName}
-            messageText={this.state.messageText}
-            messages={this.state.messages}
-            changeMessageText={this.changeMessageText}
-            sendMessage={this.sendMessage}
-            isDeleteEnabled = {true}
-            deleteMessage={this.deleteMessage} />
+        <ChatRooms />
+        <div style={{flex: 2, overflowY: 'auto'}}>
+          <ChatRoom isAgentOnRight={true}
+              user={this.state.user}
+              displayName={this.state.displayName}
+              messageText={this.state.messageText}
+              messages={this.state.messages}
+              changeMessageText={this.changeMessageText}
+              sendMessage={this.sendMessage}
+              isDeleteEnabled = {true}
+              deleteMessage={this.deleteMessage} />
+        </div>
       </div>
     );
   }
 }
 
-export default ChatRoom;
+export default Chat;
