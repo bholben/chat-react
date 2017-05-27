@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import Header from './Header';
+import ChatSessions from './ChatSessions';
+
+const chatRoomsStyle = {
+  flex: 1,
+  minWidth: 320,
+  overflowY: 'auto',
+  borderRight: '1px solid #ddd',
+};
 
 class ChatRooms extends Component {
   constructor(props) {
@@ -10,7 +19,11 @@ class ChatRooms extends Component {
 
   render() {
     return (
-      <div style={{flex: 1, overflowY: 'auto'}}>Users</div>
+      <div style={chatRoomsStyle}>
+        <Header />
+        <ChatSessions sessions={this.props.sessions}
+            activateSession={this.props.activateSession}/>
+      </div>
     );
   }
 }

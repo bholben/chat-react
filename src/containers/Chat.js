@@ -4,20 +4,18 @@ import { hasEnter } from '../utils/strings';
 import ChatRooms from '../components/ChatRooms';
 import ChatRoom from '../node_modules/chat-room-component/ChatRoom';
 
-const messengerStyles = {
-  display: 'flex',
-  height: '100vh',
-};
-
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: {},
-      messages: [],
-      displayName: 'Anonymous',
+      messages: [],  // TODO: Replace this with activeSession
+      sessions: [],
+      activeSession: {},
+      displayName: 'Bob',  // TODO: Tie this to the agent's name
       messageText: '',
     };
+    this.activateSession = this.activateSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
@@ -32,10 +30,25 @@ class Chat extends Component {
         //   isAnonymous: true,
         // }
 
+        api.syncChatSessions(user, sessions => {
+          this.setState({ sessions });
+        });
+
+        // TODO: Get rid of this???
         api.syncMessages(user, messages => {
-          this.setState({ user, messages })
+          this.setState({ user, messages });
         });
       });
+  }
+
+  activateSession(key) {
+    const sessions = this.state.sessions.map(session => {
+      session.isActive = session.key === key;
+      this.setState({ activeSession: session });
+      return session;
+    });
+
+    this.setState({ sessions });
   }
 
   changeMessageText(e) {
@@ -76,9 +89,10 @@ class Chat extends Component {
 
   render() {
     return (
-      <div style={messengerStyles}>
-        <ChatRooms />
-        <div style={{flex: 2, overflowY: 'auto'}}>
+      <div style={{display: 'flex', height: '100vh'}}>
+        <ChatRooms sessions={this.state.sessions}
+            activateSession={this.activateSession} />
+        <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
           <ChatRoom isAgentOnRight={true}
               user={this.state.user}
               displayName={this.state.displayName}
