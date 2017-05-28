@@ -8,12 +8,11 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
+      user: { email: 'bholben@gmail.com' },
       sessions: [],
       activeSession: {},
       messageText: '',
     };
-    this.initSessions = this.initSessions.bind(this);
     this.changeSession = this.changeSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -21,33 +20,12 @@ class Chat extends Component {
   }
 
   componentWillMount() {
-    const email = 'bholben@gmail.com';
-    const password = 'password';
-
-    api.auth.signInWithEmailAndPassword(email, password)
-      .then(this.initSessions)
-      .catch(err => {
-        if (err.code === 'auth/user-not-found') {
-          api.auth.createUserWithEmailAndPassword(email, password)
-            .then(this.initSessions)
-            .catch(console.error);
-        } else {
-          console.error(err);
-        }
+    api.auth.signInWithEmail(this.state.user.email, user => {
+      api.syncChatSessions(user, sessions => {
+        const activeSession = sessions[0];
+        activeSession.isActive = true;
+        this.setState({ user, sessions, activeSession });
       });
-  }
-
-  initSessions(user) {
-    // This is where we can spoof to get into another conversation
-    // user = {
-    //   uid: 'jc4JByFVHhhamVCDbQg2hj4mzEz2',
-    //   isAnonymous: true,
-    // }
-
-    api.syncChatSessions(user, sessions => {
-      const activeSession = sessions[0];
-      activeSession.isActive = true;
-      this.setState({ user, sessions, activeSession });
     });
   }
 
@@ -88,7 +66,7 @@ class Chat extends Component {
   }
 
   deleteMessage(message) {
-    api.deleteMessage(message, this.state.user)
+    api.deleteMessage(message, this.state.user, this.state.activeSession.key)
       .catch(console.error);
   }
 
