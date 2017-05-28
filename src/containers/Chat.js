@@ -8,6 +8,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // TODO: Pass in email prop
       user: { email: 'bholben@gmail.com' },
       sessions: [],
       activeSession: {},
