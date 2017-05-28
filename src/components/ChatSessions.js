@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ChatSession from './ChatSession';
 
-const chatSessionsStyle = {
-  marginTop: 80,
-  padding: 0,
-  overflowY: 'auto',
-}
-
 class ChatSessions extends Component {
   componentDidUpdate() {
     this.scrollToBottom();
@@ -20,7 +14,7 @@ class ChatSessions extends Component {
 
   render() {
     return (
-      <div style={chatSessionsStyle}>
+      <div style={{marginTop: 80,padding: 0,overflowY: 'auto'}}>
         {this.props.sessions.map(session =>
           <ChatSession
               key={session.messages[0].timestamp}
