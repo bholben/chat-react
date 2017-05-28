@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { api, firebase } from 'chat-api';
+import { api } from 'chat-api';
 import { hasEnter } from '../utils/strings';
 import ChatRooms from '../components/ChatRooms';
 import ChatRoom from '../node_modules/chat-room-component/ChatRoom';
@@ -11,9 +11,9 @@ class Chat extends Component {
       user: {},
       sessions: [],
       activeSession: {},
-      displayName: 'Bob',  // TODO: Use user.displayName once auth hooked up
       messageText: '',
     };
+    this.initSessions = this.initSessions.bind(this);
     this.changeSession = this.changeSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -21,20 +21,34 @@ class Chat extends Component {
   }
 
   componentWillMount() {
-    firebase.auth().signInAnonymously()
-      .then(user => {
-        // This is where we can spoof to get into another conversation
-        // user = {
-        //   uid: 'jc4JByFVHhhamVCDbQg2hj4mzEz2',
-        //   isAnonymous: true,
-        // }
+    const email = 'bholben@gmail.com';
+    const password = 'password';
 
-        api.syncChatSessions(user, sessions => {
-          const activeSession = sessions[0];
-          activeSession.isActive = true;
-          this.setState({ user, sessions, activeSession });
-        });
+    api.auth().signInWithEmailAndPassword(email, password)
+      .then(this.initSessions)
+      .catch(err => {
+        if (err.code === 'auth/user-not-found') {
+          api.auth().createUserWithEmailAndPassword(email, password)
+            .then(this.initSessions)
+            .catch(console.error);
+        } else {
+          console.error(err);
+        }
       });
+  }
+
+  initSessions(user) {
+    // This is where we can spoof to get into another conversation
+    // user = {
+    //   uid: 'jc4JByFVHhhamVCDbQg2hj4mzEz2',
+    //   isAnonymous: true,
+    // }
+
+    api.syncChatSessions(user, sessions => {
+      const activeSession = sessions[0];
+      activeSession.isActive = true;
+      this.setState({ user, sessions, activeSession });
+    });
   }
 
   changeSession(key) {
@@ -58,12 +72,12 @@ class Chat extends Component {
 
   sendMessage(e) {
     const message = {
-      displayName: this.state.displayName,  // TODO: Remove this once we have auth
       user: {
-        displayName: this.state.displayName,
+        displayName: this.state.user.displayName || 'Anonymous',
         uid: this.state.user.uid,
+        isAgent: true,
       },
-      text: this.state.messageText
+      text: this.state.messageText,
     };
     this.enableOtherUserSpoof(message);
     e.preventDefault();
@@ -82,8 +96,8 @@ class Chat extends Component {
     // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
-      message.displayName = 'Addison';
-      message.isAgent = true;
+      message.user.displayName = 'Spoofer';
+      message.user.isAgent = !message.user.isAgent;
     }
   }
 
@@ -95,7 +109,6 @@ class Chat extends Component {
         <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
           <ChatRoom isAgentOnRight={true}
               user={this.state.user}
-              displayName={this.state.displayName}  // TODO: Remove this
               messageText={this.state.messageText}
               messages={this.state.activeSession.messages}
               changeMessageText={this.changeMessageText}

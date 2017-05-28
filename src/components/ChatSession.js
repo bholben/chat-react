@@ -23,8 +23,12 @@ function getMessageText(text) {
 function ChatSession(props) {
   const { session } = props;
   const lastMessage = last(session.messages);
-  const firstUserMessage = find(session.messages, message => !message.isAgent);
+  const firstUserMessage = find(session.messages, message => {
+    // TODO: Remove message.isAgent once all cleared out of db
+    return message.user ? !message.user.isAgent : !message.isAgent;
+  });
 
+  // TODO: Bind only firstUserMessage.user to user
   return (
     <div id={session.key}
         style={getSessionStyle(session)}
@@ -32,7 +36,7 @@ function ChatSession(props) {
       <div style={{padding: '5px 10px 5px 20px'}}>
         <Avatar
             style={{margin: 10}}
-            user={firstUserMessage}
+            user={firstUserMessage.user || firstUserMessage}
             fallbackTheme={'wavatar'} />
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
