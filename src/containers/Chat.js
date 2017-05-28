@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { api } from 'chat-api';
 import { hasEnter } from '../utils/strings';
 import ChatRooms from '../components/ChatRooms';
-import ChatRoom from '../node_modules/chat-room-component/ChatRoom';
+import ChatRoom from '../node_modules/chat-shared-components/ChatRoom';
 
 class Chat extends Component {
   constructor(props) {

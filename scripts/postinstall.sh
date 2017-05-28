@@ -7,5 +7,5 @@
 # file will keep them away from the remote repo.
 
 rm -rf src/node_modules
-mkdir -p src/node_modules/chat-room-component
-cp -R ./node_modules/chat-room-component/ChatRoom "$_"
+mkdir -p src/node_modules/chat-shared-components
+cp -R ./node_modules/chat-shared-components/ChatRoom "$_"
