@@ -22,7 +22,7 @@ class ChatRooms extends Component {
       <div style={chatRoomsStyle}>
         <Header />
         <ChatSessions sessions={this.props.sessions}
-            activateSession={this.props.activateSession}/>
+            changeSession={this.props.changeSession}/>
       </div>
     );
   }

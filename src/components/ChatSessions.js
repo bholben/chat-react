@@ -25,8 +25,8 @@ class ChatSessions extends Component {
           <ChatSession
               key={session.messages[0].timestamp}
               session={session}
-              activateSession={this.props.activateSession}/>
-        ).reverse()}
+              changeSession={this.props.changeSession}/>
+        )}
         {/* This dummy element is used only to facilitate bottom scrolling */}
         <div ref={el => this.bottomElement = el}></div>
       </div>

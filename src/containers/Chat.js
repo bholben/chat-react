@@ -9,19 +9,18 @@ class Chat extends Component {
     super(props);
     this.state = {
       user: {},
-      messages: [],  // TODO: Replace this with activeSession
       sessions: [],
       activeSession: {},
-      displayName: 'Bob',  // TODO: Tie this to the agent's name
+      displayName: 'Bob',  // TODO: Use user.displayName once auth hooked up
       messageText: '',
     };
-    this.activateSession = this.activateSession.bind(this);
+    this.changeSession = this.changeSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().signInAnonymously()
       .then(user => {
         // This is where we can spoof to get into another conversation
@@ -31,20 +30,17 @@ class Chat extends Component {
         // }
 
         api.syncChatSessions(user, sessions => {
-          this.setState({ sessions });
-        });
-
-        // TODO: Get rid of this???
-        api.syncMessages(user, messages => {
-          this.setState({ user, messages });
+          const activeSession = sessions[0];
+          activeSession.isActive = true;
+          this.setState({ user, sessions, activeSession });
         });
       });
   }
 
-  activateSession(key) {
+  changeSession(key) {
     const sessions = this.state.sessions.map(session => {
       session.isActive = session.key === key;
-      this.setState({ activeSession: session });
+      if (session.isActive) this.setState({ activeSession: session });
       return session;
     });
 
@@ -91,13 +87,13 @@ class Chat extends Component {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
         <ChatRooms sessions={this.state.sessions}
-            activateSession={this.activateSession} />
+            changeSession={this.changeSession} />
         <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
           <ChatRoom isAgentOnRight={true}
               user={this.state.user}
               displayName={this.state.displayName}
               messageText={this.state.messageText}
-              messages={this.state.messages}
+              messages={this.state.activeSession.messages}
               changeMessageText={this.changeMessageText}
               sendMessage={this.sendMessage}
               isDeleteEnabled = {true}

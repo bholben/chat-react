@@ -7,7 +7,6 @@ const sessionStyle = {
   display: 'flex',
   padding: 8,
   borderBottom: '1px solid #ddd',
-  backgroundColor: 'white',
   color: '#bbb',
   cursor: 'pointer',
 };
@@ -29,7 +28,7 @@ function ChatSession(props) {
   return (
     <div id={session.key}
         style={getSessionStyle(session)}
-        onClick={() => props.activateSession(session.key)}>
+        onClick={() => props.changeSession(session.key)}>
       <div style={{padding: '5px 10px 5px 20px'}}>
         <Avatar
             style={{margin: 10}}
