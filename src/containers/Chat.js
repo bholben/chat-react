@@ -52,8 +52,9 @@ class Chat extends Component {
   sendMessage(e) {
     const message = {
       user: {
-        displayName: this.state.user.displayName || 'Anonymous',
         uid: this.state.user.uid,
+        displayName: this.state.user.displayName || 'Anonymous',
+        email: this.state.user.email,
         isAgent: true,
       },
       text: this.state.messageText,
@@ -76,20 +77,22 @@ class Chat extends Component {
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
       message.user.displayName = 'Spoofer';
-      message.user.isAgent = !message.user.isAgent;
+      message.user.isAgent = false;
     }
   }
 
   render() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
-        <ChatRooms sessions={this.state.sessions}
+        <ChatRooms
+            sessions={this.state.sessions}
             changeSession={this.changeSession} />
         <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
-          <ChatRoom isAgentOnRight={true}
+          <ChatRoom
+              isAgentOnRight={true}
               user={this.state.user}
-              messageText={this.state.messageText}
               messages={this.state.activeSession.messages}
+              messageText={this.state.messageText}
               changeMessageText={this.changeMessageText}
               sendMessage={this.sendMessage}
               isDeleteEnabled = {true}
