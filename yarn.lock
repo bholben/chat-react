@@ -1232,9 +1232,9 @@ charenc@~0.0.1:
   version "1.0.0"
   resolved "https://github.com/bholben/chat-api#36a5e39612aac10b4079fb64919b0f94dda01499"
 
-"chat-room-component@https://github.com/bholben/chat-room-component":
+"chat-shared-components@https://github.com/bholben/chat-shared-components":
   version "0.1.0"
-  resolved "https://github.com/bholben/chat-room-component#0f57200696627c5a804b5d1841676a5dd4742751"
+  resolved "https://github.com/bholben/chat-shared-components#1f2bf6c60bf035f48063c18df82221b6c3391143"
   dependencies:
     font-awesome "^4.7.0"
     moment "^2.18.1"
