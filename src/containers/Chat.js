@@ -24,11 +24,11 @@ class Chat extends Component {
     const email = 'bholben@gmail.com';
     const password = 'password';
 
-    api.auth().signInWithEmailAndPassword(email, password)
+    api.auth.signInWithEmailAndPassword(email, password)
       .then(this.initSessions)
       .catch(err => {
         if (err.code === 'auth/user-not-found') {
-          api.auth().createUserWithEmailAndPassword(email, password)
+          api.auth.createUserWithEmailAndPassword(email, password)
             .then(this.initSessions)
             .catch(console.error);
         } else {
