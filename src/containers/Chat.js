@@ -58,14 +58,17 @@ class Chat extends Component {
 
   sendMessage(e) {
     const message = {
-      displayName: this.state.displayName,
-      timestamp: firebase.database.ServerValue.TIMESTAMP,
+      displayName: this.state.displayName,  // TODO: Remove this once we have auth
+      user: {
+        displayName: this.state.displayName,
+        uid: this.state.user.uid,
+      },
       text: this.state.messageText
     };
     this.enableOtherUserSpoof(message);
     e.preventDefault();
 
-    api.sendMessage(message, this.state.user)
+    api.sendMessage(message, this.state.user, this.state.activeSession.key)
       .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
   }
@@ -76,6 +79,7 @@ class Chat extends Component {
   }
 
   enableOtherUserSpoof(message) {
+    // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
       message.displayName = 'Addison';
@@ -91,7 +95,7 @@ class Chat extends Component {
         <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
           <ChatRoom isAgentOnRight={true}
               user={this.state.user}
-              displayName={this.state.displayName}
+              displayName={this.state.displayName}  // TODO: Remove this
               messageText={this.state.messageText}
               messages={this.state.activeSession.messages}
               changeMessageText={this.changeMessageText}
