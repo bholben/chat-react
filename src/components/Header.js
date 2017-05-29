@@ -6,7 +6,7 @@ const headerStyle = {
   display: 'flex',
   alignItems: 'center',
   height: 80,
-  marginBottom: 2,
+  marginBottom: 3,
   paddingLeft: 10,
   backgroundColor: '#eee',
   color: '#1e3f80',

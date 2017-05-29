@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
 import { api } from 'chat-api';
 import { hasEnter } from '../utils/strings';
+import Welcome from '../components/Welcome';
+import background from '../components/Welcome.background.jpg';
 import ChatRooms from '../components/ChatRooms';
 import ChatRoom from '../node_modules/chat-shared-components/ChatRoom';
+
+const welcomeStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  backgroundImage: `url(${background})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
 
 class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // TODO: Pass in email prop
+      welcome: {},
       user: { email: 'bholben@gmail.com' },
       sessions: [],
       activeSession: {},
       messageText: '',
     };
+    this.submitWelcome = this.submitWelcome.bind(this);
     this.changeSession = this.changeSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -28,6 +43,15 @@ class Chat extends Component {
         this.setState({ user, sessions, activeSession });
       });
     });
+  }
+
+  submitWelcome(e) {
+    e.preventDefault();
+    const displayName = e.target.children.displayName.value;
+    // TODO: Replace this fabricated email with the incoming email address
+    const email = `${displayName}@gmail.com`;
+    const welcome = { displayName, email };
+    this.setState({ welcome });
   }
 
   changeSession(key) {
@@ -76,6 +100,18 @@ class Chat extends Component {
   }
 
   render() {
+    return this.state.email ? this.getChat() : this.getIntro();
+  }
+
+  getIntro() {
+    return (
+      <div style={welcomeStyle}>
+        <Welcome submitWelcome={this.submitWelcome} />
+      </div>
+    );
+  }
+
+  getChat() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
         <ChatRooms
