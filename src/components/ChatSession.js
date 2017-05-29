@@ -7,12 +7,12 @@ const sessionStyle = {
   display: 'flex',
   padding: 8,
   borderBottom: '1px solid #ddd',
-  color: '#bbb',
+  color: '#999',
   cursor: 'pointer',
 };
 
 function getSessionStyle(session) {
-  const backgroundColor = session.isActive ? '#eee' : 'white';
+  const backgroundColor = session.isActive ? '#ddd' : 'white';
   return Object.assign({}, sessionStyle, { backgroundColor });
 }
 
@@ -30,8 +30,7 @@ function ChatSession(props) {
 
   // TODO: Bind only firstUserMessage.user to user
   return (
-    <div id={session.key}
-        style={getSessionStyle(session)}
+    <div style={getSessionStyle(session)}
         onClick={() => props.changeSession(session.key)}>
       <div style={{padding: '5px 10px 5px 20px'}}>
         <Avatar
@@ -41,7 +40,7 @@ function ChatSession(props) {
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div style={{color: '#444', fontWeight: 700}}>{lastMessage.displayName}</div>
+          <div style={{color: '#1e3f80', fontWeight: 700}}>{lastMessage.displayName}</div>
           <div style={{fontSize: '0.8em'}}>
             {moment(lastMessage.timestamp).fromNow()}
           </div>

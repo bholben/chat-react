@@ -50,19 +50,14 @@ class Chat extends Component {
   }
 
   sendMessage(e) {
-    const message = {
-      user: {
-        uid: this.state.user.uid,
-        displayName: this.state.user.displayName || 'Anonymous',
-        email: this.state.user.email,
-        isAgent: true,
-      },
-      text: this.state.messageText,
-    };
-    this.enableOtherUserSpoof(message);
+    const { displayName, email, uid } = this.state.user;
+    const user = { displayName, email, uid };
+    const message = { text: this.state.messageText, agent: user };
+
+    this.enableOtherUserSpoof(message, user);
     e.preventDefault();
 
-    api.sendMessage(message, this.state.user, this.state.activeSession.key)
+    api.sendMessage(message, user, this.state.activeSession.key)
       .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
   }
@@ -76,8 +71,7 @@ class Chat extends Component {
     // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
-      message.user.displayName = 'Spoofer';
-      message.user.isAgent = false;
+      message.agent = null;
     }
   }
 
@@ -88,13 +82,12 @@ class Chat extends Component {
             sessions={this.state.sessions}
             changeSession={this.changeSession} />
         <ChatRoom
-            isAgentOnRight={true}
+            isAgent={true}
             user={this.state.user}
             messages={this.state.activeSession.messages}
             messageText={this.state.messageText}
             changeMessageText={this.changeMessageText}
             sendMessage={this.sendMessage}
-            isDeleteEnabled = {true}
             deleteMessage={this.deleteMessage} />
       </div>
     );

@@ -14,7 +14,7 @@ class ChatSessions extends Component {
 
   render() {
     return (
-      <div style={{marginTop: 80,padding: 0,overflowY: 'auto'}}>
+      <section style={{padding: 0, overflowY: 'auto'}}>
         {this.props.sessions.map(session =>
           <ChatSession
               key={session.messages[0].timestamp}
@@ -23,7 +23,7 @@ class ChatSessions extends Component {
         )}
         {/* This dummy element is used only to facilitate bottom scrolling */}
         <div ref={el => this.bottomElement = el}></div>
-      </div>
+      </section>
     );
   }
 }
