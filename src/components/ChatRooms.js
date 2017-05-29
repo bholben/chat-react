@@ -3,9 +3,8 @@ import Header from './Header';
 import ChatSessions from './ChatSessions';
 
 const chatRoomsStyle = {
-  flex: 1,
+  flex: 5,
   minWidth: 320,
-  overflowY: 'auto',
   borderRight: '1px solid #ddd',
 };
 

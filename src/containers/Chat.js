@@ -87,17 +87,15 @@ class Chat extends Component {
         <ChatRooms
             sessions={this.state.sessions}
             changeSession={this.changeSession} />
-        <div style={{flex: 2, minWidth: 320, overflowY: 'auto'}}>
-          <ChatRoom
-              isAgentOnRight={true}
-              user={this.state.user}
-              messages={this.state.activeSession.messages}
-              messageText={this.state.messageText}
-              changeMessageText={this.changeMessageText}
-              sendMessage={this.sendMessage}
-              isDeleteEnabled = {true}
-              deleteMessage={this.deleteMessage} />
-        </div>
+        <ChatRoom
+            isAgentOnRight={true}
+            user={this.state.user}
+            messages={this.state.activeSession.messages}
+            messageText={this.state.messageText}
+            changeMessageText={this.changeMessageText}
+            sendMessage={this.sendMessage}
+            isDeleteEnabled = {true}
+            deleteMessage={this.deleteMessage} />
       </div>
     );
   }
