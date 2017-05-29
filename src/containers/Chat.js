@@ -21,9 +21,7 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // TODO: Pass in email prop
-      welcome: {},
-      user: { email: 'bholben@gmail.com' },
+      user: {},
       sessions: [],
       activeSession: {},
       messageText: '',
@@ -35,23 +33,21 @@ class Chat extends Component {
     this.deleteMessage = this.deleteMessage.bind(this);
   }
 
-  componentWillMount() {
-    api.auth.signInWithEmail(this.state.user.email, user => {
-      api.syncChatSessions(user, sessions => {
-        const activeSession = sessions[0];
-        activeSession.isActive = true;
-        this.setState({ user, sessions, activeSession });
-      });
-    });
-  }
-
   submitWelcome(e) {
     e.preventDefault();
     const displayName = e.target.children.displayName.value;
     // TODO: Replace this fabricated email with the incoming email address
     const email = `${displayName}@gmail.com`;
-    const welcome = { displayName, email };
-    this.setState({ welcome });
+
+    return api.auth.signInWithEmail(email, user => {
+      return api.syncChatSessions(user, sessions => {
+        const activeSession = sessions[0];
+        activeSession.isActive = true;
+        return user.updateProfile({ displayName })
+          .then(() => this.setState({ user, sessions, activeSession }))
+          .catch(console.error);
+      });
+    });
   }
 
   changeSession(key) {
@@ -81,7 +77,7 @@ class Chat extends Component {
     this.enableOtherUserSpoof(message, user);
     e.preventDefault();
 
-    api.sendMessage(message, user, this.state.activeSession.key)
+    api.postMessage(message, user, this.state.activeSession.key)
       .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
   }
@@ -100,10 +96,10 @@ class Chat extends Component {
   }
 
   render() {
-    return this.state.email ? this.getChat() : this.getIntro();
+    return this.state.user.email ? this.getChat() : this.getWelcome();
   }
 
-  getIntro() {
+  getWelcome() {
     return (
       <div style={welcomeStyle}>
         <Welcome submitWelcome={this.submitWelcome} />

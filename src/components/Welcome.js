@@ -1,7 +1,7 @@
 import React from 'react';
 
 const sectionStyle = {
-  padding: '50px 15px 30px',
+  padding: '50px 30px 30px',
   borderRadius: 5,
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
   color: 'white',
@@ -9,7 +9,7 @@ const sectionStyle = {
 
 const inputStyle = {
   display: 'block',
-  width: 240,
+  width: 180,
   margin: '5px 0 10px',
   fontSize: 16,
   lineHeight: 1.8,
