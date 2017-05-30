@@ -30,7 +30,7 @@ function Welcome(props) {
     <section style={sectionStyle}>
       <h3 style={{margin: 0, textAlign: 'center'}}>Sign in</h3>
       <div style={{margin: '10px 0 70px', textAlign: 'center'}}>(just first name for now)</div>
-      <form onSubmit={props.submitWelcome}>
+      <form onSubmit={props.submitSignIn}>
         <label style={{display: 'block'}} htmlFor="displayName">Name</label>
         <input style={inputStyle} id="displayName" placeholder="John" />
         <button style={buttonStyle} type="submit">Submit</button>

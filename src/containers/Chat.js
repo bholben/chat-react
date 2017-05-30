@@ -26,14 +26,14 @@ class Chat extends Component {
       activeSession: {},
       messageText: '',
     };
-    this.submitWelcome = this.submitWelcome.bind(this);
+    this.submitSignIn = this.submitSignIn.bind(this);
     this.changeSession = this.changeSession.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
   }
 
-  submitWelcome(e) {
+  submitSignIn(e) {
     e.preventDefault();
     const displayName = e.target.children.displayName.value;
     // TODO: Replace this fabricated email with the incoming email address
@@ -102,7 +102,7 @@ class Chat extends Component {
   getWelcome() {
     return (
       <div style={welcomeStyle}>
-        <Welcome submitWelcome={this.submitWelcome} />
+        <Welcome submitSignIn={this.submitSignIn} />
       </div>
     );
   }
