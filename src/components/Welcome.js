@@ -11,8 +11,9 @@ const inputStyle = {
   display: 'block',
   width: 180,
   margin: '5px 0 10px',
+  padding: '10px 5px',
+  border: 'none',
   fontSize: 16,
-  lineHeight: 1.8,
 };
 
 const buttonStyle = {
@@ -31,8 +32,8 @@ function Welcome(props) {
       <h3 style={{margin: 0, textAlign: 'center'}}>Sign in</h3>
       <div style={{margin: '10px 0 70px', textAlign: 'center'}}>(just first name for now)</div>
       <form onSubmit={props.submitSignIn}>
-        <label style={{display: 'block'}} htmlFor="displayName">Name</label>
-        <input style={inputStyle} id="displayName" placeholder="John" />
+        <label style={{display: 'block'}} htmlFor="displayName">First Name</label>
+        <input style={inputStyle} id="displayName" placeholder="Enter name here" />
         <button style={buttonStyle} type="submit">Submit</button>
       </form>
     </section>

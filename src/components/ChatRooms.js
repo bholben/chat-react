@@ -5,6 +5,7 @@ import ChatSessions from './ChatSessions';
 const chatRoomsStyle = {
   flex: 5,
   minWidth: 300,
+  maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
   borderRight: '1px solid #ddd',
