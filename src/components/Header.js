@@ -6,11 +6,9 @@ const headerStyle = {
   display: 'flex',
   alignItems: 'center',
   height: 80,
-  marginBottom: 3,
   paddingLeft: 10,
   backgroundColor: '#eee',
   color: '#1e3f80',
-  boxShadow: '0 1px 5px #bbb',
 };
 
 const headerImageStyle = {

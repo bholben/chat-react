@@ -8,7 +8,6 @@ const chatRoomsStyle = {
   maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
-  borderRight: '1px solid #ddd',
 };
 
 function ChatRooms(props) {
