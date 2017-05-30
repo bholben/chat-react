@@ -115,7 +115,7 @@ class Chat extends Component {
             changeSession={this.changeSession} />
         <ChatRoom
             isAgent={true}
-            user={this.state.user}
+            user={this.state.activeSession.user}
             messages={this.state.activeSession.messages}
             messageText={this.state.messageText}
             changeMessageText={this.changeMessageText}

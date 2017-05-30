@@ -1,6 +1,6 @@
 import React from 'react';
 import * as moment from 'moment';
-import { last, find } from 'lodash';
+import { last } from 'lodash';
 import Avatar from '../node_modules/chat-shared-components/ChatRoom/Avatar';
 
 const sessionStyle = {
@@ -23,24 +23,19 @@ function getMessageText(text) {
 function ChatSession(props) {
   const { session } = props;
   const lastMessage = last(session.messages);
-  const firstUserMessage = find(session.messages, message => {
-    // TODO: Remove message.isAgent once all cleared out of db
-    return message.user ? !message.user.isAgent : !message.isAgent;
-  });
 
-  // TODO: Bind only firstUserMessage.user to user
   return (
     <div style={getSessionStyle(session)}
         onClick={() => props.changeSession(session.key)}>
       <div style={{padding: '5px 10px 5px 20px'}}>
         <Avatar
             style={{margin: 10}}
-            user={firstUserMessage.user || firstUserMessage}
+            user={session.user}
             fallbackTheme={'wavatar'} />
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div style={{color: '#1e3f80', fontWeight: 700}}>{lastMessage.displayName}</div>
+          <div style={{color: '#1e3f80', fontWeight: 700}}>{session.user.displayName}</div>
           <div style={{fontSize: '0.8em'}}>
             {moment(lastMessage.timestamp).fromNow()}
           </div>
