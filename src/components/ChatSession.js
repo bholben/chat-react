@@ -28,10 +28,7 @@ function ChatSession(props) {
     <div style={getSessionStyle(session)}
         onClick={() => props.changeSession(session.key)}>
       <div style={{padding: '5px 10px 5px 20px'}}>
-        <Avatar
-            style={{margin: 10}}
-            user={session.user}
-            fallbackTheme={'wavatar'} />
+        <Avatar style={{margin: 10}} user={session.user} />
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
