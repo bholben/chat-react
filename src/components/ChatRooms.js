@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import ChatSessions from './ChatSessions';
+import background from './ChatSessions.background.jpg';
 
 const chatRoomsStyle = {
   flex: 5,
@@ -8,6 +9,8 @@ const chatRoomsStyle = {
   maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
+  backgroundImage: `url(${background})`,
+  backgroundSize: 'cover',
 };
 
 function ChatRooms(props) {

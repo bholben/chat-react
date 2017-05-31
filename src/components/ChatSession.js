@@ -6,13 +6,13 @@ import Avatar from '../node_modules/chat-shared-components/ChatRoom/Avatar';
 const sessionStyle = {
   display: 'flex',
   padding: 8,
-  borderBottom: '1px solid #ddd',
+  borderBottom: '1px solid #bbb',
   color: '#999',
   cursor: 'pointer',
 };
 
 function getSessionStyle(session) {
-  const backgroundColor = session.isActive ? '#ddd' : 'white';
+  const backgroundColor = session.isActive ? '#e6d57d' : 'transparent';
   return Object.assign({}, sessionStyle, { backgroundColor });
 }
 

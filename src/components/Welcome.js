@@ -33,7 +33,7 @@ function Welcome(props) {
       <div style={{margin: '10px 0 70px', textAlign: 'center'}}>(just first name for now)</div>
       <form onSubmit={props.submitSignIn}>
         <label style={{display: 'block'}} htmlFor="displayName">First Name</label>
-        <input style={inputStyle} id="displayName" placeholder="Enter name here" />
+        <input style={inputStyle} id="displayName" placeholder="Enter name here" autoFocus />
         <button style={buttonStyle} type="submit">Submit</button>
       </form>
     </section>

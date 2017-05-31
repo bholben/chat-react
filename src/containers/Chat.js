@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { api } from 'chat-api';
+import { isAgent } from '../config';
 import { hasEnter } from '../utils/strings';
 import Welcome from '../components/Welcome';
 import background from '../components/Welcome.background.jpg';
@@ -114,7 +115,7 @@ class Chat extends Component {
             sessions={this.state.sessions}
             changeSession={this.changeSession} />
         <ChatRoom
-            isAgent={true}
+            isAgent={isAgent}
             user={this.state.activeSession.user}
             messages={this.state.activeSession.messages}
             messageText={this.state.messageText}

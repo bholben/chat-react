@@ -7,7 +7,7 @@ const headerStyle = {
   alignItems: 'center',
   height: 80,
   paddingLeft: 10,
-  backgroundColor: '#eee',
+  borderBottom: '1px solid #bbb',
   color: '#1e3f80',
 };
 
