@@ -26,7 +26,7 @@ function Header(props) {
             {props.isAgent ? props.user.displayName : 'Chat Room'}
           </span>
         </div>
-        <Vitals vitals={vitals} hasLabels={true} />
+        {isAgent ? <Vitals vitals={vitals} hasLabels={true} /> : null}
       </div>
     </header>
   );

@@ -137,9 +137,9 @@ class Chat extends Component {
   getChat() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
-        <ChatSessions
+        {isAgent ? <ChatSessions
             sessions={this.state.sessions}
-            changeSession={this.changeSession} />
+            changeSession={this.changeSession} /> : null}
         <ChatRoom
             isAgent={isAgent}
             user={this.state.activeSession.user}
