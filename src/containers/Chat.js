@@ -3,9 +3,9 @@ import { api } from 'chat-api';
 import { isAgent } from '../config';
 import { hasEnter } from '../utils/strings';
 import Welcome from '../components/Welcome';
-import background from '../components/Welcome.background.jpg';
+import background from '../components/common/imags/Welcome.background.jpg';
 import ChatSessions from '../components/ChatSessions';
-import ChatRoom from '../node_modules/chat-shared-components/ChatRoom';
+import ChatRoom from '../components/ChatRoom';
 
 const welcomeStyle = {
   display: 'flex',

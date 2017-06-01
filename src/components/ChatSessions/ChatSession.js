@@ -1,7 +1,7 @@
 import React from 'react';
 import * as moment from 'moment';
 import { last } from 'lodash';
-import Avatar from '../../node_modules/chat-shared-components/ChatRoom/Avatar';
+import Avatar from '../common/Avatar';
 
 const sessionStyle = {
   display: 'flex',
