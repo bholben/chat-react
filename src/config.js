@@ -1,1 +1,1 @@
-export const isAgent = false;
+export const isAgent = true;

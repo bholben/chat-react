@@ -4,7 +4,7 @@ import { isAgent } from '../config';
 import { hasEnter } from '../utils/strings';
 import Welcome from '../components/Welcome';
 import background from '../components/Welcome.background.jpg';
-import ChatRooms from '../components/ChatRooms';
+import ChatSessions from '../components/ChatSessions';
 import ChatRoom from '../node_modules/chat-shared-components/ChatRoom';
 
 const welcomeStyle = {
@@ -111,7 +111,7 @@ class Chat extends Component {
   getChat() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
-        <ChatRooms
+        <ChatSessions
             sessions={this.state.sessions}
             changeSession={this.changeSession} />
         <ChatRoom

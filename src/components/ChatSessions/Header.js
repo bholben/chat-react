@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './Header.logo.png';
-import './Header.animation.css';
+import logo from './images/Header.logo.png';
+import './styles/Header.animation.css';
 
 const headerStyle = {
   display: 'flex',
