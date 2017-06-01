@@ -3,7 +3,7 @@ import { api } from 'chat-api';
 import { isAgent } from '../config';
 import { hasEnter } from '../utils/strings';
 import Welcome from '../components/Welcome';
-import background from '../components/common/imags/Welcome.background.jpg';
+import background from '../components/common/images/Welcome.background.jpg';
 import ChatSessions from '../components/ChatSessions';
 import ChatRoom from '../components/ChatRoom';
 
@@ -16,6 +16,25 @@ const welcomeStyle = {
   backgroundImage: `url(${background})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
+};
+
+const vitals = {
+  agent: {
+    name: 'Addison',
+    color: '#1e3f80',
+  },
+  status: {
+    name: 'Open',
+    color: '#ddd',
+  },
+  severity: {
+    name: 'Critical',
+    color: 'orange',
+  },
+  loyalty: {
+    name: 'Silver',
+    color: 'silver',
+  },
 };
 
 class Chat extends Component {
@@ -42,6 +61,13 @@ class Chat extends Component {
 
     return api.auth.signInWithEmail(email, user => {
       return api.syncChatSessions(user, sessions => {
+
+        // Temp for now...
+        sessions = sessions.map(session => {
+          session.vitals = vitals;
+          return session;
+        });
+
         const activeSession = sessions[0];
         activeSession.isActive = true;
         return user.updateProfile({ displayName })
@@ -117,7 +143,7 @@ class Chat extends Component {
         <ChatRoom
             isAgent={isAgent}
             user={this.state.activeSession.user}
-            messages={this.state.activeSession.messages}
+            session={this.state.activeSession}
             messageText={this.state.messageText}
             changeMessageText={this.changeMessageText}
             sendMessage={this.sendMessage}

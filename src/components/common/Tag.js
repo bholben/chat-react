@@ -14,10 +14,10 @@ function getStyle(backgroundColor) {
   };
 }
 
-function Label(props) {
+function Tag(props) {
   return (
     <div style={getStyle(props.color)}>{props.text}</div>
   );
 }
 
-export default Label;
+export default Tag;

@@ -2,6 +2,7 @@ import React from 'react';
 import * as moment from 'moment';
 import { last } from 'lodash';
 import Avatar from '../common/Avatar';
+import Vitals from '../common/Vitals';
 
 const sessionStyle = {
   display: 'flex',
@@ -16,9 +17,9 @@ function getSessionStyle(session) {
   return Object.assign({}, sessionStyle, { backgroundColor });
 }
 
-function getMessageText(text) {
-  return text.length > 60 ? `${text.substring(0, 60)}...` : text;
-}
+// function getMessageText(text) {
+//   return text.length > 60 ? `${text.substring(0, 60)}...` : text;
+// }
 
 function ChatSession(props) {
   const { session } = props;
@@ -38,7 +39,8 @@ function ChatSession(props) {
           </div>
         </div>
         <div style={{marginTop: 5}}>
-          {getMessageText(lastMessage.text)}
+          <Vitals vitals={session.vitals} />
+          {/* {getMessageText(lastMessage.text)} */}
         </div>
       </div>
     </div>
