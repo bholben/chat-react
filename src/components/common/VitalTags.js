@@ -17,20 +17,20 @@ const assigneeOptions = [
 ];
 
 const statusOptions = [
-  { id: 'inQueue', name: 'In Queue' },
-  { id: 'inProgress', name: 'In Progress' },
-  { id: 'closed', name: 'Closed' },
+  { id: 'inQueue', name: 'In Queue', color: 'red' },
+  { id: 'inProgress', name: 'In Progress', color: '#ddd' },
+  { id: 'closed', name: 'Closed', color: '#444' },
 ];
 
 const severityOptions = [
-  { id: 'trivial', name: 'Trivial' },
-  { id: 'critical', name: 'Critical' },
+  { id: 'trivial', name: 'Trivial', color: 'lightblue' },
+  { id: 'critical', name: 'Critical', color: 'orange' },
 ];
 
 const loyaltyOptions = [
-  { id: 'gold', name: 'Gold' },
-  { id: 'silver', name: 'Silver' },
-  { id: 'bronze', name: 'Bronze' },
+  { id: 'gold', name: 'Gold', color: 'goldenrod' },
+  { id: 'silver', name: 'Silver', color: 'silver' },
+  { id: 'bronze', name: 'Bronze', color: 'darkgoldenrod' },
 ];
 
 function VitalTags(props) {

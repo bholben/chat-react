@@ -57,6 +57,7 @@ class Chat extends Component {
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
+    this.changeVitalsItem = this.changeVitalsItem.bind(this);
   }
 
   submitSignIn(e) {
@@ -120,8 +121,17 @@ class Chat extends Component {
       .catch(console.error);
   }
 
-  changeVitalsItem(key, id) {
-    console.log({key, id});
+  changeVitalsItem(key, selected) {
+    console.log({key, selected});
+
+    // Temp for now...
+    vitals[key] = selected;
+    const sessions = this.state.sessions.map(session => {
+      session.vitals = vitals;
+      return session;
+    });
+    this.setState({ sessions });
+    return Promise.resolve();
   }
 
   enableOtherUserSpoof(message) {

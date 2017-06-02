@@ -32,8 +32,12 @@ class DropDown extends Component {
   }
 
   onClickItem(e) {
+    const { options, changeItem } = this.props;
     const div = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
-    this.props.changeItem(div.dataset.id);
+    const selected = options.find(option => option.id === div.dataset.id);
+    changeItem(selected)
+      .then(() => this.setState({isCollapsed: true}))
+      .catch(console.error);
   }
 
   render() {
