@@ -1,5 +1,5 @@
 import React from 'react';
-import Tag from './Tag';
+import DropDown from './DropDown';
 
 const vitalStyle = {
   display: 'flex',
@@ -38,19 +38,31 @@ function VitalTags(props) {
     <div style={{fontSize: '0.9em'}}>
       <div style={vitalStyle}>
         <div style={labelStyle}>Assignee:</div>
-        <Tag options={assigneeOptions} selected={props.vitals.agent} />
+        <DropDown
+            options={assigneeOptions}
+            selected={props.vitals.agent}
+            changeItem={id => props.changeVitalsItem('agent', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Status:</div>
-        <Tag options={statusOptions} selected={props.vitals.status} />
+        <DropDown
+            options={statusOptions}
+            selected={props.vitals.status}
+            changeItem={id => props.changeVitalsItem('status', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Severity:</div>
-        <Tag options={severityOptions} selected={props.vitals.severity} />
+        <DropDown
+            options={severityOptions}
+            selected={props.vitals.severity}
+            changeItem={id => props.changeVitalsItem('severity', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Loyalty:</div>
-        <Tag options={loyaltyOptions} selected={props.vitals.loyalty} />
+        <DropDown
+            options={loyaltyOptions}
+            selected={props.vitals.loyalty}
+            changeItem={id => props.changeVitalsItem('loyalty', id)} />
       </div>
     </div>
   );

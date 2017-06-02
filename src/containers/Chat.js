@@ -120,6 +120,10 @@ class Chat extends Component {
       .catch(console.error);
   }
 
+  changeVitalsItem(key, id) {
+    console.log({key, id});
+  }
+
   enableOtherUserSpoof(message) {
     // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
@@ -143,9 +147,12 @@ class Chat extends Component {
   getChat() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
-        {isAgent ? <ChatSessions
+        {isAgent ?
+        <ChatSessions
             sessions={this.state.sessions}
-            changeSession={this.changeSession} /> : null}
+            changeSession={this.changeSession}
+            changeVitalsItem={this.changeVitalsItem} /> :
+        null}
         <ChatRoom
             isAgent={isAgent}
             user={this.state.activeSession.user}

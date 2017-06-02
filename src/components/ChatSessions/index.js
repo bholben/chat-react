@@ -34,7 +34,8 @@ class ChatSessions extends Component {
             <ChatSession
                 key={session.messages[0].timestamp}
                 session={session}
-                changeSession={changeSession}/>
+                changeSession={changeSession}
+                changeVitalsItem={this.props.changeVitalsItem} />
           )}
           {/* This dummy element is used only to facilitate bottom scrolling */}
           <div ref={el => this.bottomElement = el}></div>

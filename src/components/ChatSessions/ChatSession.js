@@ -46,7 +46,7 @@ function ChatSession(props) {
         </div>
         {session.isActive ?
           <div style={{marginTop: 5}}>
-            <VitalTags vitals={session.vitals} />
+            <VitalTags vitals={session.vitals} changeVitalsItem={props.changeVitalsItem} />
           </div> :
           <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 5}}>
             <div>{getMessageText(lastMessage.text)}</div>
