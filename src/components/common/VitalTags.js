@@ -1,4 +1,5 @@
 import React from 'react';
+import md5 from 'md5';
 import DropDown from './DropDown';
 
 const vitalStyle = {
@@ -11,9 +12,9 @@ const vitalStyle = {
 const labelStyle = { marginRight: 10 };
 
 const assigneeOptions = [
-  { uid: 'NHl2onCI4DTHFfCvN87JuUXxf2C3', displayName: 'Addison' },
-  { uid: 'kj9z5Yz9y9W9Kw7eR7H4k970uaj1', displayName: 'Bob' },
-  { uid: 'hgrrPjnAAbXane9WwjGrlIOprJp2', displayName: 'bholben' },
+  { id: 'NHl2onCI4DTHFfCvN87JuUXxf2C3', name: 'Addison', color: `#${md5('addison@gmail.com').substr(0, 6)}`, email: 'addison@gmail.com' },
+  { id: 'kj9z5Yz9y9W9Kw7eR7H4k970uaj1', name: 'Bob', color: `#${md5('bob@gmail.com').substr(0, 6)}`, email: 'bob@gmail.com' },
+  { id: 'hgrrPjnAAbXane9WwjGrlIOprJp2', name: 'bholben', color: `#${md5('bholben@gmail.com').substr(0, 6)}`, email: 'bholben@gmail.com' },
 ];
 
 const statusOptions = [
@@ -40,8 +41,8 @@ function VitalTags(props) {
         <div style={labelStyle}>Assignee:</div>
         <DropDown
             options={assigneeOptions}
-            selected={props.vitals.agent}
-            changeItem={id => props.changeVitalsItem('agent', id)} />
+            selected={props.vitals.assignee}
+            changeItem={id => props.changeVitalsItem('assignee', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Status:</div>

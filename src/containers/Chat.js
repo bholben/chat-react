@@ -20,11 +20,11 @@ const welcomeStyle = {
 };
 
 const vitals = {
-  agent: {
-    uid: 'NHl2onCI4DTHFfCvN87JuUXxf2C3',
-    displayName: 'Addison',
-    email: 'addison@gmail.com',
+  assignee: {
+    id: 'NHl2onCI4DTHFfCvN87JuUXxf2C3',
+    name: 'Addison',
     color: `#${md5('addison@gmail.com').substr(0, 6)}`,
+    email: 'addison@gmail.com',
   },
   status: {
     id: 'inProgress',

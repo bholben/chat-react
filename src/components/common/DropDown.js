@@ -13,7 +13,7 @@ class DropDown extends Component {
 
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.onClickDropDown = this.onClickDropDown.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
   }
 
@@ -27,7 +27,7 @@ class DropDown extends Component {
     div.style.fontSize = '0.9em';
   }
 
-  onClick() {
+  onClickDropDown() {
     this.setState({isCollapsed: !this.state.isCollapsed});
   }
 
@@ -42,33 +42,28 @@ class DropDown extends Component {
 
   render() {
     const { options, selected } = this.props;
-    if (selected.displayName) {
-      return (
+    const isUser = selected.email;
+
+    if (isUser) {
+      selected.uid = selected.id;
+      selected.displayName = selected.name;
+    }
+
+    return (
+      <div style={{position: 'relative'}}>
         <div style={styles.getDropDownStyle(selected.color)}
             onMouseOver={this.onMouseOver}
             onMouseLeave={this.onMouseLeave}
-            onClick={this.onClick} >
-          <Avatar user={selected} size={25} />
-          <div style={{marginLeft: 5}}>{selected.displayName}</div>
+            onClick={this.onClickDropDown} >
+          {isUser ? <Avatar user={selected} size={25} /> : null}
+          <div style={{marginLeft: isUser ? 5 : 0}}>
+            {selected.name}
+          </div>
           <i className="fa fa-caret-down"
               style={styles.icon}
               aria-hidden="true">
           </i>
         </div>
-      );
-    } else {
-      return (
-        <div style={{position: 'relative'}}>
-          <div style={styles.getDropDownStyle(selected.color)}
-              onMouseOver={this.onMouseOver}
-              onMouseLeave={this.onMouseLeave}
-              onClick={this.onClick} >
-            <div>{selected.name}</div>
-            <i className="fa fa-caret-down"
-                style={styles.icon}
-                aria-hidden="true">
-            </i>
-          </div>
         <div style={styles.getItemsStyle(this.state.isCollapsed)}>
           {options.map(option => {
             const isSelected = selected.id === option.id;
@@ -84,10 +79,8 @@ class DropDown extends Component {
           })}
         </div>
       </div>
-      );
-    }
+    );
   }
-
 }
 
 export default DropDown;
