@@ -28,6 +28,7 @@
   "dependencies": {
     "chat-api": "https://github.com/bholben/chat-api",
     "chat-shared-components": "https://github.com/bholben/chat-shared-components",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "md5": "^2.2.1",
     "moment": "^2.18.1",

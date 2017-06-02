@@ -1,5 +1,4 @@
 import React from 'react';
-import Vitals from '../common/Vitals';
 import logo from './images/Header.logo.png';
 import './styles/Header.animation.css';
 
@@ -16,18 +15,22 @@ const headerImageStyle = {
   animation: 'logo-spin-animation infinite 8s linear'
 };
 
+const titleStyle = {
+  marginLeft: 15,
+  fontSize: 18,
+  textTransform: 'uppercase',
+};
+
 function Header(props) {
-  const { isAgent, vitals, user } = props;
-  return (
+  const { isAgent } = props;
+  return !isAgent ? (
     <header style={{margin: '0 auto', padding: 10, color: '#ddd'}}>
       <div style={headerStyle}>
         <img src={logo} style={headerImageStyle} alt="logo" />
-        <span style={{marginLeft: 15, fontSize: 18, textTransform: 'uppercase'}}>
-          {isAgent ? user.displayName : 'Chat Room'}
-        </span>
+        <span style={titleStyle}>Chat Room</span>
       </div>
     </header>
-  );
+  ) : null;
 }
 
 export default Header;

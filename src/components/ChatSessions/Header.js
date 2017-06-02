@@ -1,14 +1,15 @@
 import React from 'react';
-import logo from './images/Header.logo.png';
+import logo from '../common/images/logo.png';
 import './styles/Header.animation.css';
 
 const headerStyle = {
   display: 'flex',
+  justifyContent: 'center',
   alignItems: 'center',
   height: 80,
   paddingLeft: 10,
-  borderBottom: '1px solid #bbb',
-  color: '#1e3f80',
+  backgroundColor: '#1e3f80',
+  color: 'white',
 };
 
 const headerImageStyle = {
@@ -16,13 +17,17 @@ const headerImageStyle = {
   animation: 'logo-spin-animation infinite 10s linear'
 };
 
+const titleStyle = {
+  margin: '0 25px 0 10px',
+  fontSize: '1.5em',
+  textTransform: 'uppercase',
+};
+
 function Header(props) {
   return (
     <header style={headerStyle}>
       <img src={logo} style={headerImageStyle} alt="logo" />
-      <span style={{marginLeft: 10, textTransform: 'uppercase'}}>
-        Chat Sessions
-      </span>
+      <span style={titleStyle}>Chat Sessions</span>
     </header>
   );
 }

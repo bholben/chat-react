@@ -2,11 +2,12 @@ import React from 'react';
 import * as moment from 'moment';
 import { last, findLast } from 'lodash';
 import Avatar from '../common/Avatar';
-import Dot from '../common/Dot';
-import Vitals from '../common/Vitals';
+import VitalTags from '../common/VitalTags';
+import VitalDots from '../common/VitalDots';
 
 const sessionStyle = {
   display: 'flex',
+  height: 55,
   padding: 8,
   borderBottom: '1px solid #bbb',
   color: '#777',
@@ -14,8 +15,9 @@ const sessionStyle = {
 };
 
 function getSessionStyle(session) {
+  const height = session.isActive ? 171 : 55;
   const backgroundColor = session.isActive ? '#d2ccae' : 'transparent';
-  return Object.assign({}, sessionStyle, { backgroundColor });
+  return Object.assign({}, sessionStyle, { height, backgroundColor });
 }
 
 function getMessageText(text) {
@@ -34,25 +36,22 @@ function ChatSession(props) {
         <Avatar user={session.user} />
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
-        <div>
-          <div style={{float: 'left', color: '#1e3f80', fontWeight: 700}}>
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{color: '#1e3f80', fontWeight: 700}}>
             {session.user.displayName}
           </div>
-          <div style={{float: 'right'}}>
-            {!session.isActive ? <div style={{float: 'left', display: 'flex'}}>
-              <Avatar user={lastAgentMessage.agent} size={18} isDot={true} />
-              <Dot color={session.vitals.status.color} />
-              <Dot color={session.vitals.severity.color} />
-              <Dot color={session.vitals.loyalty.color} />
-            </div> : null}
-            <div style={{float: 'right', width: 120, fontSize: '0.8em', textAlign: 'right'}}>
-              {moment(lastMessage.timestamp).fromNow()}
-            </div>
+          <div style={{fontSize: '0.8em'}}>
+            {moment(lastMessage.timestamp).fromNow()}
           </div>
         </div>
-        {session.isActive ? <div style={{marginTop: 5}}>
-          <Vitals vitals={session.vitals} />
-        </div> : getMessageText(lastMessage.text)}
+        {session.isActive ?
+          <div style={{marginTop: 5}}>
+            <VitalTags vitals={session.vitals} />
+          </div> :
+          <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 5}}>
+            <div>{getMessageText(lastMessage.text)}</div>
+            <VitalDots user={lastAgentMessage.agent} session={session} />
+          </div>}
       </div>
     </div>
   );

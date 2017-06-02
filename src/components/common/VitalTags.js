@@ -1,7 +1,7 @@
 import React from 'react';
 import Tag from './Tag';
 
-function Vitals(props) {
+function VitalTags(props) {
   return (
     <div style={{display: 'flex', flexDirection: 'column', fontSize: '0.9em'}}>
       <div style={{flex: 1}}>
@@ -26,4 +26,4 @@ function Vitals(props) {
   );
 }
 
-export default Vitals;
+export default VitalTags;
