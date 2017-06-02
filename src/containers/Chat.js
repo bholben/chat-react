@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
 import { hasEnter } from '../utils/strings';
@@ -20,19 +21,23 @@ const welcomeStyle = {
 
 const vitals = {
   agent: {
+    uid: 'NHl2onCI4DTHFfCvN87JuUXxf2C3',
     displayName: 'Addison',
     email: 'addison@gmail.com',
-    color: '#1e3f80',
+    color: `#${md5('addison@gmail.com').substr(0, 6)}`,
   },
   status: {
-    name: 'Open',
+    id: 'inProgress',
+    name: 'In Progress',
     color: '#ddd',
   },
   severity: {
+    id: 'critical',
     name: 'Critical',
     color: 'orange',
   },
   loyalty: {
+    id: 'silver',
     name: 'Silver',
     color: 'silver',
   },

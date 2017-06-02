@@ -32,7 +32,7 @@ function ChatSession(props) {
   return (
     <div style={getSessionStyle(session)}
         onClick={() => props.changeSession(session.key)}>
-      <div style={{padding: '5px 10px 5px 20px'}}>
+      <div style={{padding: '5px 10px 5px 20px', marginBottom: -5}}>
         <Avatar user={session.user} />
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>

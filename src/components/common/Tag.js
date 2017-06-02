@@ -36,15 +36,39 @@ function onMouseLeave(e) {
   div.style.fontSize = '0.9em';
 }
 
+const itemsStyle = {
+  position: 'absolute',
+  top: 33,
+  left: 5,
+  right: 5,
+  zIndex: 1,
+}
+
+const itemStyle = {
+  padding: 8,
+  borderBottom: '1px solid #ddd',
+  backgroundColor: 'white',
+  color: '#777',
+}
+
+const checkStyle = {
+  margin: '0 5px',
+};
+
+function getCheckStyle(selected, id) {
+  const isSelected = selected.id === id;
+  return isSelected ? checkStyle : Object.assign({}, checkStyle, {color: 'transparent'});
+}
+
 function Tag(props) {
-  const { text, color, user } = props;
-  if (user) {
+  const { options, selected } = props;
+  if (selected.displayName) {
     return (
-      <div style={getStyle(color)}
+      <div style={getStyle(selected.color)}
           onMouseOver={onMouseOver}
           onMouseLeave={onMouseLeave} >
-        <Avatar user={user} size={25} />
-        <div style={{marginLeft: 5}}>{user.displayName}</div>
+        <Avatar user={selected} size={25} />
+        <div style={{marginLeft: 5}}>{selected.displayName}</div>
         <i className="fa fa-caret-down"
             style={iconStyle}
             aria-hidden="true">
@@ -53,14 +77,26 @@ function Tag(props) {
     );
   } else {
     return (
-      <div style={getStyle(color)}
-          onMouseOver={onMouseOver}
-          onMouseLeave={onMouseLeave} >
-        <div>{text}</div>
-        <i className="fa fa-caret-down"
-            style={iconStyle}
-            aria-hidden="true">
-        </i>
+      <div style={{position: 'relative'}}>
+        <div style={getStyle(selected.color)}
+            onMouseOver={onMouseOver}
+            onMouseLeave={onMouseLeave} >
+          <div>{selected.name}</div>
+          <i className="fa fa-caret-down"
+              style={iconStyle}
+              aria-hidden="true">
+          </i>
+        </div>
+        <div style={itemsStyle}>
+          <div style={itemStyle}>
+            <i className="fa fa-check" style={getCheckStyle(selected, 'gold')}></i>
+            <span>Gold</span>
+          </div>
+          <div style={itemStyle}>
+            <i className="fa fa-check" style={getCheckStyle(selected, 'silver')}></i>
+            <span>Silver</span>
+          </div>
+        </div>
       </div>
     );
   }
