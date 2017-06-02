@@ -8,6 +8,7 @@ const headerStyle = {
   padding: '10px',
   borderRadius: 8,
   backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  textAlign: 'center',
 };
 
 const headerImageStyle = {
@@ -20,13 +21,10 @@ function Header(props) {
   return (
     <header style={{margin: '0 auto', padding: 10, color: '#ddd'}}>
       <div style={headerStyle}>
-        <div style={{textAlign: 'center'}}>
-          <img src={logo} style={headerImageStyle} alt="logo" />
-          <span style={{marginLeft: 15, fontSize: 18, textTransform: 'uppercase'}}>
-            {props.isAgent ? props.user.displayName : 'Chat Room'}
-          </span>
-        </div>
-        {isAgent ? <Vitals vitals={vitals} hasLabels={true} /> : null}
+        <img src={logo} style={headerImageStyle} alt="logo" />
+        <span style={{marginLeft: 15, fontSize: 18, textTransform: 'uppercase'}}>
+          {isAgent ? user.displayName : 'Chat Room'}
+        </span>
       </div>
     </header>
   );

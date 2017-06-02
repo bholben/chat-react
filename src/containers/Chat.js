@@ -20,7 +20,8 @@ const welcomeStyle = {
 
 const vitals = {
   agent: {
-    name: 'Addison',
+    displayName: 'Addison',
+    email: 'addison@gmail.com',
     color: '#1e3f80',
   },
   status: {
