@@ -21,25 +21,25 @@ const welcomeStyle = {
 
 const vitals = {
   assignee: {
-    id: 'NHl2onCI4DTHFfCvN87JuUXxf2C3',
-    name: 'Addison',
-    color: `#${md5('addison@gmail.com').substr(0, 6)}`,
-    email: 'addison@gmail.com',
+    id: '',
+    name: 'Unassigned',
+    color: 'white',
+    email: '',
   },
   status: {
-    id: 'inProgress',
-    name: 'In Progress',
-    color: '#ddd',
+    id: 'inQueue',
+    name: 'In Queue',
+    color: 'red',
   },
   severity: {
-    id: 'critical',
-    name: 'Critical',
-    color: 'orange',
+    id: 'unknown',
+    name: 'Unknown',
+    color: 'white',
   },
   loyalty: {
-    id: 'silver',
-    name: 'Silver',
-    color: 'silver',
+    id: 'base',
+    name: 'Base',
+    color: 'white',
   },
 };
 
