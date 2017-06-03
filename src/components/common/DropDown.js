@@ -9,8 +9,8 @@ class DropDown extends Component {
     super(props);
     this.state = { isCollapsed: true };
     this.changeFontSize = this.changeFontSize.bind(this);
-    this.onClickDropDown = this.onClickDropDown.bind(this);
-    this.onClickItem = this.onClickItem.bind(this);
+    this.clickDropDown = this.clickDropDown.bind(this);
+    this.clickItem = this.clickItem.bind(this);
   }
 
   changeFontSize(e, fontSize) {
@@ -20,22 +20,23 @@ class DropDown extends Component {
     text.style.fontSize = fontSize;
   }
 
-  onClickDropDown(e) {
+  clickDropDown(e) {
     this.clickedDropDown = e.target;
     this.setState({ isCollapsed: !this.state.isCollapsed });
   }
 
-  onClickItem(e) {
+  clickItem(e) {
     const { className, parentNode } = e.target;
-    const dropDown = className === 'dropdown' ? e.target : parentNode;
+    const option = className === 'option' ? e.target : parentNode;
     const { options, changeItem } = this.props;
-    const selected = options.find(option => option.id === dropDown.dataset.id);
+    const selected = options.find(opt => opt.id === option.dataset.id);
     changeItem(selected)
       .then(() => this.setState({ isCollapsed: true }))
       .catch(console.error);
   }
 
   handleClickOutside(e) {
+    // This magical method is part of the onClickOutside HOC
     this.setState({ isCollapsed: true });
   }
 
@@ -54,7 +55,7 @@ class DropDown extends Component {
             className="dropdown"
             onMouseOver={e => this.changeFontSize(e, '0.95em')}
             onMouseLeave={e => this.changeFontSize(e, '0.9em')}
-            onClick={this.onClickDropDown} >
+            onClick={this.clickDropDown} >
           {isUser ? <Avatar user={selected} size={25} /> : null}
           <div style={{marginLeft: isUser ? 5 : 0, fontSize: '0.9em'}}>
             {selected.name}
@@ -70,8 +71,9 @@ class DropDown extends Component {
             return (
               <div key={option.id}
                   style={styles.getItemStyle(isSelected)}
+                  className="option"
                   data-id={option.id}
-                  onClick={this.onClickItem}>
+                  onClick={this.clickItem}>
                 <i className="fa fa-check" style={styles.getCheckStyle(isSelected)}></i>
                 <span>{option.name}</span>
               </div>
