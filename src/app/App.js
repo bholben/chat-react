@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { some } from 'lodash';
-import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
 import Welcome from '../components/Welcome';
@@ -19,39 +18,24 @@ const welcomeStyle = {
   backgroundPosition: 'center',
 };
 
-const vitals = {
-  assignee: {
-    id: '',
-    name: 'Unassigned',
-    color: 'white',
-    email: '',
-  },
-  status: {
-    id: 'inQueue',
-    name: 'In Queue',
-    color: 'red',
-  },
-  severity: {
-    id: 'unknown',
-    name: 'Unknown',
-    color: 'white',
-  },
-  loyalty: {
-    id: 'base',
-    name: 'Base',
-    color: 'white',
-  },
+const initialVitals = {
+  assignee: { id: '', name: 'Unassigned', color: 'white', email: '' },
+  status: { id: 'inQueue', name: 'In Queue', color: 'red' },
+  severity: { id: 'unknown', name: 'Unknown', color: 'white' },
+  loyalty: { id: 'base', name: 'Base', color: 'white' },
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       user: {},
-      tickets: [],
+      // tickets: [],  // Only added for agents
       activeTicket: {},
       messageText: '',
     };
+
     this.submitSignIn = this.submitSignIn.bind(this);
     this.changeTicket = this.changeTicket.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
@@ -67,27 +51,47 @@ class App extends Component {
     const email = `${displayName}@gmail.com`;
 
     return api.auth.signInWithEmail(email, user => {
-      return api.syncTickets(user, tickets => {
-
-        // Temp for now...
-        tickets = tickets.map(ticket => {
-          ticket.vitals = vitals;
-          return ticket;
-        });
-
-        const activeTicket = tickets[0];
-        activeTicket.isActive = true;
-        return user.updateProfile({ displayName })
-          .then(() => {
-            this.setState({ user, tickets, activeTicket });
-            localStorage.setItem('user', JSON.stringify({
-              uid: user.uid,
-              displayName: user.displayName,
-            }));
-          })
-          .catch(console.error);
-      });
+      if (isAgent) {
+        this.syncTickets(user, displayName);
+      } else {
+        this.syncMessages(user, displayName);
+      }
     });
+  }
+
+  syncTickets(user, displayName) {
+    return api.syncTickets(user, tickets => {
+
+      // Temp for now...
+      tickets = tickets.map(ticket => {
+        ticket.vitals = initialVitals;
+        return ticket;
+      });
+
+      const activeTicket = tickets[0];
+      activeTicket.isActive = true;
+      return user.updateProfile({ displayName })
+        .then(() => this.setState({ user, tickets, activeTicket }))
+        .then(() => this.storeUserLocally(user))
+        .catch(console.error);
+    });
+  }
+
+  syncMessages(user, displayName) {
+    return api.syncMessages(user, messages => {
+      const activeTicket = { messages };
+      return user.updateProfile({ displayName })
+        .then(() => this.setState({ user, activeTicket }))
+        .then(() => this.storeUserLocally(user))
+        .catch(console.error);
+    });
+  }
+
+  storeUserLocally(user) {
+    localStorage.setItem('user', JSON.stringify({
+      uid: user.uid,
+      displayName: user.displayName,
+    }));
   }
 
   changeTicket(key) {
@@ -113,16 +117,30 @@ class App extends Component {
   }
 
   sendMessage(e) {
+    e.preventDefault();
+    const ticketId = this.state.activeTicket.key;
+    const isFirstMessage = !this.state.activeTicket.messages.length;
     const { displayName, email, uid } = this.state.user;
     const user = { displayName, email, uid };
-    const message = { text: this.state.messageText, agent: user };
+    const message = { text: this.state.messageText };
+    if (isAgent) message.agent = user;
 
     this.enableOtherUserSpoof(message, user);
-    e.preventDefault();
 
-    api.postMessage(message, user, this.state.activeTicket.key)
+    api.pushMessage(message, user, ticketId)
+      .then(setInitialVitals)
       .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
+
+    function setInitialVitals() {
+      if (!isAgent && isFirstMessage) {
+        console.log('setting vitals');
+        return api.setVitals(initialVitals, user.uid);
+      } else {
+        console.log('not setting vitals');
+        return Promise.resolve();
+      }
+    }
   }
 
   deleteMessage(message) {
@@ -134,20 +152,28 @@ class App extends Component {
     console.log({key, selected});
 
     // Temp for now...
-    vitals[key] = selected;
+    initialVitals[key] = selected;
     const tickets = this.state.tickets.map(ticket => {
-      ticket.vitals = vitals;
+      ticket.vitals = initialVitals;
       return ticket;
     });
     this.setState({ tickets });
     return Promise.resolve();
   }
 
-  enableOtherUserSpoof(message) {
+  enableOtherUserSpoof(message, user) {
     // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
       message.text = message.text.substring(2).trim();
-      message.agent = null;
+      if (isAgent) {
+        message.agent = null;
+      } else {
+        message.agent = {
+          uid: user.uid,
+          displayName: 'Spoofed Agent',
+          email: user.email,
+        };
+      }
     }
   }
 
