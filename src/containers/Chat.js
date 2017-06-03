@@ -5,7 +5,7 @@ import { api } from 'chat-api';
 import { isAgent } from '../config';
 import Welcome from '../components/Welcome';
 import background from '../components/common/images/Welcome.background.jpg';
-import ChatSessions from '../components/ChatSessions';
+import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
 
 const welcomeStyle = {
@@ -67,7 +67,7 @@ class Chat extends Component {
     const email = `${displayName}@gmail.com`;
 
     return api.auth.signInWithEmail(email, user => {
-      return api.syncChatSessions(user, sessions => {
+      return api.syncTickets(user, sessions => {
 
         // Temp for now...
         sessions = sessions.map(session => {
@@ -161,7 +161,7 @@ class Chat extends Component {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
         {isAgent ?
-        <ChatSessions
+        <Tickets
             sessions={this.state.sessions}
             changeSession={this.changeSession}
             changeVitalsItem={this.changeVitalsItem} /> :
