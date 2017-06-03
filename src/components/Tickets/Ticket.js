@@ -42,7 +42,7 @@ function Ticket(props) {
             {ticket.user.displayName}
           </div>
           <div style={{fontSize: '0.8em'}}>
-            {moment(lastMessage.timestamp).fromNow()}
+            {lastMessage ? moment(lastMessage.timestamp).fromNow() : null}
           </div>
         </div>
         {ticket.isActive ?

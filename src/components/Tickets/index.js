@@ -32,7 +32,7 @@ class Tickets extends Component {
         <section style={{padding: 0, overflowY: 'auto'}}>
           {tickets.map(ticket =>
             <Ticket
-                key={ticket.messages[0].timestamp}
+                key={ticket.lastTimestamp}
                 ticket={ticket}
                 changeTicket={changeTicket}
                 changeVitalsItem={this.props.changeVitalsItem} />
