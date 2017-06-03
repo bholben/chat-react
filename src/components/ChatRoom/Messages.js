@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import onClickOutside from 'react-onclickoutside'
 import Message from './Message';
 
 const messagesStyle = {
@@ -27,6 +28,11 @@ class Messages extends Component {
     }
   }
 
+  handleClickOutside() {
+    // This magical method is part of the onClickOutside HOC
+    this.setState({ showDeleteX: false });
+  }
+
   render() {
     const { user, messages, isAgent, deleteMessage } = this.props;
     return !messages ? null : (
@@ -48,4 +54,4 @@ class Messages extends Component {
   }
 }
 
-export default Messages;
+export default onClickOutside(Messages);

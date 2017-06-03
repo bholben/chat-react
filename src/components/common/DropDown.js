@@ -35,7 +35,7 @@ class DropDown extends Component {
       .catch(console.error);
   }
 
-  handleClickOutside(e) {
+  handleClickOutside() {
     // This magical method is part of the onClickOutside HOC
     this.setState({ isCollapsed: true });
   }
