@@ -35,35 +35,36 @@ const loyaltyOptions = [
 ];
 
 function VitalTags(props) {
+  const { vitals, changeVitalsItem } = props;
   return (
     <div style={{fontSize: '0.9em'}}>
       <div style={vitalStyle}>
         <div style={labelStyle}>Assignee:</div>
         <DropDown
             options={assigneeOptions}
-            selected={props.vitals.assignee}
-            changeItem={id => props.changeVitalsItem('assignee', id)} />
+            selected={vitals.assignee}
+            changeItem={id => changeVitalsItem('assignee', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Status:</div>
         <DropDown
             options={statusOptions}
-            selected={props.vitals.status}
-            changeItem={id => props.changeVitalsItem('status', id)} />
+            selected={vitals.status}
+            changeItem={id => changeVitalsItem('status', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Severity:</div>
         <DropDown
             options={severityOptions}
-            selected={props.vitals.severity}
-            changeItem={id => props.changeVitalsItem('severity', id)} />
+            selected={vitals.severity}
+            changeItem={id => changeVitalsItem('severity', id)} />
       </div>
       <div style={vitalStyle}>
         <div style={labelStyle}>Loyalty:</div>
         <DropDown
             options={loyaltyOptions}
-            selected={props.vitals.loyalty}
-            changeItem={id => props.changeVitalsItem('loyalty', id)} />
+            selected={vitals.loyalty}
+            changeItem={id => changeVitalsItem('loyalty', id)} />
       </div>
     </div>
   );

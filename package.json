@@ -4,7 +4,6 @@
   "description": "Chat application for agent",
   "homepage": "https://bholben.github.io/chat-agent",
   "scripts": {
-    "postinstall": "scripts/postinstall.sh",
     "start": "yarn run start-agent",
     "start-agent": "scripts/config-agent.sh && react-scripts start",
     "start-user": "scripts/config-user.sh && react-scripts start",
@@ -22,7 +21,6 @@
   "license": "ISC",
   "dependencies": {
     "chat-api": "https://github.com/bholben/chat-api",
-    "chat-shared-components": "https://github.com/bholben/chat-shared-components",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "md5": "^2.2.1",

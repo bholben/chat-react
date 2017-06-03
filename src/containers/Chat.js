@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { some } from 'lodash';
 import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
-import { hasEnter } from '../utils/strings';
 import Welcome from '../components/Welcome';
 import background from '../components/common/images/Welcome.background.jpg';
 import ChatSessions from '../components/ChatSessions';
@@ -96,6 +96,9 @@ class Chat extends Component {
 
   changeMessageText(e) {
     const messageText = e.target.value;
+    const isEnter = char => char.charCodeAt(0) === 10;
+    const hasEnter = str => some(str, isEnter);
+
     if (hasEnter(messageText)) {
       this.sendMessage(e);
     } else {
