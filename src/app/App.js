@@ -78,7 +78,13 @@ class App extends Component {
         const activeTicket = tickets[0];
         activeTicket.isActive = true;
         return user.updateProfile({ displayName })
-          .then(() => this.setState({ user, tickets, activeTicket }))
+          .then(() => {
+            this.setState({ user, tickets, activeTicket });
+            localStorage.setItem('user', JSON.stringify({
+              uid: user.uid,
+              displayName: user.displayName,
+            }));
+          })
           .catch(console.error);
       });
     });
