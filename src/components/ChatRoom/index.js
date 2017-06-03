@@ -16,18 +16,18 @@ const chatRoomStyle = {
 };
 
 function ChatRoom(props) {
-  const { isAgent, user, session, messageText } = props;
+  const { isAgent, user, ticket, messageText } = props;
   const { changeMessageText, sendMessage, deleteMessage } = props;
   return (
     <div style={chatRoomStyle}>
       <Header
           isAgent={isAgent}
-          vitals={session.vitals}
+          vitals={ticket.vitals}
           user={user} />
       <Messages
           isAgent={isAgent}
           user={user}
-          messages={session.messages}
+          messages={ticket.messages}
           deleteMessage={deleteMessage} />
       <MessageInput
           messageText={messageText}

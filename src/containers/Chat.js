@@ -48,12 +48,12 @@ class Chat extends Component {
     super(props);
     this.state = {
       user: {},
-      sessions: [],
-      activeSession: {},
+      tickets: [],
+      activeTicket: {},
       messageText: '',
     };
     this.submitSignIn = this.submitSignIn.bind(this);
-    this.changeSession = this.changeSession.bind(this);
+    this.changeTicket = this.changeTicket.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
@@ -67,31 +67,31 @@ class Chat extends Component {
     const email = `${displayName}@gmail.com`;
 
     return api.auth.signInWithEmail(email, user => {
-      return api.syncTickets(user, sessions => {
+      return api.syncTickets(user, tickets => {
 
         // Temp for now...
-        sessions = sessions.map(session => {
-          session.vitals = vitals;
-          return session;
+        tickets = tickets.map(ticket => {
+          ticket.vitals = vitals;
+          return ticket;
         });
 
-        const activeSession = sessions[0];
-        activeSession.isActive = true;
+        const activeTicket = tickets[0];
+        activeTicket.isActive = true;
         return user.updateProfile({ displayName })
-          .then(() => this.setState({ user, sessions, activeSession }))
+          .then(() => this.setState({ user, tickets, activeTicket }))
           .catch(console.error);
       });
     });
   }
 
-  changeSession(key) {
-    const sessions = this.state.sessions.map(session => {
-      session.isActive = session.key === key;
-      if (session.isActive) this.setState({ activeSession: session });
-      return session;
+  changeTicket(key) {
+    const tickets = this.state.tickets.map(ticket => {
+      ticket.isActive = ticket.key === key;
+      if (ticket.isActive) this.setState({ activeTicket: ticket });
+      return ticket;
     });
 
-    this.setState({ sessions });
+    this.setState({ tickets });
   }
 
   changeMessageText(e) {
@@ -114,13 +114,13 @@ class Chat extends Component {
     this.enableOtherUserSpoof(message, user);
     e.preventDefault();
 
-    api.postMessage(message, user, this.state.activeSession.key)
+    api.postMessage(message, user, this.state.activeTicket.key)
       .then(() => this.setState({ messageText: '' }))
       .catch(console.error);
   }
 
   deleteMessage(message) {
-    api.deleteMessage(message, this.state.user, this.state.activeSession.key)
+    api.deleteMessage(message, this.state.user, this.state.activeTicket.key)
       .catch(console.error);
   }
 
@@ -129,11 +129,11 @@ class Chat extends Component {
 
     // Temp for now...
     vitals[key] = selected;
-    const sessions = this.state.sessions.map(session => {
-      session.vitals = vitals;
-      return session;
+    const tickets = this.state.tickets.map(ticket => {
+      ticket.vitals = vitals;
+      return ticket;
     });
-    this.setState({ sessions });
+    this.setState({ tickets });
     return Promise.resolve();
   }
 
@@ -162,14 +162,14 @@ class Chat extends Component {
       <div style={{display: 'flex', height: '100vh'}}>
         {isAgent ?
         <Tickets
-            sessions={this.state.sessions}
-            changeSession={this.changeSession}
+            tickets={this.state.tickets}
+            changeTicket={this.changeTicket}
             changeVitalsItem={this.changeVitalsItem} /> :
         null}
         <ChatRoom
             isAgent={isAgent}
-            user={this.state.activeSession.user}
-            session={this.state.activeSession}
+            user={this.state.activeTicket.user}
+            ticket={this.state.activeTicket}
             messageText={this.state.messageText}
             changeMessageText={this.changeMessageText}
             sendMessage={this.sendMessage}

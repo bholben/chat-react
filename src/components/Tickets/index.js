@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header';
-import ChatSession from './ChatSession';
-import background from './images/ChatSessions.background.jpg';
+import Ticket from './Ticket';
+import background from './images/Tickets.background.jpg';
 
 const chatRoomsStyle = {
   flex: 5,
@@ -14,7 +14,7 @@ const chatRoomsStyle = {
   backgroundSize: 'cover',
 };
 
-class ChatSessions extends Component {
+class Tickets extends Component {
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -25,16 +25,16 @@ class ChatSessions extends Component {
   }
 
   render() {
-    const { sessions, changeSession } = this.props;
+    const { tickets, changeTicket } = this.props;
     return (
       <div style={chatRoomsStyle}>
         <Header />
         <section style={{padding: 0, overflowY: 'auto'}}>
-          {sessions.map(session =>
-            <ChatSession
-                key={session.messages[0].timestamp}
-                session={session}
-                changeSession={changeSession}
+          {tickets.map(ticket =>
+            <Ticket
+                key={ticket.messages[0].timestamp}
+                ticket={ticket}
+                changeTicket={changeTicket}
                 changeVitalsItem={this.props.changeVitalsItem} />
           )}
           {/* This dummy element is used only to facilitate bottom scrolling */}
@@ -45,4 +45,4 @@ class ChatSessions extends Component {
   }
 }
 
-export default ChatSessions;
+export default Tickets;
