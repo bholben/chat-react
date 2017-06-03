@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "chat-api": "https://github.com/bholben/chat-api",
+    "color": "^1.0.3",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "md5": "^2.2.1",

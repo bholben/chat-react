@@ -1,3 +1,5 @@
+import color from 'color';
+
 export function getDropDownStyle(backgroundColor) {
   return {
     position: 'relative',
@@ -9,7 +11,7 @@ export function getDropDownStyle(backgroundColor) {
     padding: '7px 20px 7px 7px',
     borderRadius: 2,
     backgroundColor,
-    color: 'white',
+    color: color(backgroundColor).luminosity() < 0.6 ? 'white' : '#333',
     fontWeight: 700,
   };
 }
