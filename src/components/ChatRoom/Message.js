@@ -4,23 +4,6 @@ import Meta from './Meta';
 import * as styles from './styles/Message.styles';
 
 class Message extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hideX: true };
-    this.toggleDelete = this.toggleDelete.bind(this);
-  }
-
-  toggleDelete(e) {
-    if (!this.props.isAgent) return;
-
-    const bubble = e.target;
-    bubble.style.paddingRight = this.state.hideX ? '40px' : '15px';
-    const button = bubble.children[0];
-    if (button) button.style.display = this.state.hideX ? 'block' : 'none';
-
-    this.setState({hideX: !this.state.hideX});
-  }
-
   render() {
     const { isAgent, message } = this.props;
     const isOnRight = (isAgent && message.agent) || (!isAgent && !message.agent);
@@ -28,15 +11,16 @@ class Message extends Component {
   }
 
   getRightMessage() {
-    const { user, message, deleteMessage } = this.props;
+    const { user, message, showDeleteX, deleteMessage } = this.props;
     return (
       <div key={message.timestamp} style={styles.rightMessage}>
         <div style={styles.rightColumn}>
           <Meta user={user} message={message} isOnRight={true} />
-          <div style={styles.getBubbleStyle(styles.rightBubble, message)}
-              onClick={this.toggleDelete}>
+          <div style={styles.getBubbleStyle(styles.rightBubble, message, showDeleteX)}
+              className="bubble"
+              onClick={this.props.toggleDeleteX}>
             {message.text}
-            <button style={styles.x} onClick={() => deleteMessage(message)}>
+            <button style={styles.getXButtonStyle(showDeleteX)} onClick={() => deleteMessage(message)}>
               &times;
             </button>
           </div>
@@ -46,7 +30,7 @@ class Message extends Component {
   }
 
   getLeftMessage() {
-    const { isAgent, user, message, deleteMessage } = this.props;
+    const { isAgent, user, message, showDeleteX, deleteMessage } = this.props;
     return (
       <div key={message.timestamp} style={styles.leftMessage}>
         <div style={{padding: '0 0 5px 15px'}}>
@@ -54,10 +38,11 @@ class Message extends Component {
         </div>
         <div style={styles.leftColumn}>
           <Meta user={user} message={message} isOnRight={false} />
-          <div style={styles.getBubbleStyle(styles.leftBubble, message)}
-              onClick={this.toggleDelete}>
+          <div style={styles.getBubbleStyle(styles.leftBubble, message, showDeleteX)}
+              className="bubble"
+              onClick={this.props.toggleDeleteX}>
             {message.text}
-            <button style={styles.x} onClick={() => deleteMessage(message)}>
+            <button style={styles.getXButtonStyle(showDeleteX)} onClick={() => deleteMessage(message)}>
               &times;
             </button>
           </div>

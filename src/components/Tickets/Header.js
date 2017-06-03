@@ -28,7 +28,7 @@ function Header(props) {
   return (
     <header style={headerStyle}>
       <img src={logo} style={headerImageStyle} alt="logo" />
-      <span style={titleStyle}>Chat Sessions</span>
+      <span style={titleStyle}>Tickets</span>
     </header>
   );
 }

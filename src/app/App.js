@@ -133,7 +133,7 @@ class App extends Component {
   }
 
   changeVitalsItem(key, selected, ticketId) {
-    // Return to promise to DropDown (options close after db updated)
+    // Return promise to DropDown (options box needs to close after db updated)
     return api.changeVitalsItem(key, selected, ticketId);
   }
 

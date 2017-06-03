@@ -21,11 +21,26 @@ export const leftColumn = Object.assign({}, rightColumn, {
   alignItems: 'flex-start',
 });
 
+export function getXButtonStyle(showDeleteX) {
+  const x = {
+    position: 'absolute',
+    top: -1,
+    right: 7,
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: '#b00',
+    fontSize: 24,
+  };
+
+  return Object.assign({}, x, {
+    display: showDeleteX ? 'block' : 'none',
+  });
+}
+
 export const rightBubble = {
   position: 'relative',
   maxWidth: 220,
   marginTop: 3,
-  padding: '10px 15px',
   borderRadius: 20,
   backgroundColor: theme.colors.brandDark,
   color: 'white',
@@ -40,27 +55,18 @@ export const leftBubble = Object.assign({}, rightBubble, {
   fontWeight: 400,
 });
 
-export const x = {
-  display: 'none',
-  position: 'absolute',
-  top: -1,
-  right: 7,
-  border: 'none',
-  backgroundColor: 'transparent',
-  color: '#b00',
-  fontSize: 24,
-};
-
-export function getBubbleStyle(bubbleStyle, message) {
+export function getBubbleStyle(bubbleStyle, message, showDeleteX) {
   if (isShortEmojiString(message.text, 6)) {
     return Object.assign({}, bubbleStyle, {
       marginBottom: -8,
-      padding: 0,
+      padding: showDeleteX ? '0 40px 0 0' : 0,
       backgroundColor: 'none',
       fontSize: 48,
     });
   } else {
-    return bubbleStyle;
+    return Object.assign({}, bubbleStyle, {
+      padding: showDeleteX ? '10px 40px 10px 15px' : '10px 15px',
+    });
   }
 }
 
