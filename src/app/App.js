@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { some } from 'lodash';
+import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
 import Welcome from '../components/Welcome';
@@ -19,10 +20,31 @@ const welcomeStyle = {
 };
 
 const initialVitals = {
-  assignee: { id: '', name: 'Unassigned', color: 'white', email: '' },
-  status: { id: 'inQueue', name: 'In Queue', color: 'red' },
-  severity: { id: 'unknown', name: 'Unknown', color: 'white' },
-  loyalty: { id: 'base', name: 'Base', color: 'white' },
+  assignee: { id: '', name: 'Unassigned',  email: '' },
+  status: { id: 'inQueue', name: 'In Queue' },
+  severity: { id: 'unknown', name: 'Unknown' },
+  loyalty: { id: 'base', name: 'Base' },
+};
+
+const colorMap = {
+  status: {
+    inQueue: 'red',
+    inProgress: '#ddd',
+    underReview: 'pink',
+    closed: '#444',
+  },
+  severity: {
+    critical: 'red',
+    urgent: 'orange',
+    trivial: 'lightblue',
+    unknown: 'white',
+  },
+  loyalty: {
+    gold: 'goldenrod',
+    silver: 'silver',
+    bronze: 'darkgoldenrod',
+    base: 'white',
+  },
 };
 
 class App extends Component {
@@ -61,13 +83,7 @@ class App extends Component {
 
   syncTickets(user, displayName) {
     return api.syncTickets(user, tickets => {
-
-      // Temp for now...
-      tickets = tickets.map(ticket => {
-        ticket.vitals = initialVitals;
-        return ticket;
-      });
-
+      tickets = tickets.map(this.setVitalColors);
       const activeTicket = tickets[0];
       activeTicket.isActive = true;
       return user.updateProfile({ displayName })
@@ -75,6 +91,18 @@ class App extends Component {
         .then(() => this.storeUserLocally(user))
         .catch(console.error);
     });
+  }
+
+  setVitalColors(ticket) {
+    for (const key in ticket.vitals) {
+      const vital = ticket.vitals[key];
+      if (key === 'assignee') {
+        vital.color = vital.email ? `#${md5(vital.email).substr(0, 6)}` : 'white';
+      } else {
+        vital.color = colorMap[key][vital.id];
+      }
+    };
+    return ticket;
   }
 
   syncMessages(user, displayName) {
