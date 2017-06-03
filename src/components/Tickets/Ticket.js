@@ -47,7 +47,7 @@ function Ticket(props) {
         </div>
         {ticket.isActive ?
           <div style={{marginTop: 5}}>
-            <VitalTags vitals={ticket.vitals} changeVitalsItem={props.changeVitalsItem} />
+            <VitalTags vitals={ticket.vitals} ticketKey={ticket.key} changeVitalsItem={props.changeVitalsItem} />
           </div> :
           <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 5}}>
             <div>{getMessageText(lastMessage.text)}</div>

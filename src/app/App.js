@@ -60,10 +60,10 @@ class App extends Component {
 
     this.submitSignIn = this.submitSignIn.bind(this);
     this.changeTicket = this.changeTicket.bind(this);
+    this.changeVitalsItem = this.changeVitalsItem.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
-    this.changeVitalsItem = this.changeVitalsItem.bind(this);
   }
 
   submitSignIn(e) {
@@ -132,6 +132,11 @@ class App extends Component {
     this.setState({ tickets });
   }
 
+  changeVitalsItem(key, selected, ticketId) {
+    // Return to promise to DropDown (options close after db updated)
+    return api.changeVitalsItem(key, selected, ticketId);
+  }
+
   changeMessageText(e) {
     const messageText = e.target.value;
     const isEnter = char => char.charCodeAt(0) === 10;
@@ -174,19 +179,6 @@ class App extends Component {
   deleteMessage(message) {
     api.deleteMessage(message, this.state.user, this.state.activeTicket.key)
       .catch(console.error);
-  }
-
-  changeVitalsItem(key, selected) {
-    console.log({key, selected});
-
-    // Temp for now...
-    initialVitals[key] = selected;
-    const tickets = this.state.tickets.map(ticket => {
-      ticket.vitals = initialVitals;
-      return ticket;
-    });
-    this.setState({ tickets });
-    return Promise.resolve();
   }
 
   enableOtherUserSpoof(message, user) {
