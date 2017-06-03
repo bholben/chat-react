@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import onClickOutside from 'react-onclickoutside'
 import Avatar from './Avatar';
 import * as styles from './styles/DropDown.styles';
 import 'font-awesome/css/font-awesome.css'
@@ -6,38 +7,36 @@ import 'font-awesome/css/font-awesome.css'
 class DropDown extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isCollapsed: true,
-    };
-
-    this.onMouseOver = this.onMouseOver.bind(this);
-    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.state = { isCollapsed: true };
+    this.changeFontSize = this.changeFontSize.bind(this);
     this.onClickDropDown = this.onClickDropDown.bind(this);
     this.onClickItem = this.onClickItem.bind(this);
   }
 
-  onMouseOver(e) {
-    const div = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
-    div.style.fontSize = '0.95em';
+  changeFontSize(e, fontSize) {
+    const { className, parentNode } = e.target;
+    const dropDown = className === 'dropdown' ? e.target : parentNode;
+    const text = [...dropDown.children].find(child => child.tagName === 'DIV');
+    text.style.fontSize = fontSize;
   }
 
-  onMouseLeave(e) {
-    const div = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
-    div.style.fontSize = '0.9em';
-  }
-
-  onClickDropDown() {
-    this.setState({isCollapsed: !this.state.isCollapsed});
+  onClickDropDown(e) {
+    this.clickedDropDown = e.target;
+    this.setState({ isCollapsed: !this.state.isCollapsed });
   }
 
   onClickItem(e) {
+    const { className, parentNode } = e.target;
+    const dropDown = className === 'dropdown' ? e.target : parentNode;
     const { options, changeItem } = this.props;
-    const div = e.target.tagName === 'DIV' ? e.target : e.target.parentNode;
-    const selected = options.find(option => option.id === div.dataset.id);
+    const selected = options.find(option => option.id === dropDown.dataset.id);
     changeItem(selected)
-      .then(() => this.setState({isCollapsed: true}))
+      .then(() => this.setState({ isCollapsed: true }))
       .catch(console.error);
+  }
+
+  handleClickOutside(e) {
+    this.setState({ isCollapsed: true });
   }
 
   render() {
@@ -52,11 +51,12 @@ class DropDown extends Component {
     return (
       <div style={{position: 'relative'}}>
         <div style={styles.getDropDownStyle(selected.color)}
-            onMouseOver={this.onMouseOver}
-            onMouseLeave={this.onMouseLeave}
+            className="dropdown"
+            onMouseOver={e => this.changeFontSize(e, '0.95em')}
+            onMouseLeave={e => this.changeFontSize(e, '0.9em')}
             onClick={this.onClickDropDown} >
           {isUser ? <Avatar user={selected} size={25} /> : null}
-          <div style={{marginLeft: isUser ? 5 : 0}}>
+          <div style={{marginLeft: isUser ? 5 : 0, fontSize: '0.9em'}}>
             {selected.name}
           </div>
           <i className="fa fa-caret-down"
@@ -83,4 +83,4 @@ class DropDown extends Component {
   }
 }
 
-export default DropDown;
+export default onClickOutside(DropDown);

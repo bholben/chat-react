@@ -5,21 +5,16 @@
   "homepage": "https://bholben.github.io/chat-agent",
   "scripts": {
     "postinstall": "scripts/postinstall.sh",
-
     "start": "yarn run start-agent",
     "start-agent": "scripts/config-agent.sh && react-scripts start",
     "start-user": "scripts/config-user.sh && react-scripts start",
-
     "build": "yarn run build-agent",
     "build-agent": "scripts/config-agent.sh && react-scripts build",
     "build-user": "scripts/config-user.sh && react-scripts build",
-
     "test": "react-scripts test --env=jsdom",
-
     "deploy": "yarn run deploy-agent",
     "deploy-agent": "yarn run build-agent && gh-pages -d build",
     "deploy-user": "yarn run build-user && gh-pages -d build",
-
     "eject": "react-scripts eject"
   },
   "keywords": [],
@@ -33,7 +28,8 @@
     "md5": "^2.2.1",
     "moment": "^2.18.1",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "react-onclickoutside": "^6.0.1"
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",

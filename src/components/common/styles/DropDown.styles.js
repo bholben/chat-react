@@ -10,7 +10,6 @@ export function getDropDownStyle(backgroundColor) {
     borderRadius: 2,
     backgroundColor,
     color: 'white',
-    fontSize: '0.9em',
     fontWeight: 700,
   };
 }
