@@ -1,4 +1,5 @@
 import React from 'react';
+import * as theme from '../common/styles/theme-variables';
 
 const sectionStyle = {
   padding: '50px 30px 30px',
@@ -22,7 +23,7 @@ const buttonStyle = {
   padding: 10,
   border: 'none',
   fontSize: 16,
-  backgroundColor: '#1e3f80',
+  backgroundColor: theme.colors.brand1,
   color: 'white',
 };
 

@@ -1,3 +1,5 @@
+import * as theme from '../../common/styles/theme-variables';
+
 export const rightMessage = {
   display: 'flex',
   justifyContent: 'flex-end',
@@ -25,7 +27,7 @@ export const rightBubble = {
   marginTop: 3,
   padding: '10px 15px',
   borderRadius: 20,
-  backgroundColor: '#1e3f80',
+  backgroundColor: theme.colors.brandDark,
   color: 'white',
   fontSize: '1.1em',
   fontWeight: 100,
@@ -34,7 +36,7 @@ export const rightBubble = {
 
 export const leftBubble = Object.assign({}, rightBubble, {
   backgroundColor: '#ddd',
-  color: '#1e3f80',
+  color: theme.colors.brandDark,
   fontWeight: 400,
 });
 

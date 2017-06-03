@@ -1,4 +1,5 @@
 import React from 'react';
+import * as theme from '../common/styles/theme-variables';
 
 const footerStyle = {
   display: 'flex',
@@ -25,7 +26,7 @@ const inactiveTextAreaStyle = {
 };
 
 const activeTextAreaStyle = Object.assign({}, inactiveTextAreaStyle, {
-  borderColor: '#1e3f80',
+  borderColor: theme.colors.brand1,
 });
 
 function MessageInput(props) {

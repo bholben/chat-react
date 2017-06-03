@@ -1,4 +1,5 @@
 import color from 'color';
+import * as theme from './theme-variables';
 
 export function getDropDownStyle(backgroundColor) {
   return {
@@ -11,7 +12,7 @@ export function getDropDownStyle(backgroundColor) {
     padding: '7px 20px 7px 7px',
     borderRadius: 2,
     backgroundColor,
-    color: color(backgroundColor).luminosity() < 0.6 ? 'white' : '#333',
+    color: color(backgroundColor).luminosity() < 0.6 ? 'white' : theme.colors.brandDark,
     fontWeight: 700,
   };
 }
@@ -44,7 +45,7 @@ export function getItemStyle(isSelected) {
     color: '#777',
   };
   const selectedItem = Object.assign({}, item, {
-    color: '#1e3f80',
+    color: theme.colors.brandDark,
     fontWeight: 700,
   });
   return isSelected ? selectedItem : item;

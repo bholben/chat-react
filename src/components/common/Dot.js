@@ -1,4 +1,5 @@
 import React from 'react';
+import * as theme from './styles/theme-variables';
 
 function Dot(props) {
   const dotStyle = {
@@ -6,7 +7,7 @@ function Dot(props) {
     height: 18,
     marginLeft: 5,
     borderRadius: '50%',
-    border: '1px solid #1e3f80',
+    border: `1px solid ${theme.colors.brand1}`,
     backgroundColor: props.color,
   };
   return <div style={dotStyle}></div>;

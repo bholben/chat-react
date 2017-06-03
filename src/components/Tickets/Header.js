@@ -1,4 +1,5 @@
 import React from 'react';
+import * as theme from '../common/styles/theme-variables';
 import logo from '../common/images/logo.png';
 import './styles/Header.animation.css';
 
@@ -8,7 +9,7 @@ const headerStyle = {
   alignItems: 'center',
   height: 80,
   paddingLeft: 10,
-  backgroundColor: '#1e3f80',
+  backgroundColor: theme.colors.brand1,
   color: 'white',
 };
 

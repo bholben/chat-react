@@ -4,6 +4,7 @@ import { last, findLast } from 'lodash';
 import Avatar from '../common/Avatar';
 import VitalTags from '../common/VitalTags';
 import VitalDots from '../common/VitalDots';
+import * as theme from '../common/styles/theme-variables';
 
 const ticketStyle = {
   display: 'flex',
@@ -37,7 +38,7 @@ function Ticket(props) {
       </div>
       <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <div style={{color: '#1e3f80', fontWeight: 700}}>
+          <div style={{color: theme.colors.brandDark, fontWeight: 700}}>
             {ticket.user.displayName}
           </div>
           <div style={{fontSize: '0.8em'}}>
