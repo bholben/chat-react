@@ -13,6 +13,7 @@ export function getDropDownStyle(backgroundColor) {
     borderRadius: 2,
     backgroundColor,
     color: color(backgroundColor).luminosity() < 0.6 ? 'white' : theme.colors.brandDark,
+    boxShadow: 'grey 1px 1px 3px',
     fontWeight: 700,
   };
 }
@@ -32,6 +33,7 @@ export function getItemsStyle(isCollapsed) {
     left: 5,
     right: 5,
     zIndex: 1,
+    boxShadow: 'grey 2px 2px 5px',
   };
   const hiddenItems = Object.assign({}, visibleItems, {display: 'none'});
   return isCollapsed ? hiddenItems : visibleItems;
@@ -46,7 +48,7 @@ export function getItemStyle(isSelected) {
   };
   const selectedItem = Object.assign({}, item, {
     color: theme.colors.brandDark,
-    fontWeight: 700,
+    // fontWeight: 700,
   });
   return isSelected ? selectedItem : item;
 }

@@ -42,6 +42,7 @@ class DropDown extends Component {
 
   render() {
     const { options, selected } = this.props;
+    if (!selected) return null;
     const isUser = selected.email;
 
     if (isUser) {
@@ -56,7 +57,11 @@ class DropDown extends Component {
             onMouseOver={e => this.changeFontSize(e, '0.95em')}
             onMouseLeave={e => this.changeFontSize(e, '0.9em')}
             onClick={this.clickDropDown} >
-          {isUser ? <Avatar user={selected} size={25} /> : null}
+
+          {isUser ?
+          <Avatar user={selected} size={25} />
+          : null}
+
           <div style={{marginLeft: isUser ? 5 : 0, fontSize: '0.9em'}}>
             {selected.name}
           </div>

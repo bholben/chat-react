@@ -22,13 +22,6 @@ const welcomeStyle = {
   backgroundPosition: 'center',
 };
 
-const initialVitals = {
-  assignee: { id: '', name: 'Unassigned',  email: '' },
-  status: { id: 'inQueue', name: 'In Queue' },
-  severity: { id: 'unknown', name: 'Unknown' },
-  loyalty: { id: 'base', name: 'Base' },
-};
-
 const colorMap = {
   status: {
     inQueue: 'red',
@@ -48,15 +41,12 @@ const colorMap = {
     bronze: 'darkgoldenrod',
     base: 'white',
   },
+  escalation: {
+    managerInvolved: 'red',
+    managerAlerted: 'orange',
+    agent: 'yellow',
+  },
 };
-
-const userMenuItems = [
-  { id: 'lorem', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
-  { id: 'item2', text: 'Item 2' },
-  { id: 'item3', text: 'Item 3' },
-  { id: 'item4', text: 'Item 4' },
-  { id: 'logout', text: 'Log out', action: 'logout' },
-];
 
 class App extends Component {
   constructor(props) {
@@ -67,7 +57,7 @@ class App extends Component {
       // tickets: [],  // Only added for agents
       activeTicket: {},
       messageText: '',
-      userConfig: { userMenuItems },  // Only added for agents
+      // userConfig: { userMenuItems },  // Only added for agents
       showSpinner: false,
     };
 
@@ -91,7 +81,7 @@ class App extends Component {
     return api.auth.signInWithEmail(email, user => {
       if (isAgent) {
         this.syncTickets(user, displayName);
-        // this.syncUserConfig(user);
+        this.syncUserConfig(user);
       } else {
         this.syncMessages(user, displayName);
       }
@@ -115,6 +105,16 @@ class App extends Component {
     // return api.syncUserConfig(user, userConfig => {
     //   this.setState({ userConfig });
     // });
+
+    // For now...
+    const userMenuItems = [
+      { id: 'lorem', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
+      { id: 'item2', text: 'Item 2' },
+      { id: 'item3', text: 'Item 3' },
+      { id: 'item4', text: 'Item 4' },
+      { id: 'logout', text: 'Log out', action: 'logout' },
+    ];
+    this.setState({ userConfig: {userMenuItems} })
   }
 
   setVitalColors(ticket) {
@@ -196,7 +196,7 @@ class App extends Component {
 
     function initVitals() {
       if (!isAgent && isFirstMessage) {
-        return api.setVitals(initialVitals, user.uid);
+        return api.setVitals(user.uid);
       } else {
         return Promise.resolve();
       }
