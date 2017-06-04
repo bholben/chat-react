@@ -11,11 +11,11 @@ class Message extends Component {
   }
 
   getRightMessage() {
-    const { user, message, showDeleteX, deleteMessage } = this.props;
+    const { isAgent, user, message, showDeleteX, deleteMessage } = this.props;
     return (
       <div key={message.timestamp} style={styles.rightMessage}>
         <div style={styles.rightColumn}>
-          <Meta user={user} message={message} isOnRight={true} />
+          <Meta user={user} message={message} showName={isAgent} />
           <div style={styles.getBubbleStyle(styles.rightBubble, message, showDeleteX)}
               className="bubble"
               onClick={this.props.toggleDeleteX}>
@@ -25,6 +25,9 @@ class Message extends Component {
             </button>
           </div>
         </div>
+        {isAgent ? <div style={{padding: '0 15px 5px 0'}}>
+          <Avatar user={message.agent} size={30} />
+        </div> : null}
       </div>
     );
   }
@@ -37,7 +40,7 @@ class Message extends Component {
           <Avatar user={isAgent ? user : message.agent} size={30} />
         </div>
         <div style={styles.leftColumn}>
-          <Meta user={user} message={message} isOnRight={false} />
+          <Meta user={user} message={message} showName={true} />
           <div style={styles.getBubbleStyle(styles.leftBubble, message, showDeleteX)}
               className="bubble"
               onClick={this.props.toggleDeleteX}>

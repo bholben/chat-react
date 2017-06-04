@@ -16,23 +16,13 @@ class Meta extends Component {
   }
 
   render() {
-    const { user, message, isOnRight} = this.props;
-    return isOnRight ? this.getRightMeta(message) : this.getLeftMeta(user, message);
-  }
-
-  getRightMeta(message) {
+    const { user, message, showName } = this.props;
     return (
       <div style={metaStyle} onClick={this.clickMeta}>
-        {this.getTime(message)}
-      </div>
-    );
-  }
-
-  getLeftMeta(user, message) {
-    return (
-      <div style={metaStyle} onClick={this.clickMeta}>
-        <span style={{fontWeight: 700}}>{this.getName(user, message)}</span>
-        <span> - {this.getTime(message)}</span>
+        {showName ?
+        <span style={{fontWeight: 700}}>{this.getName(user, message)} - </span>
+        : null}
+        <span>{this.getTime(message)}</span>
       </div>
     );
   }
@@ -51,7 +41,7 @@ class Meta extends Component {
   }
 
   clickMeta() {
-    this.setState({isTimeFromNow: !this.state.isTimeFromNow});
+    this.setState({ isTimeFromNow: !this.state.isTimeFromNow });
   }
 }
 

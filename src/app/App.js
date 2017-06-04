@@ -167,10 +167,8 @@ class App extends Component {
 
     function setInitialVitals() {
       if (!isAgent && isFirstMessage) {
-        console.log('setting vitals');
         return api.setVitals(initialVitals, user.uid);
       } else {
-        console.log('not setting vitals');
         return Promise.resolve();
       }
     }
