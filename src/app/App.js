@@ -54,12 +54,15 @@ class App extends Component {
 
     this.state = {
       user: {},
-      // tickets: [],  // Only added for agents
-      // activeTicketKey: '',  // Only added for agents
       activeTicket: {},
       messageText: '',
-      // userConfig: { userMenuItems },  // Only added for agents
       showSpinner: false,
+
+      // Agent-only properties...
+
+      // tickets: [],
+      // activeTicketKey: '',
+      // userConfig: {},
     };
 
     this.submitSignIn = this.submitSignIn.bind(this);
