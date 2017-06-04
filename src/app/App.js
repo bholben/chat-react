@@ -55,6 +55,7 @@ class App extends Component {
     this.state = {
       user: {},
       // tickets: [],  // Only added for agents
+      // activeTicketKey: '',  // Only added for agents
       activeTicket: {},
       messageText: '',
       // userConfig: { userMenuItems },  // Only added for agents
@@ -91,10 +92,17 @@ class App extends Component {
   syncTickets(user, displayName) {
     return api.syncTickets(user, tickets => {
       tickets = tickets.map(this.setVitalColors);
-      const activeTicket = tickets[0];
-      activeTicket.isActive = true;
+
+      if (this.state.activeTicketKey) {
+        tickets = tickets.map(ticket => {
+          ticket.isActive = ticket.key === this.state.activeTicketKey;
+          if (ticket.isActive) this.setState({ activeTicket: ticket });
+          return ticket;
+        });
+      }
+
       return user.updateProfile({ displayName })
-        .then(() => this.setState({ user, tickets, activeTicket }))
+        .then(() => this.setState({ user, tickets }))
         .then(() => this.storeUserLocally(user))
         .then(() => this.setState({showSpinner: false}))
         .catch(console.error);
@@ -149,7 +157,9 @@ class App extends Component {
   changeTicket(key) {
     const tickets = this.state.tickets.map(ticket => {
       ticket.isActive = ticket.key === key;
-      if (ticket.isActive) this.setState({ activeTicket: ticket });
+      if (ticket.isActive) {
+        this.setState({ activeTicket: ticket, activeTicketKey: key });
+      }
       return ticket;
     });
 
