@@ -51,11 +51,11 @@ const colorMap = {
 };
 
 const userMenuItems = [
-  { text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
-  { text: 'Item' },
-  { text: 'Item' },
-  { text: 'Item' },
-  { text: 'Item' },
+  { id: 'lorem', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
+  { id: 'item2', text: 'Item 2' },
+  { id: 'item3', text: 'Item 3' },
+  { id: 'item4', text: 'Item 4' },
+  { id: 'logout', text: 'Log out', action: 'logout' },
 ];
 
 class App extends Component {
@@ -77,6 +77,7 @@ class App extends Component {
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   submitSignIn(e) {
@@ -220,6 +221,10 @@ class App extends Component {
       .catch(console.error);
   }
 
+  logout() {
+    this.setState({ user: {} });
+  }
+
   enableOtherUserSpoof(message, user) {
     // TODO: Remove this
     if (this.state.messageText.startsWith('//')) {
@@ -263,7 +268,8 @@ class App extends Component {
         {isAgent ?
         <Header
             user={this.state.user}
-            userMenuItems={this.state.userConfig.userMenuItems} />
+            userMenuItems={this.state.userConfig.userMenuItems}
+            logout={this.logout} />
         : null}
 
         <div style={{display: 'flex', height: 'calc(100% - 80px)'}}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Avatar from '../common/Avatar';
 import Menu from '../common/Menu';
 import * as theme from '../common/styles/theme-variables';
@@ -38,31 +38,58 @@ const titleStyle = {
 
 const rightMenuStyle = {
   position: 'relative',
+};
+
+const avatarStyle = {
   padding: '5px 15px 5px 5px',
-  textAlign: 'right',
   cursor: 'pointer',
 };
 
-function Header (props) {
-  return (
-    <header style={headerStyle}>
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showUserMenu: false };
+    this.clickAvatar = this.clickAvatar.bind(this);
+    this.clickUserMenuItem = this.clickUserMenuItem.bind(this);
+  }
 
-      <div style={leftMenuStyle}>
-        <i className="fa fa-bars"></i>
-      </div>
+  clickAvatar(e) {
+    this.setState({ showUserMenu: !this.state.showUserMenu });
+  }
 
-      <div style={centerTitleStyle}>
-        <img src={logo} style={headerImageStyle} alt="logo" />
-        <span style={titleStyle}>Chat Support</span>
-      </div>
+  clickUserMenuItem(id) {
+    const selected = this.props.userMenuItems.find(item => item.id === id);
+    if (selected.action) this.props[selected.action]();
+    this.setState({ showUserMenu: false });
+  }
 
-      <div style={rightMenuStyle}>
-        <Avatar user={props.user} />
-        <Menu userMenuItems={props.userMenuItems} />
-      </div>
+  render() {
+    return (
+      <header style={headerStyle}>
 
-    </header>
-  );
+        <div style={leftMenuStyle}>
+          <i className="fa fa-bars"></i>
+        </div>
+
+        <div style={centerTitleStyle}>
+          <img src={logo} style={headerImageStyle} alt="logo" />
+          <span style={titleStyle}>Chat Support</span>
+        </div>
+
+        <div style={rightMenuStyle}>
+          <div style={avatarStyle} onClick={this.clickAvatar}>
+            <Avatar user={this.props.user} />
+          </div>
+          {this.state.showUserMenu ?
+          <Menu
+              userMenuItems={this.props.userMenuItems}
+              clickUserMenuItem={this.clickUserMenuItem} />
+          : null}
+        </div>
+
+      </header>
+    );
+  }
 }
 
 export default Header;

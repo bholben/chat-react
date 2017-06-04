@@ -20,18 +20,36 @@ const menuItemStyle = {
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+  cursor: 'pointer',
 };
+
+function clickItem(e, props) {
+  props.clickUserMenuItem(e.target.dataset.id);
+}
 
 function Menu(props) {
   return (
     <div style={menuStyle}>
-      {props.userMenuItems.map(item => <MenuItem item={item} />)}
+      {props.userMenuItems.map(item => {
+        return (
+          <MenuItem
+              key={item.id}
+              item={item}
+              clickUserMenuItem={props.clickUserMenuItem} />
+        );
+      })}
     </div>
   );
 }
 
 function MenuItem(props) {
-  return <div style={menuItemStyle}>{props.item.text}</div>;
+  return (
+    <div style={menuItemStyle}
+        data-id={props.item.id}
+        onClick={e => clickItem(e, props)}>
+      {props.item.text}
+    </div>
+  );
 }
 
 export default Menu;
