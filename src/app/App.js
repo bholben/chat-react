@@ -245,7 +245,7 @@ class App extends Component {
       <div style={{width: '100vw', height: '100vh'}}>
 
         {isAgent ?
-        <Header />
+        <Header user={this.state.user} />
         : null}
 
         <div style={{display: 'flex', height: 'calc(100% - 80px)'}}>
