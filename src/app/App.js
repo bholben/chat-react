@@ -161,13 +161,32 @@ class App extends Component {
     this.enableOtherUserSpoof(message, user);
 
     api.pushMessage(message, user, ticketId)
-      .then(setInitialVitals)
       .then(() => this.setState({ messageText: '' }))
+      .then(() => {
+        return Promise.all([
+          new Promise(initVitals),
+          new Promise(autoAssignAgent.bind(this)),
+        ]);
+      })
       .catch(console.error);
 
-    function setInitialVitals() {
+    function initVitals() {
       if (!isAgent && isFirstMessage) {
         return api.setVitals(initialVitals, user.uid);
+      } else {
+        return Promise.resolve();
+      }
+    }
+
+    function autoAssignAgent() {
+      if (isAgent) {
+        const agent = {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+        }
+        console.log({agent, ticketId});
+        return this.changeVitalsItem('assignee', agent, ticketId);
       } else {
         return Promise.resolve();
       }

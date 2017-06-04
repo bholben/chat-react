@@ -25,9 +25,11 @@ class Message extends Component {
             </button>
           </div>
         </div>
-        {isAgent ? <div style={{padding: '0 15px 5px 0'}}>
+        {isAgent ?
+        <div style={{padding: '0 15px 5px 0'}}>
           <Avatar user={message.agent} size={30} />
-        </div> : null}
+        </div>
+        : null}
       </div>
     );
   }
