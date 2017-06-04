@@ -6,7 +6,6 @@ import Message from './Message';
 const messagesStyle = {
   flexGrow: 1,
   overflowY: 'auto',
-  borderTop: '1px solid #bbb',
   borderBottom: '1px solid #bbb',
 };
 

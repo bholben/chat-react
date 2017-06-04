@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Header from './Header';
 import Ticket from './Ticket';
 import background from './images/Tickets.background.jpg';
 
@@ -28,7 +27,6 @@ class Tickets extends Component {
     const { tickets, changeTicket } = this.props;
     return (
       <div style={chatRoomsStyle}>
-        <Header />
         <section style={{padding: 0, overflowY: 'auto'}}>
           {tickets.map(ticket =>
             <Ticket

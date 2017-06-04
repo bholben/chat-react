@@ -5,8 +5,10 @@ import { api } from 'chat-api';
 import { isAgent } from '../config';
 import Welcome from '../components/Welcome';
 import background from '../components/common/images/Welcome.background.jpg';
+import Header from '../components/Header';
 import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
+import Inventory from '../components/Inventory';
 import '../components/common/styles/spinner.css';
 
 const welcomeStyle = {
@@ -190,7 +192,6 @@ class App extends Component {
           name: user.displayName,
           email: user.email,
         }
-        console.log({agent, ticketId});
         return this.changeVitalsItem('assignee', agent, ticketId);
       } else {
         return Promise.resolve();
@@ -241,23 +242,35 @@ class App extends Component {
 
   getChat() {
     return (
-      <div style={{display: 'flex', height: '100vh'}}>
+      <div style={{width: '100vw', height: '100vh'}}>
 
         {isAgent ?
-        <Tickets
-            tickets={this.state.tickets}
-            changeTicket={this.changeTicket}
-            changeVitalsItem={this.changeVitalsItem} /> :
-        null}
+        <Header />
+        : null}
 
-        <ChatRoom
-            isAgent={isAgent}
-            user={this.state.activeTicket.user}
-            ticket={this.state.activeTicket}
-            messageText={this.state.messageText}
-            changeMessageText={this.changeMessageText}
-            sendMessage={this.sendMessage}
-            deleteMessage={this.deleteMessage} />
+        <div style={{display: 'flex', height: 'calc(100% - 80px)'}}>
+
+          {isAgent ?
+          <Tickets
+              tickets={this.state.tickets}
+              changeTicket={this.changeTicket}
+              changeVitalsItem={this.changeVitalsItem} />
+          : null}
+
+          <ChatRoom
+              isAgent={isAgent}
+              user={this.state.activeTicket.user}
+              ticket={this.state.activeTicket}
+              messageText={this.state.messageText}
+              changeMessageText={this.changeMessageText}
+              sendMessage={this.sendMessage}
+              deleteMessage={this.deleteMessage} />
+
+          {isAgent ?
+          <Inventory />
+          : null}
+
+        </div>
 
       </div>
     );
