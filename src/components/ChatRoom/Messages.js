@@ -17,7 +17,15 @@ class Messages extends Component {
     this.toggleDeleteX = this.toggleDeleteX.bind(this);
   }
 
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
   componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
     const node = ReactDOM.findDOMNode(this.bottomElement);
     if (node) node.scrollIntoView({behavior: 'smooth'});
   }
