@@ -7,6 +7,7 @@ import Welcome from '../components/Welcome';
 import background from '../components/common/images/Welcome.background.jpg';
 import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
+import '../components/common/styles/spinner.css';
 
 const welcomeStyle = {
   display: 'flex',
@@ -56,6 +57,7 @@ class App extends Component {
       // tickets: [],  // Only added for agents
       activeTicket: {},
       messageText: '',
+      showSpinner: false,
     };
 
     this.submitSignIn = this.submitSignIn.bind(this);
@@ -71,6 +73,8 @@ class App extends Component {
     const displayName = e.target.children.displayName.value;
     // TODO: Replace this fabricated email with the incoming email address
     const email = `${displayName}@gmail.com`;
+
+    this.setState({showSpinner: true});
 
     return api.auth.signInWithEmail(email, user => {
       if (isAgent) {
@@ -89,6 +93,7 @@ class App extends Component {
       return user.updateProfile({ displayName })
         .then(() => this.setState({ user, tickets, activeTicket }))
         .then(() => this.storeUserLocally(user))
+        .then(() => this.setState({showSpinner: false}))
         .catch(console.error);
     });
   }
@@ -220,8 +225,16 @@ class App extends Component {
 
   getWelcome() {
     return (
-      <div style={welcomeStyle}>
-        <Welcome submitSignIn={this.submitSignIn} />
+      <div>
+        {this.state.showSpinner ?
+        <div className="spinner-backdrop">
+          <div className="spinner">Loading...</div>
+        </div>
+        : null}
+
+        <div style={welcomeStyle}>
+          <Welcome submitSignIn={this.submitSignIn} />
+        </div>
       </div>
     );
   }
@@ -229,12 +242,14 @@ class App extends Component {
   getChat() {
     return (
       <div style={{display: 'flex', height: '100vh'}}>
+
         {isAgent ?
         <Tickets
             tickets={this.state.tickets}
             changeTicket={this.changeTicket}
             changeVitalsItem={this.changeVitalsItem} /> :
         null}
+
         <ChatRoom
             isAgent={isAgent}
             user={this.state.activeTicket.user}
@@ -243,6 +258,7 @@ class App extends Component {
             changeMessageText={this.changeMessageText}
             sendMessage={this.sendMessage}
             deleteMessage={this.deleteMessage} />
+
       </div>
     );
   }
