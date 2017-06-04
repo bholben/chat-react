@@ -50,6 +50,14 @@ const colorMap = {
   },
 };
 
+const userMenuItems = [
+  { text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
+  { text: 'Item' },
+  { text: 'Item' },
+  { text: 'Item' },
+  { text: 'Item' },
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +67,7 @@ class App extends Component {
       // tickets: [],  // Only added for agents
       activeTicket: {},
       messageText: '',
+      userConfig: { userMenuItems },  // Only added for agents
       showSpinner: false,
     };
 
@@ -81,6 +90,7 @@ class App extends Component {
     return api.auth.signInWithEmail(email, user => {
       if (isAgent) {
         this.syncTickets(user, displayName);
+        // this.syncUserConfig(user);
       } else {
         this.syncMessages(user, displayName);
       }
@@ -98,6 +108,12 @@ class App extends Component {
         .then(() => this.setState({showSpinner: false}))
         .catch(console.error);
     });
+  }
+
+  syncUserConfig(user) {
+    // return api.syncUserConfig(user, userConfig => {
+    //   this.setState({ userConfig });
+    // });
   }
 
   setVitalColors(ticket) {
@@ -245,7 +261,9 @@ class App extends Component {
       <div style={{width: '100vw', height: '100vh'}}>
 
         {isAgent ?
-        <Header user={this.state.user} />
+        <Header
+            user={this.state.user}
+            userMenuItems={this.state.userConfig.userMenuItems} />
         : null}
 
         <div style={{display: 'flex', height: 'calc(100% - 80px)'}}>
