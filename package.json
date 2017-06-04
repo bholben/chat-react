@@ -20,6 +20,7 @@
   "author": "Bob Holben",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.16.2",
     "chat-api": "https://github.com/bholben/chat-api",
     "color": "^1.0.3",
     "font-awesome": "^4.7.0",
