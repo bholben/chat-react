@@ -29,7 +29,7 @@ function Ticket(props) {
 
   return (
     <div style={getTicketStyle(ticket)}
-        onClick={() => props.changeTicket(ticket.key)}>
+        onClick={() => props.clickTicket(ticket.key)}>
       <div style={{padding: '5px 10px 5px 20px', marginBottom: -5}}>
         <Avatar user={ticket.user} />
       </div>

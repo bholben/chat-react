@@ -66,7 +66,7 @@ class App extends Component {
     };
 
     this.submitSignIn = this.submitSignIn.bind(this);
-    this.changeTicket = this.changeTicket.bind(this);
+    this.clickTicket = this.clickTicket.bind(this);
     this.changeVitalsItem = this.changeVitalsItem.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -157,7 +157,12 @@ class App extends Component {
     }));
   }
 
-  changeTicket(key) {
+  clickTicket(key) {
+    if (key === this.state.activeTicketKey) {
+      key = '';
+      this.setState({ activeTicket: {}, activeTicketKey: '' });
+    }
+
     const tickets = this.state.tickets.map(ticket => {
       ticket.isActive = ticket.key === key;
       if (ticket.isActive) {
@@ -290,7 +295,7 @@ class App extends Component {
           {isAgent ?
           <Tickets
               tickets={this.state.tickets}
-              changeTicket={this.changeTicket}
+              clickTicket={this.clickTicket}
               changeVitalsItem={this.changeVitalsItem} />
           : null}
 

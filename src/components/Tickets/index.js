@@ -24,7 +24,7 @@ class Tickets extends Component {
   }
 
   render() {
-    const { tickets, changeTicket } = this.props;
+    const { tickets, clickTicket } = this.props;
     return (
       <div style={chatRoomsStyle}>
         <section style={{padding: 0, overflowY: 'auto'}}>
@@ -32,7 +32,7 @@ class Tickets extends Component {
             <Ticket
                 key={ticket.lastTimestamp}
                 ticket={ticket}
-                changeTicket={changeTicket}
+                clickTicket={clickTicket}
                 changeVitalsItem={this.props.changeVitalsItem} />
           )}
           {/* This dummy element is used only to facilitate bottom scrolling */}
