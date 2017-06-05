@@ -1,4 +1,5 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 import Header from './Header';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
@@ -29,10 +30,15 @@ function ChatRoom(props) {
           user={user}
           messages={ticket.messages}
           deleteMessage={deleteMessage} />
+
+      {isAgent && isEmpty(ticket) ?
+      null :
       <MessageInput
+          isTicket={ticket}
           messageText={messageText}
           changeMessageText={changeMessageText}
           sendMessage={sendMessage} />
+      }
     </div>
   );
 }
