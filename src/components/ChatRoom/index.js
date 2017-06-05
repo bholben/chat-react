@@ -5,7 +5,7 @@ import MessageInput from './MessageInput';
 import background from './images/Welcome.background.jpg';
 
 const chatRoomStyle = {
-  flex: 10,
+  flex: 1,
   minWidth: 300,
   maxWidth: 500,
   display: 'flex',

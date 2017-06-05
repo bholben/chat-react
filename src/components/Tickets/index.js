@@ -4,8 +4,8 @@ import Ticket from './Ticket';
 import background from './images/Tickets.background.jpg';
 
 const chatRoomsStyle = {
-  flex: 5,
-  minWidth: 300,
+  flex: 1,
+  minWidth: 330,
   maxWidth: 400,
   display: 'flex',
   flexDirection: 'column',
