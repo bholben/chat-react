@@ -46,6 +46,8 @@ function MenuItem(props) {
   return (
     <div style={menuItemStyle}
         data-id={props.item.id}
+        onMouseOver={e => e.target.style.backgroundColor = '#e9e9e9'}
+        onMouseLeave={e => e.target.style.backgroundColor = '#f6f6f6'}
         onClick={e => clickItem(e, props)}>
       {props.item.text}
     </div>

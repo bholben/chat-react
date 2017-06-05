@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import onClickOutside from 'react-onclickoutside'
+import color from 'color';
 import Avatar from './Avatar';
 import * as styles from './styles/DropDown.styles';
+import * as theme from './styles/theme-variables';
 import 'font-awesome/css/font-awesome.css'
 
 class DropDown extends Component {
   constructor(props) {
     super(props);
     this.state = { isCollapsed: true };
-    this.changeFontSize = this.changeFontSize.bind(this);
+    this.hoverDropDown = this.hoverDropDown.bind(this);
     this.clickDropDown = this.clickDropDown.bind(this);
     this.clickItem = this.clickItem.bind(this);
   }
 
-  changeFontSize(e, fontSize) {
+  hoverDropDown(e, bgColor) {
+    const contrast = color(bgColor).luminosity() < 0.6 ? 'white': theme.colors.brandDark;
     const { className, parentNode } = e.target;
     const dropDown = className === 'dropdown' ? e.target : parentNode;
-    const text = [...dropDown.children].find(child => child.tagName === 'DIV');
-    text.style.fontSize = fontSize;
+    dropDown.style.backgroundColor = bgColor ? bgColor : theme.colors.brandDark;
+    dropDown.style.color = bgColor ? contrast : '#ddd';
   }
 
   clickDropDown(e) {
@@ -54,12 +57,12 @@ class DropDown extends Component {
       <div style={{position: 'relative'}}>
         <div style={styles.getDropDownStyle(selected.color)}
             className="dropdown"
-            onMouseOver={e => this.changeFontSize(e, '0.95em')}
-            onMouseLeave={e => this.changeFontSize(e, '0.9em')}
+            onMouseOver={e => this.hoverDropDown(e, null)}
+            onMouseLeave={e => this.hoverDropDown(e, selected.color)}
             onClick={this.clickDropDown} >
 
           {isUser ?
-          <Avatar user={selected} size={25} />
+          <Avatar user={selected} size={25} hasBorder={true} />
           : null}
 
           <div style={{marginLeft: isUser ? 5 : 0, fontSize: '0.9em'}}>

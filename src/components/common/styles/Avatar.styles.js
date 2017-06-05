@@ -12,11 +12,11 @@ export function getAvatarStyle(size, isDot) {
   return avatarStyle;
 };
 
-export function getInitialStyle(user, size) {
+export function getInitialStyle(user, size, hasBorder) {
   const hash = md5(user.email);
   const backgroundColor = `#${hash.substring(0, 6)}`;
 
-  return Object.assign({}, getAvatarStyle(size), {
+  return Object.assign({}, getAvatarStyle(size, hasBorder), {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
