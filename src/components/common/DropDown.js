@@ -81,6 +81,8 @@ class DropDown extends Component {
                   style={styles.getItemStyle(isSelected)}
                   className="option"
                   data-id={option.id}
+                  onMouseOver={e => e.target.style.backgroundColor = '#e9e9e9'}
+                  onMouseLeave={e => e.target.style.backgroundColor = '#f6f6f6'}
                   onClick={this.clickItem}>
                 <i className="fa fa-check" style={styles.getCheckStyle(isSelected)}></i>
                 <span>{option.name}</span>

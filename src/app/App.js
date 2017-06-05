@@ -44,7 +44,7 @@ const colorMap = {
   escalation: {
     managerInvolved: 'red',
     managerAlerted: 'orange',
-    agent: 'yellow',
+    agent: 'lightyellow',
   },
 };
 

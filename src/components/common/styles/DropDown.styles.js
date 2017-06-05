@@ -44,7 +44,7 @@ export function getItemStyle(isSelected) {
   const item = {
     padding: 8,
     borderBottom: '1px solid #ddd',
-    backgroundColor: 'white',
+    backgroundColor: '#f6f6f6',
     color: '#777',
   };
   const selectedItem = Object.assign({}, item, {

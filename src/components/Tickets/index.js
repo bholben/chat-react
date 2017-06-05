@@ -27,7 +27,7 @@ class Tickets extends Component {
     const { tickets, clickTicket } = this.props;
     return (
       <div style={chatRoomsStyle}>
-        <section style={{padding: 0, overflowY: 'auto'}}>
+        <section style={{padding: 0, overflowY: 'visible'}}>
           {tickets.map(ticket =>
             <Ticket
                 key={ticket.lastTimestamp}
