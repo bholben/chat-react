@@ -6,7 +6,7 @@ import background from './images/Tickets.background.jpg';
 const chatRoomsStyle = {
   flex: 1,
   minWidth: 330,
-  maxWidth: 400,
+  maxWidth: 360,
   display: 'flex',
   flexDirection: 'column',
   backgroundImage: `url(${background})`,

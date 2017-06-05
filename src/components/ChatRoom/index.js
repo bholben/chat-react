@@ -7,7 +7,7 @@ import background from './images/Welcome.background.jpg';
 const chatRoomStyle = {
   flex: 1,
   minWidth: 300,
-  maxWidth: 500,
+  maxWidth: 450,
   display: 'flex',
   flexDirection: 'column',
   backgroundImage: `url(${background})`,
