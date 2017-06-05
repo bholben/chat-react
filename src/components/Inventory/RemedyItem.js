@@ -20,7 +20,7 @@ function getDraggableItemStyle(x, y) {
     boxShadow: 'gray 1px 1px 5px',
     fontWeight: 700,
     textTransform: 'uppercase',
-    cursor: 'grab',
+    cursor: '-webkit-grab',
   };
 
   return Object.assign({}, draggableItemStyle, {
@@ -39,6 +39,8 @@ class RemedyItem extends Component {
       initialY: null,
       deltaX: 0,
       deltaY: 0,
+      lastX: null,
+      lastY: null,
     };
 
     this.mouseDown = this.mouseDown.bind(this);
@@ -48,14 +50,17 @@ class RemedyItem extends Component {
   }
 
   mouseDown(e) {
-    const initialX = e.clientX;
-    const initialY = e.clientY;
+    e.target.style.cursor = '-webkit-grabbing';
+    const initialX = this.state.lastX || e.clientX;
+    const initialY = this.state.lastY || e.clientY;
     this.setState({ isMouseDown: true, initialX, initialY });
   }
 
   mouseUp(e) {
-    console.log('mouseUp');
-    this.setState({ isMouseDown: false });
+    e.target.style.cursor = '-webkit-grab';
+    const lastX = e.clientX - this.state.deltaX;
+    const lastY = e.clientY - this.state.deltaY;
+    this.setState({ isMouseDown: false, lastX, lastY });
   }
 
   mouseMove(e) {
@@ -63,8 +68,6 @@ class RemedyItem extends Component {
       const deltaX = e.clientX - this.state.initialX;
       const deltaY = e.clientY - this.state.initialY;
       this.setState({ deltaX, deltaY });
-
-      console.log(deltaX, deltaY);
     }
   }
 
