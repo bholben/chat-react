@@ -15,6 +15,7 @@ export function getDropDownStyle(backgroundColor) {
     color: color(backgroundColor).luminosity() < 0.6 ? 'white' : theme.colors.brandDark,
     boxShadow: 'grey 1px 1px 3px',
     fontWeight: 700,
+    cursor: 'pointer',
   };
 }
 

@@ -119,10 +119,10 @@ class App extends Component {
 
     // For now...
     const userMenuItems = [
-      { id: 'lorem', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit' },
-      { id: 'item2', text: 'Item 2' },
-      { id: 'item3', text: 'Item 3' },
-      { id: 'item4', text: 'Item 4' },
+      { id: 'videoTraining', text: 'Video Tutorial' },
+      { id: 'admin', text: 'Admin Panel' },
+      { id: 'theme', text: 'Theme' },
+      { id: 'profile', text: 'Profile' },
       { id: 'logout', text: 'Log out', action: 'logout' },
     ];
     this.setState({ userConfig: {userMenuItems} })
