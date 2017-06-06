@@ -3,6 +3,7 @@ import { some } from 'lodash';
 import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
+import Spinner from '../components/common/Spinner';
 import Welcome from '../components/Welcome';
 import background from '../components/common/images/Welcome.background.jpg';
 import Header from '../components/Header';
@@ -266,12 +267,7 @@ class App extends Component {
   getWelcome() {
     return (
       <div>
-        {this.state.showSpinner ?
-        <div className="spinner-backdrop">
-          <div className="spinner">Loading...</div>
-        </div>
-        : null}
-
+        {this.state.showSpinner ? <Spinner /> : null}
         <div style={welcomeStyle}>
           <Welcome submitSignIn={this.submitSignIn} />
         </div>

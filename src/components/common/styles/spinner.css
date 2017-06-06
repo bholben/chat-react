@@ -1,0 +1,69 @@
+/*
+   Based on Ana Tudor's amazing spinner (inspired by the sea-shell animated gif)
+   https://css-tricks.com/solving-last-item-problem-circular-distribution-partially-overlapping-items/
+   https://codepen.io/thebabydino/pen/qmxKzW/
+   http://geometricanimations.tumblr.com/post/156483123108/sea-shell
+*/
+
+.spinner-backdrop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+}
+
+.ring:first-child {
+  --k: -.5;
+  --c: currentcolor;
+}
+
+.bar {
+  --i: 0;
+  position: absolute;
+  margin: -0.84853em -0.09em;
+  width: 0.18em;
+  height: 1.69706em;
+  border-radius: 4px / 5.65685px;
+  --bc: rotate(calc(var(--i)*20deg)) translateY(1.6em);
+  --rx: rotateX(45deg);
+  transform: var(--bc) rotate(0deg) var(--rx);
+  box-shadow: 0 0 0 0.09em var(--c, white);
+  background: currentcolor;
+  color: rgb(calc(230 + var(--j, 1)*(9 - var(--i))*-24), 49, 99);
+  animation: ani 2s linear calc(var(--k, 0)*2s) infinite;
+}
+
+.bar:nth-child(n + 10) { --j: -1; }
+.bar:nth-child(2) { --i: 1; }
+.bar:nth-child(3) { --i: 2; }
+.bar:nth-child(4) { --i: 3; }
+.bar:nth-child(5) { --i: 4; }
+.bar:nth-child(6) { --i: 5; }
+.bar:nth-child(7) { --i: 6; }
+.bar:nth-child(8) { --i: 7; }
+.bar:nth-child(9) { --i: 8; }
+.bar:nth-child(10) { --i: 9; }
+.bar:nth-child(11) { --i: 10; }
+.bar:nth-child(12) { --i: 11; }
+.bar:nth-child(13) { --i: 12; }
+.bar:nth-child(14) { --i: 13; }
+.bar:nth-child(15) { --i: 14; }
+.bar:nth-child(16) { --i: 15; }
+.bar:nth-child(17) { --i: 16; }
+.bar:nth-child(18) { --i: 17; }
+
+@keyframes ani {
+  to {
+    transform: var(--bc) rotate(0.5turn) var(--rx);
+  }
+}
