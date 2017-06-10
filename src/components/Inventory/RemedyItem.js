@@ -1,35 +1,5 @@
 import React, { Component } from 'react';
-import badge from './images/RemedyItem.badge.png';
-
-const itemStyle = {
-  position: 'relative',
-  height: 60,
-  width: 53,
-  margin: 3,
-};
-
-function getDraggableItemStyle(x, y) {
-  const draggableItemStyle = {
-    position: 'absolute',
-    height: itemStyle.height,
-    width: itemStyle.width,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundImage: `url(${badge})`,
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    color: '#edc13c',
-    fontWeight: 700,
-    textTransform: 'uppercase',
-    cursor: '-webkit-grab',
-  };
-
-  return Object.assign({}, draggableItemStyle, {
-    top: y,
-    left: x,
-  });
-}
+import * as styles from './styles/RemedyItem.styles';
 
 class RemedyItem extends Component {
   constructor(props) {
@@ -37,8 +7,8 @@ class RemedyItem extends Component {
 
     this.state = {
       isMouseDown: false,
-      divX: 0,
-      divY: 0,
+      divX: null,
+      divY: null,
       mouseX: null,
       mouseY: null,
     };
@@ -57,7 +27,7 @@ class RemedyItem extends Component {
     e.target.style.position = 'fixed';
     e.target.style.cursor = '-webkit-grabbing';
     e.target.style.zIndex = 1;
-    this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY});
+    this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY });
   }
 
   mouseUp(e) {
@@ -77,8 +47,8 @@ class RemedyItem extends Component {
 
   render() {
     return (
-      <div style={itemStyle}>
-        <div style={getDraggableItemStyle(this.state.divX, this.state.divY)}
+      <div style={styles.item}>
+        <div style={styles.getDraggableItem(this.state.divX, this.state.divY)}
             ref="draggable"
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}
