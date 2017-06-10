@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 const itemStyle = {
   position: 'relative',
@@ -46,44 +47,53 @@ class RemedyItem extends Component {
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
     this.mouseMove = this.mouseMove.bind(this);
-    this.click = this.click.bind(this);
   }
 
   mouseDown(e) {
+    const parentRect = this.refs.draggable.getBoundingClientRect();
+    const deltaX = parentRect.left;
+    const deltaY = parentRect.top;
+    const initialX = this.state.lastX || deltaX;
+    const initialY = this.state.lastY || deltaY;
+    // const initialX = this.state.lastX || e.pageX;
+    // const initialY = this.state.lastY || e.pageY;
+
+    const mouseX = e.pageX - e.target.offsetLeft;
+    const mouseY = e.pageY - e.target.offsetTop;
+
+    console.log(parentRect, deltaX, deltaY, mouseX, mouseY);
+    console.dir(e.target);
+    e.target.style.position = 'fixed';
     e.target.style.cursor = '-webkit-grabbing';
-    const initialX = this.state.lastX || e.clientX;
-    const initialY = this.state.lastY || e.clientY;
-    this.setState({ isMouseDown: true, initialX, initialY });
+    this.setState({ isMouseDown: true, initialX, initialY, deltaX, deltaY });
   }
 
   mouseUp(e) {
     e.target.style.cursor = '-webkit-grab';
-    const lastX = e.clientX - this.state.deltaX;
-    const lastY = e.clientY - this.state.deltaY;
+    const lastX = e.pageX - this.state.deltaX;
+    const lastY = e.pageY - this.state.deltaY;
     this.setState({ isMouseDown: false, lastX, lastY });
   }
 
   mouseMove(e) {
+    e.target.style.zIndex = 99999;
     if (this.state.isMouseDown) {
-      const deltaX = e.clientX - this.state.initialX;
-      const deltaY = e.clientY - this.state.initialY;
+      console.log(e.pageX, e.pageY);
+      const deltaX = e.pageX - this.state.initialX;
+      const deltaY = e.pageY - this.state.initialY;
       this.setState({ deltaX, deltaY });
     }
-  }
-
-  click(e) {
-    console.log('click');
   }
 
   render() {
     return (
       <div style={itemStyle}>
         <div style={getDraggableItemStyle(this.state.deltaX, this.state.deltaY)}
-          onMouseDown={this.mouseDown}
-          onMouseUp={this.mouseUp}
-          onMouseMove={this.mouseMove}
-          onClick={this.click}>
-          <div>Run</div>
+            ref="draggable"
+            onMouseDown={this.mouseDown}
+            onMouseUp={this.mouseUp}
+            onMouseMove={this.mouseMove}>
+          Run
         </div>
       </div>
     );
