@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import badge from './images/RemedyItem.badge.png';
 
 const itemStyle = {
   position: 'relative',
-  height: 50,
-  width: 70,
+  height: 60,
+  width: 53,
   margin: 3,
-  borderRadius: '50%',
-  backgroundColor: 'lightblue',
 };
 
 function getDraggableItemStyle(x, y) {
@@ -15,12 +13,13 @@ function getDraggableItemStyle(x, y) {
     position: 'absolute',
     height: itemStyle.height,
     width: itemStyle.width,
-    borderRadius: '50%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightgreen',
-    boxShadow: 'gray 1px 1px 5px',
+    backgroundImage: `url(${badge})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    color: '#edc13c',
     fontWeight: 700,
     textTransform: 'uppercase',
     cursor: '-webkit-grab',
