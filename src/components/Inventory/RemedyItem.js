@@ -6,14 +6,16 @@ const itemStyle = {
   height: 50,
   width: 70,
   margin: 3,
+  borderRadius: '50%',
   backgroundColor: 'lightblue',
 };
 
 function getDraggableItemStyle(x, y) {
   const draggableItemStyle = {
     position: 'absolute',
-    height: 50,
-    width: 70,
+    height: itemStyle.height,
+    width: itemStyle.width,
+    borderRadius: '50%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -36,12 +38,10 @@ class RemedyItem extends Component {
 
     this.state = {
       isMouseDown: false,
-      initialX: null,
-      initialY: null,
-      deltaX: 0,
-      deltaY: 0,
-      lastX: null,
-      lastY: null,
+      divX: 0,
+      divY: 0,
+      mouseX: null,
+      mouseY: null,
     };
 
     this.mouseDown = this.mouseDown.bind(this);
@@ -51,44 +51,35 @@ class RemedyItem extends Component {
 
   mouseDown(e) {
     const parentRect = this.refs.draggable.getBoundingClientRect();
-    const deltaX = parentRect.left;
-    const deltaY = parentRect.top;
-    const initialX = this.state.lastX || deltaX;
-    const initialY = this.state.lastY || deltaY;
-    // const initialX = this.state.lastX || e.pageX;
-    // const initialY = this.state.lastY || e.pageY;
-
-    const mouseX = e.pageX - e.target.offsetLeft;
-    const mouseY = e.pageY - e.target.offsetTop;
-
-    console.log(parentRect, deltaX, deltaY, mouseX, mouseY);
-    console.dir(e.target);
+    const divX = parentRect.left;
+    const divY = parentRect.top;
+    const mouseX = e.pageX;
+    const mouseY = e.pageY;
     e.target.style.position = 'fixed';
     e.target.style.cursor = '-webkit-grabbing';
-    this.setState({ isMouseDown: true, initialX, initialY, deltaX, deltaY });
+    e.target.style.zIndex = 1;
+    this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY});
   }
 
   mouseUp(e) {
     e.target.style.cursor = '-webkit-grab';
-    const lastX = e.pageX - this.state.deltaX;
-    const lastY = e.pageY - this.state.deltaY;
-    this.setState({ isMouseDown: false, lastX, lastY });
+    this.setState({ isMouseDown: false });
   }
 
   mouseMove(e) {
-    e.target.style.zIndex = 99999;
     if (this.state.isMouseDown) {
-      console.log(e.pageX, e.pageY);
-      const deltaX = e.pageX - this.state.initialX;
-      const deltaY = e.pageY - this.state.initialY;
-      this.setState({ deltaX, deltaY });
+      const mouseX = e.pageX;
+      const mouseY = e.pageY;
+      const divX = this.state.divX + (mouseX - this.state.mouseX);
+      const divY = this.state.divY + (mouseY - this.state.mouseY);
+      this.setState({ divX, divY, mouseX, mouseY });
     }
   }
 
   render() {
     return (
       <div style={itemStyle}>
-        <div style={getDraggableItemStyle(this.state.deltaX, this.state.deltaY)}
+        <div style={getDraggableItemStyle(this.state.divX, this.state.divY)}
             ref="draggable"
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}

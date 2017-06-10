@@ -10,6 +10,9 @@ const headerStyle = {
   justifyContent: 'space-between',
   alignItems: 'center',
   height: 80,
+  // This keeps the header above the draggable divs
+  position: 'relative',
+  zIndex: 2,
   backgroundColor: theme.colors.brand1,
   color: 'white',
 };
