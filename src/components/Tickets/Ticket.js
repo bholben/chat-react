@@ -11,10 +11,26 @@ class Ticket extends Component {
     super(props);
     this.state = { isTimeFromNow: true };
     this.clickTime = this.clickTime.bind(this);
+    this.clickTicket = this.clickTicket.bind(this);
   }
 
   clickTime() {
     this.setState({ isTimeFromNow: !this.state.isTimeFromNow });
+  }
+
+  clickTicket() {
+    const ticket = this.refs.ticketButton.closest('.ticket');
+    const ticketBounds = {
+      left: ticket.offsetLeft,
+      top: ticket.offsetTop,
+      right: ticket.offsetLeft + ticket.offsetWidth,
+      bottom: ticket.offsetTop + ticket.offsetHeight,
+    };
+    const isActive = this.props.activeTicketKey !== this.props.ticket.key;
+    const activeTicketBounds = isActive ? ticketBounds : null;
+
+    this.props.setActiveTicketBounds(activeTicketBounds);
+    this.props.clickTicket(this.props.ticket.key);
   }
 
   getTime(message) {
@@ -29,7 +45,7 @@ class Ticket extends Component {
     const agent = lastAgentMessage || { uid: '', name: 'Unassigned', email: '' };
 
     return (
-      <div style={styles.getTicket(ticket)}>
+      <div style={styles.getTicket(ticket)} className="ticket">
         <div style={styles.avatarColumn}>
           <Avatar user={ticket.user} />
         </div>
@@ -45,7 +61,8 @@ class Ticket extends Component {
                 {lastMessage ? this.getTime(lastMessage) : null}
               </div>
               <button style={styles.toggleButton}
-                  onClick={() => this.props.clickTicket(ticket.key)}>
+                  ref="ticketButton"
+                  onClick={this.clickTicket}>
                 <i className={ticket.isActive ? 'fa fa-chevron-up' : 'fa fa-chevron-down'}></i>
               </button>
             </div>

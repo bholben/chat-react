@@ -58,6 +58,7 @@ class App extends Component {
       activeTicket: {},
       messageText: '',
       showSpinner: false,
+      activeTicketBounds: null,
 
       // Agent-only properties...
 
@@ -68,6 +69,7 @@ class App extends Component {
 
     this.submitSignIn = this.submitSignIn.bind(this);
     this.clickTicket = this.clickTicket.bind(this);
+    this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
     this.changeVitalsItem = this.changeVitalsItem.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -173,6 +175,10 @@ class App extends Component {
     });
 
     this.setState({ tickets });
+  }
+
+  setActiveTicketBounds(activeTicketBounds) {
+    this.setState({ activeTicketBounds });
   }
 
   changeVitalsItem(key, selected, ticketId) {
@@ -292,6 +298,8 @@ class App extends Component {
           <Tickets
               tickets={this.state.tickets}
               clickTicket={this.clickTicket}
+              activeTicketKey={this.state.activeTicketKey}
+              setActiveTicketBounds={this.setActiveTicketBounds}
               changeVitalsItem={this.changeVitalsItem} />
           : null}
 
