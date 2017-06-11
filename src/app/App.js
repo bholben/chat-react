@@ -282,8 +282,10 @@ class App extends Component {
     times(count, () => api.pushRemedyItem(remedyId));
   }
 
-  saveRemedyItemToTicket(ticket, remedyItem) {
-    console.log({ticket, remedyItem});
+  saveRemedyItemToTicket(ticket, remedyKey, remedyItem) {
+    console.log({ticket, remedyKey, remedyItem});
+    const inventoryStatus = { isAvailable: null, isUsed: true };
+    api.updateRemedyInventory(inventoryStatus, remedyKey, remedyItem.key);
   }
 
   logout() {
