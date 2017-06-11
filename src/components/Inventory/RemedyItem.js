@@ -74,7 +74,7 @@ class RemedyItem extends Component {
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}
             onMouseMove={this.mouseMove}>
-          {this.props.remedyItem.text}
+          {this.props.remedyItem.itemTitle}
         </div>
       </div>
     );

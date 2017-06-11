@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import RemedyItem from './RemedyItem';
 
 const cardStyle = {
@@ -7,96 +7,32 @@ const cardStyle = {
   boxShadow: 'gray 5px 5px 8px',
 };
 
-class Remedy extends Component {
-    render() {
-      return (
-        <div>
-          <h3>Run the Bases</h3>
-          <div style={cardStyle}>
-            <div style={{marginBottom: 10}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+function Remedy(props) {
+  const { remedy, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItem } = props;
+  const { title, description, itemIds, itemTitle, itemImageUrl } = remedy;
+  const remedyItem = { itemTitle, itemImageUrl };
+
+  return (
+    <div>
+      <h3>{title}</h3>
+      <div style={cardStyle}>
+        <div style={{marginBottom: 10}}>{description}</div>
+        <div style={{display: 'flex', flexWrap: 'wrap'}}>
+          {itemIds.available.map(id => {
+            return (
               <RemedyItem
-                  remedyItem={{text: 'Run'}}
+                  remedyItem={remedyItem}
                   isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-              <RemedyItem
-                  remedyItem={{text: 'Run'}}
-                  isDraggable={true}
-                  ticket={this.props.ticket}
-                  activeTicketBounds={this.props.activeTicketBounds}
-                  setDraggingStatus={this.props.setDraggingStatus}
-                  saveRemedyItem={this.props.saveRemedyItem} />
-            </div>
-          </div>
+                  ticket={ticket}
+                  activeTicketBounds={activeTicketBounds}
+                  setDraggingStatus={setDraggingStatus}
+                  saveRemedyItem={saveRemedyItem} />
+            );
+          })}
         </div>
-      );
-    }
+      </div>
+    </div>
+  );
 }
 
 export default Remedy;

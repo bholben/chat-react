@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Remedy from './Remedy';
 import * as theme from '../common/styles/theme-variables';
 
@@ -10,28 +10,22 @@ const inventoryStyle = {
   color: theme.colors.brand1,
 };
 
-class Inventory extends Component {
-    render() {
-      return (
-        <div style={inventoryStyle}>
+function Inventory(props) {
+  const { remedies, saveRemedyItem, ticket, activeTicketBounds, setDraggingStatus } = props;
+  return (
+    <div style={inventoryStyle}>
+      {remedies.map(remedy => {
+        return (
           <Remedy
-              ticket={this.props.ticket}
-              activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus}
-              saveRemedyItem={this.props.saveRemedyItem} />
-          <Remedy
-              ticket={this.props.ticket}
-              activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus}
-              saveRemedyItem={this.props.saveRemedyItem} />
-          <Remedy
-              ticket={this.props.ticket}
-              activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus}
-              saveRemedyItem={this.props.saveRemedyItem} />
-        </div>
-      );
-    }
+              remedy={remedy}
+              saveRemedyItem={saveRemedyItem}
+              ticket={ticket}
+              activeTicketBounds={activeTicketBounds}
+              setDraggingStatus={setDraggingStatus} />
+        );
+      })}
+    </div>
+  );
 }
 
 export default Inventory;

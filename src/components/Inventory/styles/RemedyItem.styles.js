@@ -1,5 +1,7 @@
 import badge from '../images/RemedyItem.badge.png';
 
+const images = { badge };
+
 export const item = {
   position: 'relative',
   height: 60,
@@ -15,7 +17,7 @@ export function getDraggableItem(x, y) {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: `url(${badge})`,
+    backgroundImage: `url(${images['badge']})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     color: '#edc13c',
