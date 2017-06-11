@@ -58,25 +58,28 @@ class App extends Component {
       activeTicket: {},
       messageText: '',
       showSpinner: false,
-
-      // Agent-only properties...
-
-      // tickets: [],
-      // activeTicketKey: '',
-      // userConfig: {},
-      // activeTicketBounds: null,
-      // isDragging: false,
     };
 
     this.submitSignIn = this.submitSignIn.bind(this);
     this.clickTicket = this.clickTicket.bind(this);
-    this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
-    this.setDraggingStatus = this.setDraggingStatus.bind(this);
     this.changeVitalsItem = this.changeVitalsItem.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
+    this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
+    this.setDraggingStatus = this.setDraggingStatus.bind(this);
+    this.saveRemedyItem = this.saveRemedyItem.bind(this);
     this.logout = this.logout.bind(this);
+  }
+
+  componentWillMount() {
+    if (isAgent) {
+      this.setState({ tickets: [] });
+      this.setState({ activeTicketKey: '' });
+      this.setState({ userConfig: {} });
+      this.setState({ activeTicketBounds: null });
+      this.setState({ draggingStatus: { isDragging: false, isInTarget: false } });
+    }
   }
 
   submitSignIn(e) {
@@ -179,15 +182,6 @@ class App extends Component {
     this.setState({ tickets });
   }
 
-  setActiveTicketBounds(activeTicketBounds) {
-    console.log('setActiveTicketBounds() called:', activeTicketBounds);
-    this.setState({ activeTicketBounds });
-  }
-
-  setDraggingStatus(isDragging) {
-    this.setState({ isDragging });
-  }
-
   changeVitalsItem(key, selected, ticketId) {
     // Return promise to DropDown (options box needs to close after db updated)
     return api.changeVitalsItem(key, selected, ticketId);
@@ -253,6 +247,18 @@ class App extends Component {
       .catch(console.error);
   }
 
+  setActiveTicketBounds(activeTicketBounds) {
+    this.setState({ activeTicketBounds });
+  }
+
+  setDraggingStatus(draggingStatus) {
+    this.setState({ draggingStatus });
+  }
+
+  saveRemedyItem(ticket, remedyItem) {
+    console.log({ticket, remedyItem});
+  }
+
   logout() {
     this.setState({ user: {} });
   }
@@ -274,6 +280,7 @@ class App extends Component {
   }
 
   render() {
+    // Hacky approach until router implemented
     return this.state.user.email ? this.getChat() : this.getWelcome();
   }
 
@@ -307,7 +314,7 @@ class App extends Component {
               clickTicket={this.clickTicket}
               activeTicketKey={this.state.activeTicketKey}
               setActiveTicketBounds={this.setActiveTicketBounds}
-              isDragging={this.state.isDragging}
+              draggingStatus={this.state.draggingStatus}
               changeVitalsItem={this.changeVitalsItem} />
           : null}
 
@@ -322,8 +329,10 @@ class App extends Component {
 
           {isAgent ?
           <Inventory
+              ticket={this.state.activeTicket}
               activeTicketBounds={this.state.activeTicketBounds}
-              setDraggingStatus={this.setDraggingStatus} />
+              setDraggingStatus={this.setDraggingStatus}
+              saveRemedyItem={this.saveRemedyItem} />
           : null}
 
         </div>

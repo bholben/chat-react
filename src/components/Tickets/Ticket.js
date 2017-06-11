@@ -44,18 +44,19 @@ class Ticket extends Component {
   }
 
   render() {
-    const { ticket, isDragging } = this.props;
+    const { ticket, draggingStatus } = this.props;
+    const showTarget = ticket.isActive && draggingStatus.isDragging;
+    const showRemedy = ticket.remedy && ticket.isActive;
     const lastMessage = last(ticket.messages);
     const lastAgentMessage = findLast(ticket.messages, message => message.agent);
     const agent = lastAgentMessage || { uid: '', name: 'Unassigned', email: '' };
-    const showTarget = ticket.isActive && isDragging;
 
     return (
       <div style={styles.getTicket(ticket)} className="ticket">
         <div style={styles.avatarColumn}>
           <Avatar user={ticket.user} />
           <div style={styles.getTarget(showTarget)} className="target">
-            {ticket.remedy && ticket.isActive ?
+            {showRemedy ?
             <RemedyItem text={ticket.remedy.text} />
             : null}
           </div>

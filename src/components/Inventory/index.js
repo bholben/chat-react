@@ -15,14 +15,20 @@ class Inventory extends Component {
       return (
         <div style={inventoryStyle}>
           <Remedy
+              ticket={this.props.ticket}
               activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus} />
+              setDraggingStatus={this.props.setDraggingStatus}
+              saveRemedyItem={this.props.saveRemedyItem} />
           <Remedy
+              ticket={this.props.ticket}
               activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus} />
+              setDraggingStatus={this.props.setDraggingStatus}
+              saveRemedyItem={this.props.saveRemedyItem} />
           <Remedy
+              ticket={this.props.ticket}
               activeTicketBounds={this.props.activeTicketBounds}
-              setDraggingStatus={this.props.setDraggingStatus} />
+              setDraggingStatus={this.props.setDraggingStatus}
+              saveRemedyItem={this.props.saveRemedyItem} />
         </div>
       );
     }

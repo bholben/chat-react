@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import badge from '../images/RemedyItem.badge.png';
 
 export const item = {

@@ -30,7 +30,7 @@ class RemedyItem extends Component {
       e.target.style.cursor = '-webkit-grabbing';
       e.target.style.zIndex = 1;
       this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY });
-      setDraggingStatus(true);
+      setDraggingStatus({ isDragging: true, isInTarget: false });
     }
   }
 
@@ -38,7 +38,7 @@ class RemedyItem extends Component {
     e.target.style.cursor = '-webkit-grab';
     this.setState({ isMouseDown: false });
 
-    const { isDraggable, activeTicketBounds, setDraggingStatus } = this.props;
+    const { isDraggable, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItem, remedyItem } = this.props;
     if (isDraggable && activeTicketBounds) {
       const target = activeTicketBounds;
       const badgeX = (this.state.divX + (this.state.divX + styles.item.width)) / 2;
@@ -46,7 +46,12 @@ class RemedyItem extends Component {
       const isInTargetX = target.left < badgeX && badgeX < target.right;
       const isInTargetY = target.top < badgeY && badgeY < target.bottom;
       console.log({target, badgeX, badgeY, isInTargetX, isInTargetY});
-      setDraggingStatus(false);
+      if (isInTargetX && isInTargetY) {
+        setDraggingStatus({ isDragging: false, isInTarget: true });
+        saveRemedyItem(ticket, remedyItem);
+      } else {
+        setDraggingStatus({ isDragging: false, isInTarget: false });
+      }
     }
   }
 
@@ -69,7 +74,7 @@ class RemedyItem extends Component {
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}
             onMouseMove={this.mouseMove}>
-          Run
+          {this.props.remedyItem.text}
         </div>
       </div>
     );
