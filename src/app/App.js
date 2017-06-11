@@ -141,40 +141,9 @@ class App extends Component {
   }
 
   syncRemedies() {
-    // return api.syncRemedies(remedies => {
-    //   this.setState({ remedies });
-    // });
-
-    // For now...
-    const remedies = [
-      {
-        id: '123456789',
-        title: 'Run the Bases',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
-        prerequisite: '',
-        itemIds: {
-          available: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-          onHold: [],
-          used: [],
-        },
-        itemTitle: 'RUN',
-        itemImageUrl: 'badge',
-      },
-      {
-        id: '123456790',
-        title: 'Concert Field Access',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.',
-        prerequisite: '',
-        itemIds: {
-          available: [1, 2, 3, 4],
-          onHold: [],
-          used: [],
-        },
-        itemTitle: 'CFA',
-        itemImageUrl: 'badge',
-      },
-    ];
-    this.setState({ remedies });
+    return api.syncRemedies(remedies => {
+      this.setState({ remedies });
+    });
   }
 
   setVitalColors(ticket) {

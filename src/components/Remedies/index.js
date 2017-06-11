@@ -17,7 +17,7 @@ function Remedies(props) {
       {remedies.map(remedy => {
         return (
           <Remedy
-              key={remedy.id}
+              key={remedy.key}
               remedy={remedy}
               addRemedyItemToInventory={addRemedyItemToInventory}
               saveRemedyItemToTicket={saveRemedyItemToTicket}

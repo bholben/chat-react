@@ -9,7 +9,7 @@ const cardStyle = {
 
 function Remedy(props) {
   const { remedy, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItemToTicket, addRemedyItemToInventory } = props;
-  const { title, description, itemIds, itemTitle, itemImageUrl } = remedy;
+  const { title, description, inventory, itemTitle, itemImageUrl } = remedy;
   const remedyItem = { itemTitle, itemImageUrl };
 
   return (
@@ -24,10 +24,10 @@ function Remedy(props) {
       <div style={cardStyle}>
         <div style={{marginBottom: 10}}>{description}</div>
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
-          {itemIds.available.map(id => {
+          {inventory.map(item => {
             return (
               <RemedyItem
-                  key={id}
+                  key={item.key}
                   remedyItem={remedyItem}
                   saveRemedyItemToTicket={saveRemedyItemToTicket}
                   ticket={ticket}
