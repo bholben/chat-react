@@ -67,14 +67,16 @@ class RemedyItem extends Component {
   }
 
   render() {
+    const { divX, divY } = this.state;
+    const { itemImageUrl, itemTitle } = this.props.remedyItem;
     return (
       <div style={styles.item}>
-        <div style={styles.getDraggableItem(this.state.divX, this.state.divY)}
+        <div style={styles.getDraggableItem(divX, divY, itemImageUrl)}
             ref="draggable"
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}
             onMouseMove={this.mouseMove}>
-          {this.props.remedyItem.itemTitle}
+          {itemTitle}
         </div>
       </div>
     );

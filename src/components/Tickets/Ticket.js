@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as moment from 'moment';
 import { last, findLast } from 'lodash';
 import Avatar from '../common/Avatar';
-import RemedyItem from '../Inventory/RemedyItem';
+import RemedyItem from '../Remedies/RemedyItem';
 import VitalTags from './VitalTags';
 import VitalDots from './VitalDots';
 import * as styles from './styles/Ticket.styles';

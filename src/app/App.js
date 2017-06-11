@@ -9,7 +9,7 @@ import background from '../components/common/images/Welcome.background.jpg';
 import Header from '../components/Header';
 import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
-import Inventory from '../components/Inventory';
+import Remedies from '../components/Remedies';
 import '../components/common/styles/spinner.css';
 
 const welcomeStyle = {
@@ -367,7 +367,7 @@ class App extends Component {
               deleteMessage={this.deleteMessage} />
 
           {isAgent ?
-          <Inventory
+          <Remedies
               remedies={this.state.remedies}
               saveRemedyItem={this.saveRemedyItem}
               ticket={this.state.activeTicket}

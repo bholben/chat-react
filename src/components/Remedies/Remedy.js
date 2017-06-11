@@ -21,12 +21,13 @@ function Remedy(props) {
           {itemIds.available.map(id => {
             return (
               <RemedyItem
+                  key={id}
                   remedyItem={remedyItem}
-                  isDraggable={true}
+                  saveRemedyItem={saveRemedyItem}
                   ticket={ticket}
                   activeTicketBounds={activeTicketBounds}
                   setDraggingStatus={setDraggingStatus}
-                  saveRemedyItem={saveRemedyItem} />
+                  isDraggable={true} />
             );
           })}
         </div>

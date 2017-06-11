@@ -9,7 +9,7 @@ export const item = {
   margin: 3,
 };
 
-export function getDraggableItem(x, y) {
+export function getDraggableItem(divX, divY, imageUrl) {
   const draggableItem = {
     position: 'absolute',
     height: item.height,
@@ -17,7 +17,7 @@ export function getDraggableItem(x, y) {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundImage: `url(${images['badge']})`,
+    backgroundImage: `url(${images[imageUrl]})`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     color: '#edc13c',
@@ -27,7 +27,7 @@ export function getDraggableItem(x, y) {
   };
 
   return Object.assign({}, draggableItem, {
-    top: y,
-    left: x,
+    top: divY,
+    left: divX,
   });
 }

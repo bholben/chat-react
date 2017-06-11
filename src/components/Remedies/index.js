@@ -10,13 +10,14 @@ const inventoryStyle = {
   color: theme.colors.brand1,
 };
 
-function Inventory(props) {
+function Remedies(props) {
   const { remedies, saveRemedyItem, ticket, activeTicketBounds, setDraggingStatus } = props;
   return (
     <div style={inventoryStyle}>
       {remedies.map(remedy => {
         return (
           <Remedy
+              key={remedy.id}
               remedy={remedy}
               saveRemedyItem={saveRemedyItem}
               ticket={ticket}
@@ -28,4 +29,4 @@ function Inventory(props) {
   );
 }
 
-export default Inventory;
+export default Remedies;
