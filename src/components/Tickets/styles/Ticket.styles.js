@@ -6,6 +6,7 @@ export function getTicket(ticket) {
     padding: 8,
     borderBottom: '1px solid #bbb',
     color: '#777',
+    cursor: 'default',
   };
   const height = ticket.isActive ? 'initial' : 60;
   const backgroundColor = ticket.isActive ? '#d2ccae' : 'transparent';

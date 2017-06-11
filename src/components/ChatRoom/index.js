@@ -14,6 +14,7 @@ const chatRoomStyle = {
   backgroundImage: `url(${background})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
+  cursor: 'default',
 };
 
 function ChatRoom(props) {

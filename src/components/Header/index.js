@@ -15,6 +15,7 @@ const headerStyle = {
   zIndex: 2,
   backgroundColor: theme.colors.brand1,
   color: 'white',
+  cursor: 'default',
 };
 
 const leftMenuStyle = {

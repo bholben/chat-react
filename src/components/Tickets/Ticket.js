@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as moment from 'moment';
-import { last, findLast } from 'lodash';
+import { last, findLast, map } from 'lodash';
 import Avatar from '../common/Avatar';
 import RemedyItem from '../Remedies/RemedyItem';
 import VitalTags from './VitalTags';
@@ -46,7 +46,9 @@ class Ticket extends Component {
   render() {
     const { ticket, draggingStatus } = this.props;
     const showTarget = ticket.isActive && draggingStatus.isDragging;
-    const showRemedy = ticket.remedy && ticket.isActive;
+    const remedies = map(ticket.remedies, remedy => remedy);
+    const lastRemedy = last(remedies);
+    const showRemedy = lastRemedy && ticket.isActive;
     const lastMessage = last(ticket.messages);
     const lastAgentMessage = findLast(ticket.messages, message => message.agent);
     const agent = lastAgentMessage || { uid: '', name: 'Unassigned', email: '' };
@@ -57,7 +59,7 @@ class Ticket extends Component {
           <Avatar user={ticket.user} />
           <div style={styles.getTarget(showTarget)} className="target">
             {showRemedy ?
-            <RemedyItem remedy={ticket.remedy} />
+            <RemedyItem remedy={lastRemedy} />
             : null}
           </div>
         </div>

@@ -9,7 +9,7 @@ export const item = {
   margin: 3,
 };
 
-export function getDraggableItem(divX, divY, imageUrl) {
+export function getDraggableItem(divX, divY, imageUrl, isDraggable) {
   const draggableItem = {
     position: 'absolute',
     height: item.height,
@@ -23,7 +23,7 @@ export function getDraggableItem(divX, divY, imageUrl) {
     color: '#edc13c',
     fontWeight: 700,
     textTransform: 'uppercase',
-    cursor: '-webkit-grab',
+    cursor: isDraggable ? '-webkit-grab' : 'default',
   };
 
   return Object.assign({}, draggableItem, {

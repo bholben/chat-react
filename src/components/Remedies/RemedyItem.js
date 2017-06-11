@@ -45,10 +45,9 @@ class RemedyItem extends Component {
       const badgeY = (this.state.divY + (this.state.divY + styles.item.height)) / 2;
       const isInTargetX = target.left < badgeX && badgeX < target.right;
       const isInTargetY = target.top < badgeY && badgeY < target.bottom;
-      console.log({target, badgeX, badgeY, isInTargetX, isInTargetY});
       if (isInTargetX && isInTargetY) {
         setDraggingStatus({ isDragging: false, isInTarget: true });
-        saveRemedyItemToTicket(ticket, remedy.key, item);
+        saveRemedyItemToTicket(ticket, remedy, item);
       } else {
         setDraggingStatus({ isDragging: false, isInTarget: false });
       }
@@ -68,10 +67,11 @@ class RemedyItem extends Component {
 
   render() {
     const { divX, divY } = this.state;
+    const { isDraggable } = this.props;
     const { itemImageUrl, itemTitle } = this.props.remedy;
     return (
       <div style={styles.item}>
-        <div style={styles.getDraggableItem(divX, divY, itemImageUrl)}
+        <div style={styles.getDraggableItem(divX, divY, itemImageUrl, isDraggable)}
             ref="draggable"
             onMouseDown={this.mouseDown}
             onMouseUp={this.mouseUp}

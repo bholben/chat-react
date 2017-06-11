@@ -282,10 +282,14 @@ class App extends Component {
     times(count, () => api.pushRemedyItem(remedyId));
   }
 
-  saveRemedyItemToTicket(ticket, remedyKey, remedyItem) {
-    // console.log({ticket, remedyKey, remedyItem});
-    const inventoryStatus = { isAvailable: null, isConsumed: true };
-    api.updateRemedyInventory(remedyKey, remedyItem.key, inventoryStatus);
+  saveRemedyItemToTicket(ticket, remedy, remedyItem) {
+    const shortRemedy = {
+      itemTitle: remedy.itemTitle,
+      itemImageUrl: remedy.itemImageUrl,
+    };
+    api.consumeRemedyInventory(remedy.key, remedyItem.key)
+      .then(() => api.applyRemedyToTicket(ticket, shortRemedy))
+      .catch(console.error);
   }
 
   logout() {
