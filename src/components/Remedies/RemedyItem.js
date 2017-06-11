@@ -38,7 +38,7 @@ class RemedyItem extends Component {
     e.target.style.cursor = '-webkit-grab';
     this.setState({ isMouseDown: false });
 
-    const { isDraggable, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItemToTicket, remedyKey, item } = this.props;
+    const { isDraggable, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItemToTicket, remedy, item } = this.props;
     if (isDraggable && activeTicketBounds) {
       const target = activeTicketBounds;
       const badgeX = (this.state.divX + (this.state.divX + styles.item.width)) / 2;
@@ -48,7 +48,7 @@ class RemedyItem extends Component {
       console.log({target, badgeX, badgeY, isInTargetX, isInTargetY});
       if (isInTargetX && isInTargetY) {
         setDraggingStatus({ isDragging: false, isInTarget: true });
-        saveRemedyItemToTicket(ticket, remedyKey, item);
+        saveRemedyItemToTicket(ticket, remedy.key, item);
       } else {
         setDraggingStatus({ isDragging: false, isInTarget: false });
       }
@@ -68,7 +68,7 @@ class RemedyItem extends Component {
 
   render() {
     const { divX, divY } = this.state;
-    const { itemImageUrl, itemTitle } = this.props;
+    const { itemImageUrl, itemTitle } = this.props.remedy;
     return (
       <div style={styles.item}>
         <div style={styles.getDraggableItem(divX, divY, itemImageUrl)}

@@ -57,7 +57,7 @@ class Ticket extends Component {
           <Avatar user={ticket.user} />
           <div style={styles.getTarget(showTarget)} className="target">
             {showRemedy ?
-            <RemedyItem text={ticket.remedy.text} />
+            <RemedyItem remedy={ticket.remedy} />
             : null}
           </div>
         </div>
