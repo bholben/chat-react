@@ -11,7 +11,7 @@ const inventoryStyle = {
 };
 
 function Remedies(props) {
-  const { remedies, saveRemedyItem, ticket, activeTicketBounds, setDraggingStatus } = props;
+  const { remedies, addRemedyItemToInventory, saveRemedyItemToTicket, ticket, activeTicketBounds, setDraggingStatus } = props;
   return (
     <div style={inventoryStyle}>
       {remedies.map(remedy => {
@@ -19,7 +19,8 @@ function Remedies(props) {
           <Remedy
               key={remedy.id}
               remedy={remedy}
-              saveRemedyItem={saveRemedyItem}
+              addRemedyItemToInventory={addRemedyItemToInventory}
+              saveRemedyItemToTicket={saveRemedyItemToTicket}
               ticket={ticket}
               activeTicketBounds={activeTicketBounds}
               setDraggingStatus={setDraggingStatus} />

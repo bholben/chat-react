@@ -24,7 +24,8 @@ class Tickets extends Component {
   }
 
   render() {
-    const { tickets, clickTicket } = this.props;
+    const { tickets, clickTicket, activeTicketKey, setActiveTicketBounds,
+      draggingStatus, changeVitalsItem } = this.props;
     return (
       <div style={chatRoomsStyle}>
         <section style={{padding: 0, overflowY: 'visible'}}>
@@ -33,10 +34,10 @@ class Tickets extends Component {
                 key={ticket.lastTimestamp}
                 ticket={ticket}
                 clickTicket={clickTicket}
-                activeTicketKey={this.props.activeTicketKey}
-                setActiveTicketBounds={this.props.setActiveTicketBounds}
-                draggingStatus={this.props.draggingStatus}
-                changeVitalsItem={this.props.changeVitalsItem} />
+                activeTicketKey={activeTicketKey}
+                setActiveTicketBounds={setActiveTicketBounds}
+                draggingStatus={draggingStatus}
+                changeVitalsItem={changeVitalsItem} />
           )}
           {/* This dummy element is used only to facilitate bottom scrolling */}
           <div ref={el => this.bottomElement = el}></div>

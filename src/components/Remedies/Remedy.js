@@ -8,13 +8,19 @@ const cardStyle = {
 };
 
 function Remedy(props) {
-  const { remedy, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItem } = props;
+  const { remedy, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItemToTicket, addRemedyItemToInventory } = props;
   const { title, description, itemIds, itemTitle, itemImageUrl } = remedy;
   const remedyItem = { itemTitle, itemImageUrl };
 
   return (
     <div>
-      <h3>{title}</h3>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <h3>{title}</h3>
+        <div style={{fontSize: 36, lineHeight: 1.5, cursor: 'pointer'}}
+            onClick={() => addRemedyItemToInventory('-KmN-oiD7DGjjzXDBWHk')}>
+          +
+        </div>
+      </div>
       <div style={cardStyle}>
         <div style={{marginBottom: 10}}>{description}</div>
         <div style={{display: 'flex', flexWrap: 'wrap'}}>
@@ -23,7 +29,7 @@ function Remedy(props) {
               <RemedyItem
                   key={id}
                   remedyItem={remedyItem}
-                  saveRemedyItem={saveRemedyItem}
+                  saveRemedyItemToTicket={saveRemedyItemToTicket}
                   ticket={ticket}
                   activeTicketBounds={activeTicketBounds}
                   setDraggingStatus={setDraggingStatus}

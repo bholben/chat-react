@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { some } from 'lodash';
+import { times, some } from 'lodash';
 import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
@@ -68,7 +68,9 @@ class App extends Component {
     this.deleteMessage = this.deleteMessage.bind(this);
     this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
     this.setDraggingStatus = this.setDraggingStatus.bind(this);
-    this.saveRemedyItem = this.saveRemedyItem.bind(this);
+    this.createRemedy = this.createRemedy.bind(this);
+    this.addRemedyItemToInventory = this.addRemedyItemToInventory.bind(this);
+    this.saveRemedyItemToTicket = this.saveRemedyItemToTicket.bind(this);
     this.logout = this.logout.bind(this);
   }
 
@@ -294,7 +296,24 @@ class App extends Component {
     this.setState({ draggingStatus });
   }
 
-  saveRemedyItem(ticket, remedyItem) {
+  createRemedy(remedy) {
+    // TODO: Create a user form to enter this stuff in
+    remedy = remedy || {
+      title: 'Run the Bases',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
+      prerequisite: '',
+      itemTitle: 'RUN',
+      itemImageUrl: 'badge',
+    };
+
+    api.pushRemedy(remedy);
+  }
+
+  addRemedyItemToInventory(remedyId, count = 1) {
+    times(count, () => api.pushRemedyItem(remedyId));
+  }
+
+  saveRemedyItemToTicket(ticket, remedyItem) {
     console.log({ticket, remedyItem});
   }
 
@@ -369,7 +388,8 @@ class App extends Component {
           {isAgent ?
           <Remedies
               remedies={this.state.remedies}
-              saveRemedyItem={this.saveRemedyItem}
+              addRemedyItemToInventory={this.addRemedyItemToInventory}
+              saveRemedyItemToTicket={this.saveRemedyItemToTicket}
               ticket={this.state.activeTicket}
               activeTicketBounds={this.state.activeTicketBounds}
               setDraggingStatus={this.setDraggingStatus} />
