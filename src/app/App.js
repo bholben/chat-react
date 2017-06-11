@@ -58,18 +58,20 @@ class App extends Component {
       activeTicket: {},
       messageText: '',
       showSpinner: false,
-      activeTicketBounds: null,
 
       // Agent-only properties...
 
       // tickets: [],
       // activeTicketKey: '',
       // userConfig: {},
+      // activeTicketBounds: null,
+      // isDragging: false,
     };
 
     this.submitSignIn = this.submitSignIn.bind(this);
     this.clickTicket = this.clickTicket.bind(this);
     this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
+    this.setDraggingStatus = this.setDraggingStatus.bind(this);
     this.changeVitalsItem = this.changeVitalsItem.bind(this);
     this.changeMessageText = this.changeMessageText.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -178,7 +180,12 @@ class App extends Component {
   }
 
   setActiveTicketBounds(activeTicketBounds) {
+    console.log('setActiveTicketBounds() called:', activeTicketBounds);
     this.setState({ activeTicketBounds });
+  }
+
+  setDraggingStatus(isDragging) {
+    this.setState({ isDragging });
   }
 
   changeVitalsItem(key, selected, ticketId) {
@@ -300,6 +307,7 @@ class App extends Component {
               clickTicket={this.clickTicket}
               activeTicketKey={this.state.activeTicketKey}
               setActiveTicketBounds={this.setActiveTicketBounds}
+              isDragging={this.state.isDragging}
               changeVitalsItem={this.changeVitalsItem} />
           : null}
 
@@ -313,7 +321,9 @@ class App extends Component {
               deleteMessage={this.deleteMessage} />
 
           {isAgent ?
-          <Inventory />
+          <Inventory
+              activeTicketBounds={this.state.activeTicketBounds}
+              setDraggingStatus={this.setDraggingStatus} />
           : null}
 
         </div>

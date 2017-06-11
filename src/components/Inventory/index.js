@@ -14,9 +14,15 @@ class Inventory extends Component {
     render() {
       return (
         <div style={inventoryStyle}>
-          <Remedy />
-          <Remedy />
-          <Remedy />
+          <Remedy
+              activeTicketBounds={this.props.activeTicketBounds}
+              setDraggingStatus={this.props.setDraggingStatus} />
+          <Remedy
+              activeTicketBounds={this.props.activeTicketBounds}
+              setDraggingStatus={this.props.setDraggingStatus} />
+          <Remedy
+              activeTicketBounds={this.props.activeTicketBounds}
+              setDraggingStatus={this.props.setDraggingStatus} />
         </div>
       );
     }

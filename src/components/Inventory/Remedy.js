@@ -15,17 +15,61 @@ class Remedy extends Component {
           <div style={cardStyle}>
             <div style={{marginBottom: 10}}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</div>
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
-              <RemedyItem />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
+              <RemedyItem
+                  text={'Run'}
+                  isDraggable={true}
+                  activeTicketBounds={this.props.activeTicketBounds}
+                  setDraggingStatus={this.props.setDraggingStatus} />
             </div>
           </div>
         </div>

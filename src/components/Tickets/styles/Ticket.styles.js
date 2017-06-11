@@ -13,9 +13,21 @@ export function getTicket(ticket) {
 }
 
 export const avatarColumn = {
-  padding: '5px 10px 5px 20px',
-  marginBottom: -5,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: 5,
 };
+
+export function getTarget(showTarget) {
+  const base = {
+    width: 55,
+    height: 60,
+    backgroundColor: 'lightgoldenrodyellow',
+    border: '3px dashed red',
+  };
+  return showTarget ? base : {};
+}
 
 export const vitalsColumn = {
   display: 'flex',
@@ -26,6 +38,7 @@ export const vitalsColumn = {
 export const metaRow = {
   display: 'flex',
   justifyContent: 'space-between',
+  marginLeft: 5,
   lineHeight: 1.8,
 };
 

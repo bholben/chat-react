@@ -19,24 +19,40 @@ class RemedyItem extends Component {
   }
 
   mouseDown(e) {
-    const parentRect = this.refs.draggable.getBoundingClientRect();
-    const divX = parentRect.left;
-    const divY = parentRect.top;
-    const mouseX = e.pageX;
-    const mouseY = e.pageY;
-    e.target.style.position = 'fixed';
-    e.target.style.cursor = '-webkit-grabbing';
-    e.target.style.zIndex = 1;
-    this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY });
+    const { isDraggable, activeTicketBounds, setDraggingStatus } = this.props;
+    if (isDraggable && activeTicketBounds) {
+      const parentRect = this.refs.draggable.getBoundingClientRect();
+      const divX = parentRect.left;
+      const divY = parentRect.top;
+      const mouseX = e.pageX;
+      const mouseY = e.pageY;
+      e.target.style.position = 'fixed';
+      e.target.style.cursor = '-webkit-grabbing';
+      e.target.style.zIndex = 1;
+      this.setState({ isMouseDown: true, divX, divY, mouseX, mouseY });
+      setDraggingStatus(true);
+    }
   }
 
   mouseUp(e) {
     e.target.style.cursor = '-webkit-grab';
     this.setState({ isMouseDown: false });
+
+    const { isDraggable, activeTicketBounds, setDraggingStatus } = this.props;
+    if (isDraggable && activeTicketBounds) {
+      const target = activeTicketBounds;
+      const badgeX = (this.state.divX + (this.state.divX + styles.item.width)) / 2;
+      const badgeY = (this.state.divY + (this.state.divY + styles.item.height)) / 2;
+      const isInTargetX = target.left < badgeX && badgeX < target.right;
+      const isInTargetY = target.top < badgeY && badgeY < target.bottom;
+      console.log({target, badgeX, badgeY, isInTargetX, isInTargetY});
+      setDraggingStatus(false);
+    }
   }
 
   mouseMove(e) {
-    if (this.state.isMouseDown) {
+    const { isDraggable, activeTicketBounds } = this.props;
+    if (isDraggable && activeTicketBounds && this.state.isMouseDown) {
       const mouseX = e.pageX;
       const mouseY = e.pageY;
       const divX = this.state.divX + (mouseX - this.state.mouseX);

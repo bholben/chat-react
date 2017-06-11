@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as moment from 'moment';
 import { last, findLast } from 'lodash';
 import Avatar from '../common/Avatar';
+import RemedyItem from '../Inventory/RemedyItem';
 import VitalTags from './VitalTags';
 import VitalDots from './VitalDots';
 import * as styles from './styles/Ticket.styles';
@@ -19,18 +20,22 @@ class Ticket extends Component {
   }
 
   clickTicket() {
-    const ticket = this.refs.ticketButton.closest('.ticket');
-    const ticketBounds = {
-      left: ticket.offsetLeft,
-      top: ticket.offsetTop,
-      right: ticket.offsetLeft + ticket.offsetWidth,
-      bottom: ticket.offsetTop + ticket.offsetHeight,
-    };
-    const isActive = this.props.activeTicketKey !== this.props.ticket.key;
-    const activeTicketBounds = isActive ? ticketBounds : null;
-
-    this.props.setActiveTicketBounds(activeTicketBounds);
     this.props.clickTicket(this.props.ticket.key);
+    setTimeout(() => {
+      // Use a timeout so the expand operation can clear the event loop
+      // before we execute (gets us the proper bottom bounds)
+      const ticket = this.refs.ticketButton.closest('.ticket');
+      const ticketBounds = {
+        left: ticket.offsetLeft,
+        top: ticket.offsetTop,
+        right: ticket.offsetLeft + ticket.offsetWidth,
+        bottom: ticket.offsetTop + ticket.offsetHeight,
+      };
+      const isActive = this.props.activeTicketKey === this.props.ticket.key;
+      const activeTicketBounds = isActive ? ticketBounds : null;
+
+      this.props.setActiveTicketBounds(activeTicketBounds);
+    });
   }
 
   getTime(message) {
@@ -39,15 +44,21 @@ class Ticket extends Component {
   }
 
   render() {
-    const { ticket } = this.props;
+    const { ticket, isDragging } = this.props;
     const lastMessage = last(ticket.messages);
     const lastAgentMessage = findLast(ticket.messages, message => message.agent);
     const agent = lastAgentMessage || { uid: '', name: 'Unassigned', email: '' };
+    const showTarget = ticket.isActive && isDragging;
 
     return (
       <div style={styles.getTicket(ticket)} className="ticket">
         <div style={styles.avatarColumn}>
           <Avatar user={ticket.user} />
+          <div style={styles.getTarget(showTarget)} className="target">
+            {ticket.remedy && ticket.isActive ?
+            <RemedyItem text={ticket.remedy.text} />
+            : null}
+          </div>
         </div>
 
         <div style={styles.vitalsColumn}>

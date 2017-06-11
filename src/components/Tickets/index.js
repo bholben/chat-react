@@ -35,6 +35,7 @@ class Tickets extends Component {
                 clickTicket={clickTicket}
                 activeTicketKey={this.props.activeTicketKey}
                 setActiveTicketBounds={this.props.setActiveTicketBounds}
+                isDragging={this.props.isDragging}
                 changeVitalsItem={this.props.changeVitalsItem} />
           )}
           {/* This dummy element is used only to facilitate bottom scrolling */}
