@@ -1,9 +1,8 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
-import Header from './Header';
 import Messages from './Messages';
 import MessageInput from './MessageInput';
-import background from './images/Welcome.background.jpg';
+import backdrop from '../common/images/backdrop.faded.jpg';
 
 const chatRoomStyle = {
   flex: 1,
@@ -11,7 +10,7 @@ const chatRoomStyle = {
   maxWidth: 450,
   display: 'flex',
   flexDirection: 'column',
-  backgroundImage: `url(${background})`,
+  backgroundImage: `url(${backdrop})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   cursor: 'default',
@@ -22,20 +21,15 @@ function ChatRoom(props) {
   const { changeMessageText, sendMessage, deleteMessage } = props;
   return (
     <div style={chatRoomStyle}>
-      <Header
-          isAgent={isAgent}
-          vitals={ticket.vitals}
-          user={user} />
       <Messages
           isAgent={isAgent}
           user={user}
           messages={ticket.messages}
           deleteMessage={deleteMessage} />
 
-      {isAgent && isEmpty(ticket) ?
-      null :
+      {isAgent && isEmpty(ticket) ? null :
       <MessageInput
-          isTicket={ticket}
+          isTicket={!!ticket}
           messageText={messageText}
           changeMessageText={changeMessageText}
           sendMessage={sendMessage} />

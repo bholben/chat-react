@@ -27,7 +27,7 @@ const buttonStyle = {
   color: 'white',
 };
 
-function Welcome(props) {
+function SignIn(props) {
   const user = JSON.parse(localStorage.getItem('user'));
   const displayName = user ? user.displayName : '';
 
@@ -48,4 +48,4 @@ function Welcome(props) {
   );
 }
 
-export default Welcome;
+export default SignIn;

@@ -11,6 +11,7 @@ html, body {
   background-color: #cfd8dd;
 }
 
-button:focus {
+/* Not being nice for a11y */
+input, textarea, select, button, a {
   outline: none;
 }

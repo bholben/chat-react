@@ -4,8 +4,8 @@ import md5 from 'md5';
 import { api } from 'chat-api';
 import { isAgent } from '../config';
 import Spinner from '../components/common/Spinner';
-import Welcome from '../components/Welcome';
-import background from '../components/common/images/Welcome.background.jpg';
+import SignIn from '../components/SignIn';
+import backdrop from '../components/common/images/backdrop.jpg';
 import Header from '../components/Header';
 import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
@@ -19,7 +19,7 @@ const welcomeStyle = {
   justifyContent: 'center',
   alignItems: 'center',
   height: '100vh',
-  backgroundImage: `url(${background})`,
+  backgroundImage: `url(${backdrop})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 };
@@ -303,15 +303,15 @@ class App extends Component {
 
   render() {
     // Hacky approach until router implemented
-    return this.state.user.email ? this.getChat() : this.getWelcome();
+    return this.state.user.email ? this.getChat() : this.getSignIn();
   }
 
-  getWelcome() {
+  getSignIn() {
     return (
       <div>
         {this.state.showSpinner ? <Spinner /> : null}
         <div style={welcomeStyle}>
-          <Welcome submitSignIn={this.submitSignIn} />
+          <SignIn submitSignIn={this.submitSignIn} />
         </div>
       </div>
     );
