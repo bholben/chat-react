@@ -4,7 +4,9 @@ import * as theme from '../common/styles/theme-variables';
 
 const remediesStyle = {
   flex: 1,
-  minWidth: 200,
+  minWidth: 300,
+  display: 'flex',
+  flexWrap: 'wrap',
   padding: '0 10px 10px',
   overflowY: 'auto',
   color: theme.colors.brand1,

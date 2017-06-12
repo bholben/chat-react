@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Tickets from '../components/Tickets';
 import ChatRoom from '../components/ChatRoom';
 import Remedies from '../components/Remedies';
+import CreateRemedy from '../components/Remedies/CreateRemedy';
 import '../components/common/styles/spinner.css';
 
 const welcomeStyle = {
@@ -68,7 +69,6 @@ class App extends Component {
     this.deleteMessage = this.deleteMessage.bind(this);
     this.setActiveTicketBounds = this.setActiveTicketBounds.bind(this);
     this.setDraggingStatus = this.setDraggingStatus.bind(this);
-    this.createRemedy = this.createRemedy.bind(this);
     this.addRemedyItemToInventory = this.addRemedyItemToInventory.bind(this);
     this.saveRemedyItemToTicket = this.saveRemedyItemToTicket.bind(this);
     this.logout = this.logout.bind(this);
@@ -82,6 +82,8 @@ class App extends Component {
       this.setState({ remedies: [] });
       this.setState({ activeTicketBounds: null });
       this.setState({ draggingStatus: { isDragging: false, isInTarget: false } });
+
+      CreateRemedy();
     }
   }
 
@@ -263,19 +265,6 @@ class App extends Component {
 
   setDraggingStatus(draggingStatus) {
     this.setState({ draggingStatus });
-  }
-
-  createRemedy(remedy) {
-    // TODO: Create a user form to enter this stuff in
-    remedy = remedy || {
-      title: 'Run the Bases',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.',
-      prerequisite: '',
-      itemTitle: 'RUN',
-      itemImageUrl: 'badge',
-    };
-
-    api.pushRemedy(remedy);
   }
 
   addRemedyItemToInventory(remedyId, count = 1) {

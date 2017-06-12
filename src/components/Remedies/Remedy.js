@@ -1,4 +1,5 @@
 import React from 'react';
+import { isEmpty } from 'lodash';
 import RemedyItem from './RemedyItem';
 
 const cardStyle = {
@@ -7,14 +8,22 @@ const cardStyle = {
   boxShadow: 'gray 5px 5px 8px',
 };
 
+const emptyStyle = {
+  background: '#edc13c',
+  padding: 5,
+  width: '100%',
+  textAlign: 'center',
+  fontWeight: 700,
+};
+
 function Remedy(props) {
   const { remedy, ticket, activeTicketBounds, setDraggingStatus, saveRemedyItemToTicket, addRemedyItemToInventory } = props;
 
   return (
-    <div>
+    <div style={{flex: '1 1 200px', maxWidth: '100%', margin: '10px 20px'}}>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-        <h3>{remedy.title}</h3>
-        <div style={{fontSize: 36, paddingBottom: 5, cursor: 'pointer'}}
+        <div style={{fontSize: '1.2em', marginBottom: 5}}>{remedy.title}</div>
+        <div style={{fontSize: '2.5em', marginTop: -15, cursor: 'pointer'}}
             onClick={() => addRemedyItemToInventory(remedy.key)}>
           +
         </div>
@@ -37,6 +46,9 @@ function Remedy(props) {
                   isDraggable={true} />
             );
           })}
+          {isEmpty(remedy.availableInventory) ?
+          <div style={emptyStyle}>Inventory is Empty</div>
+          : null}
         </div>
       </div>
     </div>
