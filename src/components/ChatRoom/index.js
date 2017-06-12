@@ -4,23 +4,25 @@ import Messages from './Messages';
 import MessageInput from './MessageInput';
 import backdrop from '../common/images/backdrop.faded.jpg';
 
-const chatRoomStyle = {
-  flex: 1,
-  minWidth: 300,
-  maxWidth: 450,
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundImage: `url(${backdrop})`,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  cursor: 'default',
-};
+function getChatRoomStyle(isAgent) {
+  return {
+    flex: 1,
+    minWidth: 300,
+    maxWidth: isAgent ? 450 : '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundImage: `url(${backdrop})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    cursor: 'default',
+  };
+}
 
 function ChatRoom(props) {
-  const { isAgent, user, ticket, messageText } = props;
-  const { changeMessageText, sendMessage, deleteMessage } = props;
+  const { isAgent, user, ticket, messageText, changeMessageText, sendMessage,
+    deleteMessage } = props;
   return (
-    <div style={chatRoomStyle}>
+    <div style={getChatRoomStyle(isAgent)}>
       <Messages
           isAgent={isAgent}
           user={user}
@@ -32,7 +34,8 @@ function ChatRoom(props) {
           isTicket={!!ticket}
           messageText={messageText}
           changeMessageText={changeMessageText}
-          sendMessage={sendMessage} />
+          sendMessage={sendMessage}
+          isAgent={isAgent} />
       }
     </div>
   );
