@@ -1,4 +1,3 @@
-import React from 'react';
 import * as theme from '../../common/styles/theme-variables';
 
 export const footer = {

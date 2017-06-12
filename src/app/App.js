@@ -13,7 +13,7 @@ import Remedies from '../components/Remedies';
 import CreateRemedy from '../components/Remedies/CreateRemedy';
 import '../components/common/styles/spinner.css';
 
-const welcomeStyle = {
+const signInStyle = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -310,7 +310,7 @@ class App extends Component {
     return (
       <div>
         {this.state.showSpinner ? <Spinner /> : null}
-        <div style={welcomeStyle}>
+        <div style={signInStyle}>
           <SignIn submitSignIn={this.submitSignIn} />
         </div>
       </div>

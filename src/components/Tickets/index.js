@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Ticket from './Ticket';
 import background from './images/Tickets.background.jpg';
 
-const chatRoomsStyle = {
+const ticketsStyle = {
   flex: 1,
   minWidth: 330,
   maxWidth: 360,
@@ -11,6 +11,7 @@ const chatRoomsStyle = {
   flexDirection: 'column',
   backgroundImage: `url(${background})`,
   backgroundSize: 'cover',
+  overflowY: 'auto',
 };
 
 class Tickets extends Component {
@@ -27,7 +28,7 @@ class Tickets extends Component {
     const { tickets, clickTicket, activeTicketKey, setActiveTicketBounds,
       draggingStatus, changeVitalsItem } = this.props;
     return (
-      <div style={chatRoomsStyle}>
+      <div style={ticketsStyle}>
         <section style={{padding: 0, overflowY: 'visible'}}>
           {tickets.map(ticket =>
             <Ticket

@@ -13,7 +13,7 @@ export function getAvatarStyle(size, isDot) {
 };
 
 export function getInitialStyle(user, size, hasBorder) {
-  const hash = md5(user.email);
+  const hash = user ? md5(user.email) : '';
   const backgroundColor = `#${hash.substring(0, 6)}`;
 
   return Object.assign({}, getAvatarStyle(size, hasBorder), {
