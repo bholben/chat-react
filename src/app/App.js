@@ -328,7 +328,7 @@ class App extends Component {
             logout={this.logout} />
         : null}
 
-        <div style={{display: 'flex', height: 'calc(100% - 80px)'}}>
+        <div style={{display: 'flex', height: isAgent ? 'calc(100% - 80px)' : '100%'}}>
 
           {isAgent ?
           <Tickets
