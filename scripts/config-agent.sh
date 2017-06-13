@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cp config/config-agent.js  src/config.js
+cp scripts/config/config-agent.js  src/config.js

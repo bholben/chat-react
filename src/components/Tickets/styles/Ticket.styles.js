@@ -3,7 +3,7 @@ import * as theme from '../../common/styles/theme-variables';
 export function getTicket(ticket) {
   const base = {
     display: 'flex',
-    padding: 8,
+    padding: '8px 14px 8px 8px',
     borderBottom: '1px solid #bbb',
     color: '#777',
     cursor: 'default',

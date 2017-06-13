@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cp config/config-user.js  src/config.js
+cp scripts/config/config-user.js  src/config.js
