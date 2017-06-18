@@ -1,8 +1,8 @@
 {
-  "name": "chat-agent",
+  "name": "chat-react",
   "version": "0.1.0",
-  "description": "Chat application for agent",
-  "homepage": "https://bholben.github.io/chat-agent",
+  "description": "Customer support chat application for agent and user",
+  "homepage": "https://bholben.github.io/chat-react",
   "scripts": {
     "start": "yarn run start-agent",
     "start-agent": "scripts/config-agent.sh && react-scripts start",

@@ -1,6 +1,6 @@
 {
-  "short_name": "Chat-Agent",
-  "name": "Chat application for agent",
+  "short_name": "Chat-React",
+  "name": "Chat application",
   "icons": [
     {
       "src": "favicon.ico",

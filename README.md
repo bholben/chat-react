@@ -1,8 +1,8 @@
 To run this project, open a terminal and type the following commands:
 
- 1. `git clone https://github.com/bholben/chat-agent.git`
+ 1. `git clone https://github.com/bholben/chat-react.git`
 
- 2. `cd chat-agent`
+ 2. `cd chat-react`
 
  3. `yarn install`
 
